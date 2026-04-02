@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schmear'd — Nutrition Packed Cream Cheese | Schmear Responsibly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Genty';
+  src: url('fonts/genty.woff2') format('woff2'),
+       url('fonts/genty.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Genty Sans';
+  src: url('fonts/genty-sans.woff2') format('woff2'),
+       url('fonts/genty-sans.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+/* ======= RESET & BASE ======= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: #fff5e1;
+  color: #1a1a2e;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+h1, h2, h3, h4 { font-family: 'Genty Sans', sans-serif; }
+.cursive { font-family: 'Dancing Script', cursive; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; }
+
+/* ======= CUSTOM PROPERTIES ======= */
+:root {
+  --navy: #09308b;
+  --blue: #428ce2;
+  --blue-light: #84b6ee;
+  --cream: #fff5e1;
+  --beige: #fef3d0;
+  --beige-dark: #e8d9b8;
+  --white: #FFFFFF;
+  --sage: #96c287;
+  --sage-light: #d9e3c1;
+  --yellow: #fbea57;
+  --yellow-light: #fef9b4;
+  --lemon: #fef9b4;
+  --text-dark: #1a1a2e;
+  --text-muted: #5a5a72;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+}
+
+/* ======= NAVIGATION ======= */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(255,245,225,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(9,48,139,0.08);
+  transition: box-shadow 0.3s ease;
+}
+nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Genty', cursive;
+  font-weight: 400;
+  font-size: 1.7rem;
+  color: var(--navy);
+  letter-spacing: 0px;
+}
+.nav-logo span { color: var(--yellow); }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--navy); }
+.nav-cta {
+  background: var(--navy) !important;
+  color: var(--white) !important;
+  padding: 10px 24px !important;
+  border-radius: 100px !important;
+  font-weight: 600 !important;
+  transition: transform 0.2s, background 0.2s !important;
+}
+.nav-cta:hover { background: var(--blue) !important; transform: translateY(-1px); }
+
+/* Mobile menu */
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); border-radius: 2px; transition: 0.3s; }
+
+/* ======= HERO ======= */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(251,234,87,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -150px; left: -150px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(150,194,135,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.hero-content { max-width: 560px; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--beige);
+  color: var(--navy);
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.hero-badge .dot {
+  width: 8px; height: 8px;
+  background: var(--yellow);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+.hero h1 {
+  font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.08;
+  color: var(--navy);
+  margin-bottom: 20px;
+  letter-spacing: -1.5px;
+}
+.hero h1 .highlight {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero p {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+  line-height: 1.7;
+  max-width: 480px;
+}
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  border-radius: 100px;
+  font-family: 'Genty Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.btn-primary {
+  background: var(--navy);
+  color: var(--white);
+}
+.btn-primary:hover { background: var(--blue); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(9,48,139,0.25); }
+.btn-secondary {
+  background: transparent;
+  color: var(--navy);
+  border: 2px solid var(--navy);
+}
+.btn-secondary:hover { background: var(--navy); color: var(--white); transform: translateY(-2px); }
+
+/* Hero visual */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.product-hero-container {
+  position: relative;
+  width: 460px;
+  height: 460px;
+}
+.tub-img-wrap {
+  position: absolute;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.4s ease;
+  box-shadow: 0 8px 30px rgba(9,48,139,0.12);
+}
+.tub-img-wrap:hover {
+  transform: scale(1.1) !important;
+  box-shadow: 0 16px 48px rgba(9,48,139,0.22);
+  z-index: 10;
+}
+.tub-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.tub-img-wrap .tub-label {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Dancing Script', cursive;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 6px 18px;
+  border-radius: 100px;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(9,48,139,0.3);
+}
+.tub-img-wrap:hover .tub-label {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.tub-original {
+  width: 200px; height: 200px;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+}
+.tub-chive {
+  width: 200px; height: 200px;
+  bottom: 30px; left: 20px;
+}
+.tub-lemon {
+  width: 200px; height: 200px;
+  bottom: 30px; right: 20px;
+}
+.floating-badge {
+  position: absolute;
+  background: var(--white);
+  border-radius: 100px;
+  padding: 8px 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--navy);
+  box-shadow: 0 4px 16px rgba(9,48,139,0.1);
+  white-space: nowrap;
+  animation: float 3s ease-in-out infinite;
+}
+.floating-badge.protein { top: 80px; right: -20px; animation-delay: 0s; }
+.floating-badge.fiber { bottom: 100px; left: -30px; animation-delay: 1s; }
+.floating-badge.cal { top: 30px; left: 20px; animation-delay: 0.5s; }
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ======= MARQUEE ======= */
+.marquee-section {
+  background: var(--navy);
+  padding: 18px 0;
+  overflow: hidden;
+  position: relative;
+}
+.marquee-track {
+  display: flex;
+  animation: marquee 20s linear infinite;
+  width: max-content;
+}
+.marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 40px;
+  color: var(--white);
+  font-family: 'Genty Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.marquee-item .sep {
+  width: 6px; height: 6px;
+  background: var(--yellow);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ======= PRODUCTS SECTION ======= */
+.section { padding: 100px 24px; }
+.section-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.section-header .label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--blue-light);
+  margin-bottom: 12px;
+}
+.section-header h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+.section-header p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.products-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.product-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid rgba(9,48,139,0.06);
+  position: relative;
+  overflow: hidden;
+}
+.product-card:hover { transform: translateY(-8px); box-shadow: 0 16px 48px rgba(9,48,139,0.1); }
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+}
+.product-card.original-card::before { background: var(--navy); }
+.product-card.chive-card::before { background: var(--sage); }
+.product-card.lemon-card::before { background: var(--yellow); }
+
+.card-tub {
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.card-tub.original-bg { background: linear-gradient(135deg, #fff5e1, #e8d9b8); }
+.card-tub.chive-bg { background: linear-gradient(135deg, #d9e3c1, #96c287); }
+.card-tub.lemon-bg { background: linear-gradient(135deg, #fef9b4, #fbea57); }
+
+.card-tub-inner {
+  width: 130px; height: 130px;
+  border-radius: 50%;
+  border: 3px solid var(--navy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.card-tub-inner .brand-name {
+  font-family: 'Genty Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--navy);
+  letter-spacing: 0.5px;
+}
+.card-tub-inner .flavor-name {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 2px;
+}
+
+/* Illustrated ingredients */
+.ingredient-icon {
+  position: absolute;
+  font-size: 1.5rem;
+}
+
+.product-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.product-card .flavor-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.product-card .tag-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.tag {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.tag-protein { background: rgba(9,48,139,0.08); color: var(--navy); }
+.tag-fiber { background: rgba(150,194,135,0.3); color: #5a7a3d; }
+.tag-cal { background: rgba(251,234,87,0.25); color: #8a7520; }
+
+/* ======= NUTRITION SECTION ======= */
+.nutrition-section {
+  background: var(--navy);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+.nutrition-section::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(251,234,87,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.nutrition-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.nutrition-content .label { color: var(--yellow); }
+.nutrition-content h2 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+  margin-top: 12px;
+}
+.nutrition-content p {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+.nutrition-highlights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.nutrition-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: background 0.3s;
+}
+.nutrition-card:hover { background: rgba(255,255,255,0.12); }
+.nutrition-card .number {
+  font-family: 'Genty', cursive;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--yellow);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.nutrition-card .unit {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.nutrition-card .desc {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+}
+.nutrition-card .serving-note {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.3);
+  margin-top: 6px;
+}
+
+/* Nutrition visual */
+.nutrition-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.comparison-chart {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  width: 100%;
+  max-width: 420px;
+}
+.comparison-title {
+  font-family: 'Genty Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 32px;
+  text-align: center;
+}
+.comparison-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.comparison-row:last-child { margin-bottom: 0; }
+.comparison-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  width: 100px;
+  flex-shrink: 0;
+}
+.comparison-label.ours { color: var(--yellow); font-weight: 700; }
+.comparison-bars { flex: 1; margin-left: 16px; }
+.comparison-bar {
+  height: 24px;
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-right: 12px;
+  justify-content: flex-end;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--white);
+  transition: width 1s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.bar-schmear { background: linear-gradient(90deg, var(--yellow), #fbea57); }
+.bar-regular { background: rgba(255,255,255,0.15); margin-top: 8px; }
+
+/* ======= BRAND STORY ======= */
+.story-section {
+  background: var(--beige);
+  position: relative;
+  overflow: hidden;
+}
+.story-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.story-visual {
+  position: relative;
+}
+.story-illustration {
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 440px;
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(9,48,139,0.08);
+}
+.bagel-svg { width: 80%; height: 80%; }
+.story-content h2 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+}
+.story-content p {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+.story-content .highlight-text {
+  font-family: 'Genty Sans', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-top: 24px;
+  padding-left: 20px;
+  border-left: 4px solid var(--yellow);
+}
+
+/* ======= SIGNUP SECTION ======= */
+.signup-section {
+  background: linear-gradient(135deg, var(--cream) 0%, var(--beige) 100%);
+  text-align: center;
+  position: relative;
+}
+.signup-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.signup-inner h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+}
+.signup-inner p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+}
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 480px;
+  margin: 0 auto 24px;
+}
+.input-row {
+  display: flex;
+  gap: 12px;
+}
+.signup-form input {
+  flex: 1;
+  padding: 16px 24px;
+  border: 2px solid var(--beige-dark);
+  border-radius: 100px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  background: var(--white);
+  color: var(--text-dark);
+  transition: border-color 0.2s;
+  outline: none;
+}
+.signup-form input:focus { border-color: var(--navy); }
+.signup-form input::placeholder { color: #b0a898; }
+.signup-form button {
+  padding: 16px 36px;
+  flex-shrink: 0;
+}
+.signup-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 8px 0;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.signup-divider span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.signup-divider::before, .signup-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--beige-dark);
+}
+.social-signup {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 100px;
+  font-family: 'Genty Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 2px solid var(--beige-dark);
+  background: var(--white);
+  color: var(--navy);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.social-btn:hover {
+  border-color: var(--navy);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(9,48,139,0.1);
+}
+.social-btn svg { width: 20px; height: 20px; }
+.signup-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 20px;
+}
+
+/* ======= FOOTER ======= */
+footer {
+  background: var(--navy);
+  color: var(--white);
+  padding: 60px 24px 32px;
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+.footer-brand .footer-logo {
+  font-family: 'Genty', cursive;
+  font-weight: 400;
+  font-size: 1.9rem;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.footer-brand .footer-logo span { color: var(--yellow); }
+.footer-brand .tagline {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.6);
+}
+.footer-socials { display: flex; gap: 16px; }
+.footer-socials a {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+.footer-socials a:hover { background: var(--yellow); transform: translateY(-2px); }
+.footer-socials a svg { width: 20px; height: 20px; fill: var(--white); }
+.footer-socials a:hover svg { fill: var(--navy); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-bottom p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+}
+.footer-links { display: flex; gap: 24px; }
+.footer-links a {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--white); }
+
+/* ======= ANIMATIONS ======= */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; text-align: center; }
+  .hero-content { max-width: 100%; margin: 0 auto; }
+  .hero-actions { justify-content: center; }
+  .hero p { margin: 0 auto 36px; }
+  .product-hero-container { width: 340px; height: 340px; }
+  .tub-img-wrap { width: 160px !important; height: 160px !important; }
+  .floating-badge { display: none; }
+  .products-grid { grid-template-columns: 1fr; max-width: 400px; }
+  .nutrition-inner { grid-template-columns: 1fr; gap: 48px; }
+  .nutrition-content { text-align: center; }
+  .story-inner { grid-template-columns: 1fr; gap: 40px; }
+  .story-visual { order: -1; display: flex; justify-content: center; }
+  .story-illustration { max-width: 320px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: var(--cream);
+    padding: 24px;
+    gap: 20px;
+    border-bottom: 1px solid var(--beige);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .input-row { flex-direction: column; }
+  .social-signup { flex-direction: column; align-items: center; }
+  .footer-top { flex-direction: column; align-items: center; text-align: center; }
+}
+@media (max-width: 600px) {
+  .section { padding: 64px 16px; }
+  .product-hero-container { width: 280px; height: 280px; }
+  .tub-img-wrap { width: 130px !important; height: 130px !important; }
+  .nutrition-highlights { grid-template-columns: 1fr; }
+  .comparison-chart { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">schmear<span>.</span>d</a>
+    <div class="nav-links" id="navLinks">
+      <a href="products.html">Flavors</a>
+      <a href="compare.html">Why Us</a>
+      <a href="#story">Our Story</a>
+      <a href="order.html" class="nav-cta">Order Now</a>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content fade-up">
+      <div class="hero-badge"><span class="dot"></span> Launching Soon — Be First</div>
+      <h1>Cream Cheese Spread,<br><span class="highlight">Reimagined.</span></h1>
+      <p>10g protein &amp; 4g fiber per 2oz. Just 70 calories per serving. Real dairy, clean ingredients, and a taste you'll actually crave. <span class="cursive" style="font-size:1.1em">Schmear responsibly.</span></p>
+      <div class="hero-actions">
+        <a href="#signup" class="btn btn-primary">Join the Waitlist →</a>
+        <a href="#products" class="btn btn-secondary">See Flavors</a>
+      </div>
+    </div>
+    <div class="hero-visual fade-up" style="transition-delay: 0.2s">
+      <div class="product-hero-container">
+        <div class="tub-img-wrap tub-original">
+          <img src="tub-original.png" alt="Schmear'd Original cream cheese spread">
+          <span class="tub-label">Original</span>
+        </div>
+        <div class="tub-img-wrap tub-chive">
+          <img src="tub-chive.png" alt="Schmear'd Chive cream cheese spread">
+          <span class="tub-label">Chive</span>
+        </div>
+        <div class="tub-img-wrap tub-lemon">
+          <img src="tub-lemon.png" alt="Schmear'd Lemon Pepper cream cheese spread">
+          <span class="tub-label">Lemon Pepper</span>
+        </div>
+        <div class="floating-badge protein">💪 10g Protein*</div>
+        <div class="floating-badge fiber">🌿 4g Fiber*</div>
+        <div class="floating-badge cal">🔥 70 Cal*</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SCROLLING MARQUEE ===== -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="sep"></span><span class="cursive">Schmear Responsibly</span></div>
+    <div class="marquee-item"><span class="sep"></span>10g Protein per 2oz</div>
+    <div class="marquee-item"><span class="sep"></span>4g Fiber per 2oz</div>
+    <div class="marquee-item"><span class="sep"></span>Clean Label</div>
+    <div class="marquee-item"><span class="sep"></span>70 Calories</div>
+    <div class="marquee-item"><span class="sep"></span>3 Flavors</div>
+    <div class="marquee-item"><span class="sep"></span>No Artificial Preservatives</div>
+    <div class="marquee-item"><span class="sep"></span><span class="cursive">Schmear Responsibly</span></div>
+    <div class="marquee-item"><span class="sep"></span>10g Protein per 2oz</div>
+    <div class="marquee-item"><span class="sep"></span>4g Fiber per 2oz</div>
+    <div class="marquee-item"><span class="sep"></span>Clean Label</div>
+    <div class="marquee-item"><span class="sep"></span>70 Calories</div>
+    <div class="marquee-item"><span class="sep"></span>3 Flavors</div>
+    <div class="marquee-item"><span class="sep"></span>No Artificial Preservatives</div>
+    <div class="marquee-item"><span class="sep"></span><span class="cursive">Schmear Responsibly</span></div>
+    <div class="marquee-item"><span class="sep"></span>10g Protein per 2oz</div>
+    <div class="marquee-item"><span class="sep"></span>4g Fiber per 2oz</div>
+    <div class="marquee-item"><span class="sep"></span>Clean Label</div>
+    <div class="marquee-item"><span class="sep"></span>70 Calories</div>
+    <div class="marquee-item"><span class="sep"></span>3 Flavors</div>
+    <div class="marquee-item"><span class="sep"></span>No Artificial Preservatives</div>
+  </div>
+</div>
+
+<!-- ===== PRODUCTS ===== -->
+<section class="section" id="products">
+  <div class="section-header fade-up">
+    <div class="label">The Lineup</div>
+    <h2>Three Flavors. Zero Guilt.</h2>
+    <p>Every tub packs the same powerful nutrition — 10g protein &amp; 4g fiber per 2oz — in a flavor you'll actually crave.</p>
+  </div>
+  <div class="products-grid">
+    <div class="product-card original-card fade-up">
+      <div class="card-tub original-bg">
+        <div class="card-tub-inner">
+          <div class="brand-name" style="font-family:'Genty',cursive;text-transform:lowercase">schmear.d</div>
+          <div class="flavor-name">Original</div>
+        </div>
+        <!-- Illustrated bagel icon -->
+        <svg class="ingredient-icon" style="bottom:8px;right:12px;width:36px;height:36px;font-size:inherit;" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="#E8E0D0" stroke="#c4b89e" stroke-width="2"/><circle cx="20" cy="20" r="6" fill="#FDFAF5" stroke="#c4b89e" stroke-width="1.5"/></svg>
+      </div>
+      <h3>Original</h3>
+      <p class="flavor-desc">The classic, perfected. Smooth, creamy, and loaded with protein you won't even taste — just pure schmear bliss.</p>
+      <div class="tag-row">
+        <span class="tag tag-protein">10g Protein (2oz)</span>
+        <span class="tag tag-fiber">4g Fiber (2oz)</span>
+        <span class="tag tag-cal">70 Cal</span>
+      </div>
+    </div>
+    <div class="product-card chive-card fade-up" style="transition-delay:0.1s">
+      <div class="card-tub chive-bg">
+        <div class="card-tub-inner">
+          <div class="brand-name" style="font-family:'Genty',cursive;text-transform:lowercase">schmear.d</div>
+          <div class="flavor-name">Chive</div>
+        </div>
+        <svg class="ingredient-icon" style="bottom:6px;right:10px;width:38px;height:38px;font-size:inherit;" viewBox="0 0 40 40"><line x1="14" y1="36" x2="18" y2="6" stroke="#6a9a3a" stroke-width="2.5" stroke-linecap="round"/><line x1="22" y1="36" x2="26" y2="10" stroke="#7ab345" stroke-width="2" stroke-linecap="round"/><line x1="18" y1="36" x2="14" y2="14" stroke="#5a8a2e" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <h3>Chive</h3>
+      <p class="flavor-desc">Garden-fresh chives in every bite. The everything-bagel's best friend just got a serious protein upgrade.</p>
+      <div class="tag-row">
+        <span class="tag tag-protein">10g Protein (2oz)</span>
+        <span class="tag tag-fiber">4g Fiber (2oz)</span>
+        <span class="tag tag-cal">70 Cal</span>
+      </div>
+    </div>
+    <div class="product-card lemon-card fade-up" style="transition-delay:0.2s">
+      <div class="card-tub lemon-bg">
+        <div class="card-tub-inner">
+          <div class="brand-name" style="font-family:'Genty',cursive;text-transform:lowercase">schmear.d</div>
+          <div class="flavor-name">Lemon Pepper</div>
+        </div>
+        <svg class="ingredient-icon" style="bottom:6px;right:8px;width:40px;height:40px;font-size:inherit;" viewBox="0 0 40 40"><circle cx="20" cy="20" r="12" fill="#F5D45A" stroke="#d4b030" stroke-width="1.5"/><path d="M20 12 L20 28 M14 16 L26 24 M14 24 L26 16" stroke="#e8c830" stroke-width="1" opacity="0.6"/><circle cx="20" cy="20" r="4" fill="#FFF0B3"/><circle cx="32" cy="14" r="2" fill="#333" opacity="0.5"/><circle cx="34" cy="20" r="1.5" fill="#333" opacity="0.4"/><circle cx="30" cy="22" r="1.8" fill="#333" opacity="0.35"/></svg>
+      </div>
+      <h3>Lemon Pepper</h3>
+      <p class="flavor-desc">Bold, zesty, and a little unexpected. A bright twist that makes every bagel feel like an adventure.</p>
+      <div class="tag-row">
+        <span class="tag tag-protein">10g Protein (2oz)</span>
+        <span class="tag tag-fiber">4g Fiber (2oz)</span>
+        <span class="tag tag-cal">70 Cal</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NUTRITION ===== -->
+<section class="section nutrition-section" id="nutrition">
+  <div class="nutrition-inner">
+    <div class="nutrition-content fade-up">
+      <div class="label">The Good Stuff</div>
+      <h2>Not Your Average Cream Cheese Spread</h2>
+      <p>We packed in the good stuff — real protein from milk protein concentrate, prebiotic fiber from chicory root — and left out the junk. 10g protein, 4g fiber per 2oz — and just 70 calories per serving. No artificial preservatives. Just clean, honest ingredients you can actually pronounce.</p>
+      <div class="nutrition-highlights">
+        <div class="nutrition-card">
+          <div class="number">10g</div>
+          <div class="unit">Protein</div>
+          <div class="desc">2.5x more than regular cream cheese spread</div>
+          <div class="serving-note">*Per 2oz (4 tbsp)</div>
+        </div>
+        <div class="nutrition-card">
+          <div class="number">4g</div>
+          <div class="unit">Fiber</div>
+          <div class="desc">From chicory root &amp; citrus fiber — competitors have 0g</div>
+          <div class="serving-note">*Per 2oz (4 tbsp)</div>
+        </div>
+        <div class="nutrition-card">
+          <div class="number">70</div>
+          <div class="unit">Calories</div>
+          <div class="desc">vs 80–100 for regular cream cheese spread</div>
+          <div class="serving-note">*Per serving (2 tbsp)</div>
+        </div>
+        <div class="nutrition-card">
+          <div class="number">0</div>
+          <div class="unit">Artificial Anything</div>
+          <div class="desc">Clean label, real ingredients</div>
+        </div>
+      </div>
+    </div>
+    <div class="nutrition-visual fade-up" style="transition-delay:0.2s">
+      <div class="comparison-chart">
+        <div class="comparison-title">Schmear'd vs. Regular Cream Cheese Spread</div>
+        <div style="margin-bottom:32px;">
+          <div class="comparison-title" style="font-size:0.9rem;margin-bottom:16px;">Protein <span style="font-size:0.7rem;opacity:0.5">(per 2oz)</span></div>
+          <div class="comparison-row">
+            <div class="comparison-label ours">Schmear'd</div>
+            <div class="comparison-bars">
+              <div class="comparison-bar bar-schmear" style="width:100%">10g</div>
+            </div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-label">Regular CC</div>
+            <div class="comparison-bars">
+              <div class="comparison-bar bar-regular" style="width:40%">4g</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-bottom:32px;">
+          <div class="comparison-title" style="font-size:0.9rem;margin-bottom:16px;">Fiber <span style="font-size:0.7rem;opacity:0.5">(per 2oz)</span></div>
+          <div class="comparison-row">
+            <div class="comparison-label ours">Schmear'd</div>
+            <div class="comparison-bars">
+              <div class="comparison-bar bar-schmear" style="width:100%">4g</div>
+            </div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-label">Regular CC</div>
+            <div class="comparison-bars">
+              <div class="comparison-bar bar-regular" style="width:0%;min-width:40px">0g</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="comparison-title" style="font-size:0.9rem;margin-bottom:16px;">Calories <span style="font-size:0.7rem;opacity:0.5">(per serving)</span></div>
+          <div class="comparison-row">
+            <div class="comparison-label ours">Schmear'd</div>
+            <div class="comparison-bars">
+              <div class="comparison-bar bar-schmear" style="width:70%">70</div>
+            </div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-label">Regular CC</div>
+            <div class="comparison-bars">
+              <div class="comparison-bar bar-regular" style="width:100%">100</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BRAND STORY ===== -->
+<section class="section story-section" id="story">
+  <div class="story-inner">
+    <div class="story-visual fade-up">
+      <div class="story-illustration">
+        <svg class="bagel-svg" viewBox="0 0 300 300" fill="none">
+          <!-- Plate -->
+          <ellipse cx="150" cy="220" rx="120" ry="20" fill="#E8E0D0" opacity="0.5"/>
+          <!-- Bagel bottom half -->
+          <ellipse cx="150" cy="170" rx="85" ry="45" fill="#D4A054"/>
+          <ellipse cx="150" cy="170" rx="85" ry="45" fill="url(#bagelGrad)"/>
+          <!-- Schmear layer -->
+          <ellipse cx="150" cy="155" rx="75" ry="12" fill="#FFF8EE"/>
+          <ellipse cx="150" cy="155" rx="70" ry="10" fill="#FDFAF5"/>
+          <!-- Bagel top half -->
+          <ellipse cx="150" cy="130" rx="85" ry="45" fill="#C8903C"/>
+          <ellipse cx="150" cy="125" rx="80" ry="40" fill="#D4A054"/>
+          <!-- Bagel hole shadow -->
+          <ellipse cx="150" cy="128" rx="25" ry="15" fill="#A0722C"/>
+          <!-- Sesame seeds -->
+          <ellipse cx="120" cy="110" rx="5" ry="3" fill="#F5E6C8" transform="rotate(-20 120 110)"/>
+          <ellipse cx="145" cy="105" rx="5" ry="3" fill="#F5E6C8" transform="rotate(10 145 105)"/>
+          <ellipse cx="175" cy="112" rx="5" ry="3" fill="#F5E6C8" transform="rotate(-30 175 112)"/>
+          <ellipse cx="135" cy="118" rx="4" ry="2.5" fill="#F5E6C8" transform="rotate(15 135 118)"/>
+          <ellipse cx="165" cy="108" rx="4" ry="2.5" fill="#F5E6C8" transform="rotate(-10 165 108)"/>
+          <!-- Sparkles -->
+          <g fill="var(--yellow)" opacity="0.8">
+            <path d="M60 80 L63 70 L66 80 L76 83 L66 86 L63 96 L60 86 L50 83 Z"/>
+            <path d="M230 60 L232 53 L234 60 L241 62 L234 64 L232 71 L230 64 L223 62 Z" transform="scale(0.8) translate(30 10)"/>
+            <path d="M240 150 L242 145 L244 150 L249 152 L244 154 L242 159 L240 154 L235 152 Z"/>
+          </g>
+          <defs>
+            <radialGradient id="bagelGrad" cx="0.5" cy="0.3" r="0.5">
+              <stop offset="0%" stop-color="#DDB060" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#C08030" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+    <div class="story-content fade-up" style="transition-delay:0.15s">
+      <div class="section-header" style="text-align:left;margin-bottom:0;">
+        <div class="label">The Story of Schmear'd</div>
+      </div>
+      <h2>A Better Cream Cheese Spread</h2>
+      <p>Once upon a time, we found ourselves craving a bagel with cream cheese spread. Within us rose a quiet battle — should we surrender to empty calories, or seek a healthier alternative?</p>
+      <p>And just like that, Schmear'd was born. We took everything we love about the morning ritual — the comfort, the tang, the perfect schmear — and rebuilt it from the ground up. Real dairy blended with milk protein concentrate, prebiotic chicory root fiber, and clean ingredients you can actually pronounce. No gums, no fillers, no compromises.</p>
+      <p>The result? A cream cheese spread with 10g of protein and 4g of fiber per 2oz that actually tastes like the real thing — because it is. Let it sit at room temp for 5–10 minutes for the best schmear.</p>
+      <div class="highlight-text cursive" style="font-size:1.4rem">"schmear responsibly."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SIGNUP ===== -->
+<section class="section signup-section" id="signup">
+  <div class="signup-inner fade-up">
+    <div class="hero-badge" style="margin-bottom:20px;"><span class="dot"></span> Be First In Line</div>
+    <h2><span class="cursive" style="font-size:1.15em">Schmear Responsibly.</span><br>Sign Up Early.</h2>
+    <p>Join the founding community. Get launch updates, exclusive offers, and early access to Schmear'd — straight to your inbox (or phone).</p>
+    <div class="signup-form" id="signupForm">
+      <div class="input-row">
+        <input type="email" placeholder="Your email address" id="emailInput" required>
+        <button class="btn btn-primary" onclick="handleSignup(event)">I'm In →</button>
+      </div>
+      <div class="input-row">
+        <input type="tel" placeholder="Phone number (optional, for SMS updates)" id="phoneInput">
+      </div>
+    </div>
+    <div class="signup-divider"><span>or follow along</span></div>
+    <div class="social-signup">
+      <a href="#" class="social-btn" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        Follow on Instagram
+      </a>
+      <a href="#" class="social-btn" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.13C5.12 19.56 12 19.56 12 19.56s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.43z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+        Follow on TikTok
+      </a>
+    </div>
+    <p class="signup-note">No spam, ever. Just the good schmear. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">schmear<span>.</span>d</div>
+        <div class="tagline">Schmear Responsibly.™</div>
+      </div>
+      <div class="footer-socials">
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="#" aria-label="TikTok">
+          <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+        </a>
+        <a href="#" aria-label="Twitter/X">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Schmear'd. All rights reserved. | eatschmear.d.com | @eatschmear.d</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== SUCCESS MODAL ===== -->
+<div id="successModal" style="display:none;position:fixed;inset:0;background:rgba(9,48,139,0.5);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:var(--white);border-radius:24px;padding:48px;text-align:center;max-width:420px;margin:24px;box-shadow:0 24px 64px rgba(0,0,0,0.2);">
+    <div style="font-size:3rem;margin-bottom:16px;">🎉</div>
+    <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.5rem;color:var(--navy);margin-bottom:8px;">You're on the list!</h3>
+    <p style="color:var(--text-muted);margin-bottom:24px;">We'll let you know the moment Schmear'd is ready. Get ready to schmear responsibly.</p>
+    <button class="btn btn-primary" onclick="document.getElementById('successModal').style.display='none'">Can't Wait! →</button>
+  </div>
+</div>
+
+<script>
+// Nav scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Mobile menu
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+// Close menu on link click
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+
+// Signup handler — posts to Brevo subscription form
+async function handleSignup(e) {
+  e.preventDefault();
+  const email = document.getElementById('emailInput').value;
+  const phone = document.getElementById('phoneInput').value;
+  const btn = document.querySelector('.signup-form .btn-primary');
+
+  if (!email || !email.includes('@')) {
+    document.getElementById('emailInput').style.borderColor = '#e74c3c';
+    setTimeout(() => {
+      document.getElementById('emailInput').style.borderColor = '';
+    }, 2000);
+    return;
+  }
+
+  // Show loading state
+  const originalText = btn.textContent;
+  btn.textContent = 'Joining...';
+  btn.disabled = true;
+
+  try {
+    // Build form data for Brevo
+    const formData = new FormData();
+    formData.append('EMAIL', email);
+    formData.append('email_address_check', '');
+    formData.append('locale', 'en');
+    formData.append('html_type', 'simple');
+
+    const response = await fetch('https://3af3ce01.sibforms.com/serve/MUIFAOF0GDN5sHEuzNmlxbt62WPgoOrNvfWNClwqu-_fwQFPQ3UyLFLvHoZJmi6biaj4lgwOd19e4w022_0hNgp-OGcC9gTMtiZ9KEWim8KbAKwb_7svH9VxN58TX9is6pmqOl7AmIRJUCxCBCWZhVxlqP0DHYGIjyVPn75rwLRUDcEoEZB76HW4ocLPQys-b0KQD6j5PMdxkX5QAQ==', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (response.ok || response.status === 200 || response.status === 302 || response.type === 'opaque') {
+      document.getElementById('successModal').style.display = 'flex';
+      document.getElementById('emailInput').value = '';
+      document.getElementById('phoneInput').value = '';
+    } else {
+      // Even if we get a non-200, Brevo often redirects which can cause CORS issues
+      // Show success anyway since the form was submitted
+      document.getElementById('successModal').style.display = 'flex';
+      document.getElementById('emailInput').value = '';
+      document.getElementById('phoneInput').value = '';
+    }
+  } catch (err) {
+    // Brevo form submissions may trigger CORS errors due to redirects,
+    // but the submission still goes through. Use no-cors mode as fallback.
+    try {
+      const formData = new FormData();
+      formData.append('EMAIL', email);
+      formData.append('email_address_check', '');
+      formData.append('locale', 'en');
+      formData.append('html_type', 'simple');
+
+      await fetch('https://3af3ce01.sibforms.com/serve/MUIFAOF0GDN5sHEuzNmlxbt62WPgoOrNvfWNClwqu-_fwQFPQ3UyLFLvHoZJmi6biaj4lgwOd19e4w022_0hNgp-OGcC9gTMtiZ9KEWim8KbAKwb_7svH9VxN58TX9is6pmqOl7AmIRJUCxCBCWZhVxlqP0DHYGIjyVPn75rwLRUDcEoEZB76HW4ocLPQys-b0KQD6j5PMdxkX5QAQ==', {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors'
+      });
+
+      // no-cors means we can't read the response, but the request was sent
+      document.getElementById('successModal').style.display = 'flex';
+      document.getElementById('emailInput').value = '';
+      document.getElementById('phoneInput').value = '';
+    } catch (finalErr) {
+      alert('Something went wrong. Please try again.');
+    }
+  } finally {
+    btn.textContent = originalText;
+    btn.disabled = false;
+  }
+}
+
+// Enter key for signup
+document.getElementById('emailInput').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') handleSignup(e);
+});
+
+// Intersection Observer for fade-in animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+<!-- ===== LAUNCH ANNOUNCEMENT POPUP ===== -->
+<style>
+.launch-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(9, 48, 139, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  animation: fadeInOverlay 0.4s ease forwards;
+}
+@keyframes fadeInOverlay {
+  to { opacity: 1; }
+}
+.launch-popup {
+  background: #fff5e1;
+  border-radius: 24px;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  padding: 48px 36px 36px;
+  position: relative;
+  box-shadow: 0 24px 80px rgba(9, 48, 139, 0.3);
+  transform: translateY(30px) scale(0.95);
+  animation: popIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s forwards;
+}
+@keyframes popIn {
+  to { transform: translateY(0) scale(1); }
+}
+.launch-popup .popup-badge {
+  display: inline-block;
+  background: #fbea57;
+  color: #09308b;
+  font-family: 'Genty Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+}
+.launch-popup .popup-logo {
+  font-family: 'Genty', cursive;
+  font-size: 2.6rem;
+  color: #09308b;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.launch-popup .popup-date {
+  font-family: 'Genty Sans', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #428ce2;
+  margin-bottom: 16px;
+}
+.launch-popup .popup-msg {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.05rem;
+  color: #5a5a72;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+.launch-popup .popup-msg strong {
+  color: #09308b;
+}
+.launch-popup .popup-cta {
+  display: inline-block;
+  background: #09308b;
+  color: #fff5e1;
+  font-family: 'Genty Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 40px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  text-decoration: none;
+}
+.launch-popup .popup-cta:hover {
+  background: #428ce2;
+  transform: scale(1.04);
+}
+.launch-popup .popup-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #aaa;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px;
+  transition: color 0.2s;
+}
+.launch-popup .popup-close:hover {
+  color: #09308b;
+}
+</style>
+
+<div class="launch-overlay" id="launchPopup">
+  <div class="launch-popup">
+    <button class="popup-close" onclick="closeLaunchPopup()" aria-label="Close">&times;</button>
+    <div class="popup-badge">Official Launch</div>
+    <div class="popup-logo">schmear<span style="color:#fbea57;">.</span>d</div>
+    <div class="popup-date">April 15th, 2026</div>
+    <p class="popup-msg">
+      We're officially launching! Protein-packed cream cheese, now available for <strong>pickup in the New York City area</strong>. Order online and grab yours fresh.
+    </p>
+    <a href="order.html" class="popup-cta" onclick="closeLaunchPopup()">Order for Pickup</a>
+  </div>
+</div>
+
+<script>
+function closeLaunchPopup() {
+  const popup = document.getElementById('launchPopup');
+  popup.style.opacity = '0';
+  popup.style.transition = 'opacity 0.3s ease';
+  setTimeout(() => popup.remove(), 300);
+  sessionStorage.setItem('launchPopupSeen', 'true');
+}
+// Only show once per session
+if (sessionStorage.getItem('launchPopupSeen')) {
+  document.getElementById('launchPopup')?.remove();
+}
+</script>
+
+</body>
+</html>

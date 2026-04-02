@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Products — Schmear'd | Nutrition Packed Cream Cheese</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Genty';
+  src: url('fonts/genty.woff2') format('woff2'),
+       url('fonts/genty.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Genty Sans';
+  src: url('fonts/genty-sans.woff2') format('woff2'),
+       url('fonts/genty-sans.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Quicksand', sans-serif; background: #fff5e1; color: #1a1a2e; overflow-x: hidden; line-height: 1.6; }
+h1, h2, h3, h4 { font-family: 'Genty Sans', sans-serif; }
+a { text-decoration: none; color: inherit; }
+
+:root {
+  --navy: #09308b; --blue: #428ce2; --blue-light: #84b6ee;
+  --cream: #fff5e1; --beige: #fef3d0; --beige-dark: #e8d9b8; --white: #FFFFFF;
+  --sage: #96c287; --sage-light: #d9e3c1; --sage-dark: #6a9a3a;
+  --yellow: #fbea57; --yellow-light: #fef9b4; --lemon: #fef9b4;
+  --text-dark: #1a1a2e; --text-muted: #5a5a72;
+  --radius: 16px; --radius-lg: 24px; --radius-xl: 32px;
+}
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255,245,225,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(9,48,139,0.08); }
+nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
+.nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { font-family: 'Genty', cursive; font-weight: 400; font-size: 1.8rem; color: var(--navy); letter-spacing: 0px; }
+.nav-logo span { color: var(--yellow); }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--navy); }
+.nav-cta { background: var(--navy) !important; color: var(--white) !important; padding: 10px 24px !important; border-radius: 100px !important; font-weight: 600 !important; transition: transform 0.2s, background 0.2s !important; }
+.nav-cta:hover { background: var(--blue) !important; transform: translateY(-1px); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); border-radius: 2px; }
+
+/* HERO */
+.page-hero { padding: 140px 24px 80px; text-align: center; position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; top: -100px; right: -150px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(251,234,87,0.12) 0%, transparent 70%); border-radius: 50%; }
+.page-hero::after { content: ''; position: absolute; bottom: -100px; left: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(150,194,135,0.12) 0%, transparent 70%); border-radius: 50%; }
+.page-hero h1 { font-size: clamp(2.5rem, 5vw, 3.8rem); font-weight: 700; color: var(--navy); letter-spacing: -1.5px; margin-bottom: 16px; position: relative; z-index: 1; }
+.page-hero h1 .highlight { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.page-hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 560px; margin: 0 auto; position: relative; z-index: 1; }
+
+/* PRODUCT DEEP DIVE */
+.product-section { padding: 80px 24px; }
+.product-showcase {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center;
+  padding: 60px 0;
+  border-bottom: 1px solid var(--beige-dark);
+}
+.product-showcase:last-child { border-bottom: none; }
+.product-showcase.reverse .product-visual { order: 2; }
+.product-showcase.reverse .product-info { order: 1; }
+
+.product-visual { display: flex; justify-content: center; align-items: center; }
+.product-circle {
+  width: 320px; height: 320px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(9,48,139,0.1);
+  border: 8px solid var(--white);
+  transition: transform 0.4s;
+  overflow: hidden;
+}
+.product-circle:hover { transform: scale(1.03); }
+.product-circle.original { background: linear-gradient(135deg, #F5F0E5 0%, #E0D5C0 100%); }
+.product-circle.chive { background: linear-gradient(135deg, #D4E2C4 0%, #a8b893 100%); }
+.product-circle.lemon { background: linear-gradient(135deg, #FFF0B3 0%, #f0d880 100%); }
+
+.product-image {
+  width: 240px; height: 240px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.12));
+}
+
+.circle-inner {
+  width: 260px; height: 260px; border-radius: 50%;
+  border: 4px solid var(--navy);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 20px;
+}
+.circle-inner .brand { font-family: 'Genty', cursive; font-weight: 400; font-size: 1.6rem; color: var(--navy); letter-spacing: 0px; }
+.circle-inner .sub { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px; }
+.circle-inner .flavor { font-family: 'Genty Sans', sans-serif; font-weight: 600; font-size: 0.8rem; color: var(--navy); text-transform: uppercase; letter-spacing: 2px; margin-top: 8px; }
+.circle-inner .stats { font-size: 0.7rem; color: var(--text-muted); margin-top: 8px; }
+
+/* Floating ingredient illustrations */
+.ingredient-float {
+  position: absolute; width: 50px; height: 50px;
+  background: var(--white); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  font-size: 1.4rem;
+  animation: bobble 3s ease-in-out infinite;
+}
+.ingredient-float:nth-child(2) { animation-delay: 0.5s; }
+.ingredient-float:nth-child(3) { animation-delay: 1s; }
+@keyframes bobble { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+.product-info h2 { font-size: 2.2rem; font-weight: 700; color: var(--navy); letter-spacing: -0.5px; margin-bottom: 8px; }
+.product-info .flavor-tag {
+  display: inline-block; padding: 6px 16px; border-radius: 100px;
+  font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+.tag-original { background: rgba(9,48,139,0.08); color: var(--navy); }
+.tag-chive { background: rgba(150,194,135,0.35); color: var(--sage-dark); }
+.tag-lemon { background: rgba(251,234,87,0.3); color: #8a7520; }
+
+.product-info .description { font-size: 1.05rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 28px; }
+.product-info .callout {
+  font-family: 'Genty Sans', sans-serif; font-size: 1.1rem; font-weight: 600;
+  color: var(--navy); padding-left: 16px; border-left: 4px solid var(--yellow); margin-bottom: 28px;
+}
+
+/* Nutrition grid */
+.nutrition-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.nutrition-tile {
+  background: var(--white); border-radius: var(--radius); padding: 16px 12px;
+  text-align: center; border: 1px solid rgba(9,48,139,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.nutrition-tile:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(9,48,139,0.08); }
+.nutrition-tile .value {
+  font-family: 'Genty Sans', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--navy); line-height: 1;
+}
+.nutrition-tile .label { font-size: 0.7rem; color: var(--text-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+.nutrition-note { font-size: 0.7rem; color: var(--text-muted); margin-top: 16px; font-style: italic; }
+
+/* Ingredients highlight */
+.ingredients-section {
+  max-width: 1100px; margin: 0 auto;
+  padding: 80px 24px;
+  text-align: center;
+}
+.ingredients-section h2 { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; color: var(--navy); letter-spacing: -1px; margin-bottom: 12px; }
+.ingredients-section > p { font-size: 1.05rem; color: var(--text-muted); max-width: 560px; margin: 0 auto 48px; }
+
+.ingredients-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  max-width: 900px; margin: 0 auto;
+}
+.ingredient-card {
+  background: var(--white); border-radius: var(--radius-lg); padding: 32px 20px;
+  text-align: center; border: 1px solid rgba(9,48,139,0.06);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.ingredient-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(9,48,139,0.08); }
+.ingredient-icon-lg {
+  width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
+}
+.ingredient-card h4 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.ingredient-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+
+/* CTA banner */
+.cta-banner {
+  background: var(--navy); padding: 80px 24px; text-align: center; position: relative; overflow: hidden;
+}
+.cta-banner::before { content: ''; position: absolute; top: -80px; right: -80px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(251,234,87,0.15), transparent 70%); border-radius: 50%; }
+.cta-banner h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; color: var(--white); margin-bottom: 12px; position: relative; z-index: 1; }
+.cta-banner h2 .cursive-text { font-family: 'Dancing Script', cursive; font-weight: 700; font-size: 1.1em; }
+.cta-banner p { font-size: 1.05rem; color: rgba(255,255,255,0.6); margin-bottom: 32px; position: relative; z-index: 1; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px; border-radius: 100px; font-family: 'Genty Sans', sans-serif; font-weight: 600; font-size: 1rem; border: none; cursor: pointer; transition: all 0.25s ease; }
+.btn-yellow { background: var(--yellow); color: var(--navy); }
+.btn-yellow:hover { background: #e8c830; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(251,234,87,0.3); }
+.btn-outline-white { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.3); margin-left: 12px; }
+.btn-outline-white:hover { border-color: var(--white); background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+/* Footer */
+footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-logo { font-family: 'Genty', cursive; font-weight: 400; font-size: 1.6rem; color: var(--white); }
+.footer-logo span { color: var(--yellow); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 0.85rem; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+.footer-links a:hover { color: var(--white); }
+.footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.35); width: 100%; text-align: center; margin-top: 16px; }
+.footer-copy .cursive-text { font-family: 'Dancing Script', cursive; font-weight: 400; }
+
+/* Animations */
+.fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .product-showcase { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+  .product-showcase.reverse .product-visual { order: -1; }
+  .product-showcase.reverse .product-info { order: 0; }
+  .product-info .callout { text-align: left; }
+  .nutrition-grid { grid-template-columns: repeat(3, 1fr); }
+  .ingredients-grid { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--cream); padding: 24px; gap: 20px; border-bottom: 1px solid var(--beige); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+  .product-circle { width: 260px; height: 260px; }
+  .circle-inner { width: 210px; height: 210px; }
+}
+@media (max-width: 600px) {
+  .product-section { padding: 40px 16px; }
+  .nutrition-grid { grid-template-columns: repeat(3, 1fr); }
+  .ingredients-grid { grid-template-columns: 1fr 1fr; }
+  .product-circle { width: 220px; height: 220px; }
+  .circle-inner { width: 180px; height: 180px; }
+  .circle-inner .brand { font-size: 1.3rem; }
+  .ingredient-float { width: 40px; height: 40px; font-size: 1.1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">schmear<span>.</span>d</a>
+    <div class="nav-links" id="navLinks">
+      <a href="products.html" class="active">Flavors</a>
+      <a href="compare.html">Why Us</a>
+      <a href="index.html#story">Our Story</a>
+      <a href="order.html" class="nav-cta">Order Now</a>
+    </div>
+    <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <h1>Meet the <span class="highlight">Lineup.</span></h1>
+  <p>Three flavors. Same powerful nutrition. Every tub delivers 10g of protein and 4g of fiber per 2oz — just 70 calories per serving. No compromises, no weird ingredients.</p>
+</section>
+
+<!-- PRODUCTS -->
+<section class="product-section">
+
+  <!-- ORIGINAL -->
+  <div class="product-showcase fade-up">
+    <div class="product-visual">
+      <div class="product-circle original" style="padding:0;overflow:hidden;">
+        <img src="tub-original.png" alt="Schmear'd Original cream cheese spread" class="product-image" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+      </div>
+    </div>
+    <div class="product-info">
+      <span class="flavor-tag tag-original">Classic Flavor</span>
+      <h2>Original</h2>
+      <p class="description">The one that started it all. Our Original is the classic cream cheese spread you know and love — silky, rich, and perfectly spreadable — rebuilt from scratch with a serious nutritional upgrade. Made with real dairy from cottage cheese, Greek yogurt, and milk protein concentrate, every 2oz serving packs 10g of protein and 4g of fiber from chicory root.</p>
+      <div class="callout">"All the comfort of your morning bagel ritual — now with 5x the protein."</div>
+      <div class="nutrition-grid">
+        <div class="nutrition-tile"><div class="value">70</div><div class="label">Calories</div></div>
+        <div class="nutrition-tile"><div class="value">10g</div><div class="label">Protein</div></div>
+        <div class="nutrition-tile"><div class="value">4g</div><div class="label">Fiber</div></div>
+      </div>
+      <div class="nutrition-note">Protein &amp; Fiber per 2oz · Calories per serving (2 tbsp)</div>
+    </div>
+  </div>
+
+  <!-- CHIVE -->
+  <div class="product-showcase reverse fade-up">
+    <div class="product-visual">
+      <div class="product-circle chive" style="padding:0;overflow:hidden;">
+        <img src="tub-chive.png" alt="Schmear'd Chive & Onion cream cheese spread" class="product-image" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+      </div>
+    </div>
+    <div class="product-info">
+      <span class="flavor-tag tag-chive">Savory Flavor</span>
+      <h2>Chive &amp; Onion</h2>
+      <p class="description">The everything-bagel's best friend just leveled up. Real onion powder blooms into the base during our 12-hour cold rest, while freeze-dried chives are gently folded in at the end to keep their color and crunch. It's savory, herby, and packed with the same protein and fiber as our Original — 10g and 4g per 2oz serving.</p>
+      <div class="callout">"Garden-fresh flavor meets gym-ready nutrition. Your everything bagel just got even better."</div>
+      <div class="nutrition-grid">
+        <div class="nutrition-tile"><div class="value">70</div><div class="label">Calories</div></div>
+        <div class="nutrition-tile"><div class="value">10g</div><div class="label">Protein</div></div>
+        <div class="nutrition-tile"><div class="value">4g</div><div class="label">Fiber</div></div>
+      </div>
+      <div class="nutrition-note">Protein &amp; Fiber per 2oz · Calories per serving (2 tbsp)</div>
+    </div>
+  </div>
+
+  <!-- LEMON PEPPER -->
+  <div class="product-showcase fade-up">
+    <div class="product-visual">
+      <div class="product-circle lemon" style="padding:0;overflow:hidden;">
+        <img src="tub-lemon.png" alt="Schmear'd Lemon Pepper cream cheese spread" class="product-image" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+      </div>
+    </div>
+    <div class="product-info">
+      <span class="flavor-tag tag-lemon">Bold Flavor</span>
+      <h2>Lemon Pepper</h2>
+      <p class="description">The bold one. Real lemon oil and fresh juice bring a bright, zesty punch, while coarse-cracked black pepper adds warmth and a satisfying bite. A touch of turmeric gives it that golden glow. This isn't your grandma's cream cheese spread — it's the flavor-forward spread that makes every bite an adventure with 10g protein and 4g fiber per 2oz.</p>
+      <div class="callout">"Bright, bold, and a little unexpected — for people who think cream cheese should have a personality."</div>
+      <div class="nutrition-grid">
+        <div class="nutrition-tile"><div class="value">70</div><div class="label">Calories</div></div>
+        <div class="nutrition-tile"><div class="value">10g</div><div class="label">Protein</div></div>
+        <div class="nutrition-tile"><div class="value">4g</div><div class="label">Fiber</div></div>
+      </div>
+      <div class="nutrition-note">Protein &amp; Fiber per 2oz · Calories per serving (2 tbsp)</div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY INGREDIENTS -->
+<section class="ingredients-section fade-up">
+  <h2>What's Inside (And Why)</h2>
+  <p>Every ingredient earns its spot. No fillers, no artificial preservatives, no mystery powders.</p>
+  <div class="ingredients-grid">
+    <div class="ingredient-card">
+      <div class="ingredient-icon-lg" style="background:rgba(9,48,139,0.08);">💪</div>
+      <h4>MPC 85 Protein</h4>
+      <p>Milk protein concentrate delivers 10g of complete protein per 2oz without the chalky taste.</p>
+    </div>
+    <div class="ingredient-card">
+      <div class="ingredient-icon-lg" style="background:rgba(150,194,135,0.3);">🌾</div>
+      <h4>Chicory Root Fiber</h4>
+      <p>Inulin from chicory root adds 4g of prebiotic fiber per 2oz for gut health. You won't taste it — but your gut will thank you.</p>
+    </div>
+    <div class="ingredient-card">
+      <div class="ingredient-icon-lg" style="background:rgba(251,234,87,0.25);">🍊</div>
+      <h4>Citrus Fiber</h4>
+      <p>A natural stabilizer that gives schmear.d its smooth, spreadable texture — no gums or artificial thickeners needed.</p>
+    </div>
+    <div class="ingredient-card">
+      <div class="ingredient-icon-lg" style="background:rgba(9,48,139,0.06);">🛡️</div>
+      <h4>Natural Preservatives</h4>
+      <p>Buffered vinegar and cultured skim milk keep it fresh — the way food preservation was meant to work.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <h2>Ready to <span class="cursive-text">Schmear Responsibly</span>?</h2>
+  <p>Be the first to know when Schmear'd hits shelves.</p>
+  <div>
+    <a href="index.html#signup" class="btn btn-yellow">Join the Waitlist →</a>
+    <a href="compare.html" class="btn btn-outline-white">See How We Compare</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">schmear<span>.</span>d</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="products.html">Flavors</a>
+      <a href="compare.html">Why Us</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 Schmear'd. All rights reserved. <span class="cursive-text">Schmear Responsibly.</span>™</div>
+  </div>
+</footer>
+
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

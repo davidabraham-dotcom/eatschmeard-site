@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order — Schmear'd | Protein Packed Cream Cheese</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Genty';
+  src: url('fonts/genty.woff2') format('woff2'),
+       url('fonts/genty.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Genty Sans';
+  src: url('fonts/genty-sans.woff2') format('woff2'),
+       url('fonts/genty-sans.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ======= RESET & BASE ======= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: #fff5e1;
+  color: #1a1a2e;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+h1, h2, h3, h4 { font-family: 'Genty Sans', sans-serif; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; }
+
+:root {
+  --navy: #09308b;
+  --blue: #428ce2;
+  --blue-light: #84b6ee;
+  --cream: #fff5e1;
+  --beige: #fef3d0;
+  --beige-dark: #e8d9b8;
+  --white: #FFFFFF;
+  --sage: #96c287;
+  --sage-light: #d9e3c1;
+  --yellow: #fbea57;
+  --yellow-light: #fef9b4;
+  --text-dark: #1a1a2e;
+  --text-muted: #5a5a72;
+}
+
+/* ======= NAVIGATION ======= */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(255,245,225,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(9,48,139,0.08);
+  transition: box-shadow 0.3s ease;
+}
+nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Genty', cursive;
+  font-weight: 400;
+  font-size: 1.7rem;
+  color: var(--navy);
+}
+.nav-logo span { color: var(--yellow); }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--navy); }
+.nav-links a.active { color: var(--navy); font-weight: 700; }
+.nav-cta {
+  background: var(--navy) !important;
+  color: var(--white) !important;
+  padding: 10px 24px !important;
+  border-radius: 100px !important;
+  font-weight: 600 !important;
+  transition: transform 0.2s, background 0.2s !important;
+}
+.nav-cta:hover { background: var(--blue) !important; transform: translateY(-1px); }
+
+.cart-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--navy);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  font-family: 'Quicksand', sans-serif;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+.cart-btn:hover { background: var(--blue); transform: translateY(-1px); }
+.cart-btn .badge {
+  background: var(--yellow);
+  color: var(--navy);
+  border-radius: 100px;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* Mobile menu */
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); border-radius: 2px; transition: 0.3s; }
+
+/* ======= HERO ======= */
+.order-hero {
+  padding: 120px 24px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.order-hero .glow1 {
+  position: absolute; top: -80px; right: -120px;
+  width: 380px; height: 380px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(251,234,87,0.25), transparent 70%);
+  pointer-events: none;
+}
+.order-hero .glow2 {
+  position: absolute; bottom: -80px; left: -80px;
+  width: 320px; height: 320px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(150,194,135,0.25), transparent 70%);
+  pointer-events: none;
+}
+.order-hero h1 {
+  font-size: 3rem;
+  color: var(--navy);
+  letter-spacing: -1.5px;
+  margin-bottom: 12px;
+  position: relative; z-index: 1;
+}
+.order-hero h1 .gradient {
+  background: linear-gradient(135deg, #428ce2, #84b6ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.order-hero p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 540px;
+  margin: 0 auto 28px;
+  position: relative; z-index: 1;
+}
+
+/* Steps indicator */
+.steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative; z-index: 1;
+}
+.step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.step.active { color: var(--navy); }
+.step-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--beige-dark);
+  color: var(--text-muted);
+}
+.step.active .step-num { background: var(--navy); color: white; }
+.step-line { width: 32px; height: 2px; border-radius: 2px; background: var(--beige-dark); }
+
+/* ======= PRODUCT GRID ======= */
+.products-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px 120px;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.product-card {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.product-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-2px); }
+.product-img {
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+}
+.product-img img {
+  width: 180px; height: 180px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.12));
+}
+.product-img.variety-img {
+  position: relative;
+}
+.product-img.variety-img img {
+  width: 100px; height: 100px;
+}
+.product-img.variety-img img:nth-child(1) { margin-right: -15px; transform: rotate(-10deg); }
+.product-img.variety-img img:nth-child(2) { width: 110px; height: 110px; position: relative; z-index: 2; }
+.product-img.variety-img img:nth-child(3) { margin-left: -15px; transform: rotate(10deg); }
+.product-info { padding: 0 24px 24px; }
+.product-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.product-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 100px;
+  display: inline-block;
+}
+.product-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-top: 6px;
+}
+.product-price {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--navy);
+  text-align: right;
+}
+.product-unit {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+.product-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.product-actions { display: flex; justify-content: flex-end; }
+
+/* Buttons */
+.btn-add {
+  padding: 10px 24px;
+  border-radius: 100px;
+  border: none;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: white;
+  background: var(--navy);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.btn-add:hover { transform: scale(1.05); }
+.btn-add:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.qty-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: 2px solid var(--navy);
+  color: var(--navy);
+  background: transparent;
+  cursor: pointer;
+  font-family: 'Quicksand', sans-serif;
+  transition: background 0.2s;
+}
+.qty-btn:hover { background: rgba(9,48,139,0.05); }
+.qty-btn.plus {
+  background: var(--navy);
+  color: white;
+  border-color: var(--navy);
+}
+.qty-btn.plus:hover { background: var(--blue); border-color: var(--blue); transform: scale(1.1); }
+.qty-btn.plus:disabled { opacity: 0.4; transform: none; }
+.qty-num {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy);
+  width: 24px;
+  text-align: center;
+}
+
+/* ======= PROCEED BUTTON ======= */
+.proceed-wrap { text-align: center; margin-top: 40px; }
+.btn-proceed {
+  padding: 16px 40px;
+  border-radius: 100px;
+  border: none;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, #09308b, #428ce2);
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(9,48,139,0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-proceed:hover { transform: scale(1.05); box-shadow: 0 8px 32px rgba(9,48,139,0.35); }
+
+/* ======= STICKY CART BAR ======= */
+.sticky-cart {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 999;
+  background: rgba(9,48,139,0.97);
+  backdrop-filter: blur(20px);
+  padding: 16px 24px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+.sticky-cart.visible { transform: translateY(0); }
+.sticky-cart-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sticky-cart-info { color: white; }
+.sticky-cart-info .count { font-weight: 700; font-size: 1.1rem; }
+.sticky-cart-info .sep { margin: 0 12px; opacity: 0.5; }
+.sticky-cart-info .total { font-weight: 700; font-size: 1.2rem; }
+.btn-sticky-checkout {
+  padding: 12px 32px;
+  border-radius: 100px;
+  border: none;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: var(--yellow);
+  color: var(--navy);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.btn-sticky-checkout:hover { transform: scale(1.05); }
+
+/* ======= CHECKOUT PANEL ======= */
+.checkout-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 24px 120px;
+  display: none;
+}
+.checkout-container.active { display: block; }
+.checkout-card {
+  background: white;
+  border-radius: 24px;
+  padding: 24px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(9,48,139,0.08);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.checkout-card h3 {
+  font-size: 1.15rem;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--beige);
+}
+.cart-item:last-child { border-bottom: none; }
+.cart-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cart-item-thumb {
+  width: 40px; height: 40px;
+  object-fit: contain;
+}
+.cart-item-variety-thumb {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: #e8eeff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+.cart-item-name { font-weight: 600; color: var(--text-dark); }
+.cart-item-price { font-size: 0.8rem; color: var(--text-muted); }
+.cart-item-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cart-item-right .qty-btn { width: 28px; height: 28px; font-size: 0.85rem; }
+.cart-item-right .qty-num { font-size: 0.95rem; width: 20px; }
+.cart-item-subtotal { font-weight: 700; color: var(--text-dark); width: 60px; text-align: right; margin-left: 12px; }
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 16px;
+  margin-top: 16px;
+  border-top: 2px solid var(--beige-dark);
+}
+.cart-total-label { font-size: 1.1rem; font-weight: 700; color: var(--navy); }
+.cart-total-amount { font-size: 1.5rem; font-weight: 800; color: var(--navy); }
+.back-link {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--blue);
+  cursor: pointer;
+  margin-top: 12px;
+  display: inline-block;
+}
+.back-link:hover { text-decoration: underline; }
+
+/* Pickup slots */
+.pickup-note {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.slot-group { margin-bottom: 16px; }
+.slot-day {
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+.slot-times { display: flex; flex-wrap: wrap; gap: 8px; }
+.slot-btn {
+  padding: 8px 18px;
+  border-radius: 100px;
+  border: 2px solid var(--beige-dark);
+  background: var(--cream);
+  color: var(--navy);
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.slot-btn:hover { border-color: var(--navy); }
+.slot-btn.selected {
+  background: var(--navy);
+  color: white;
+  border-color: var(--navy);
+}
+
+/* Customer info form */
+.form-group { margin-bottom: 16px; }
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+.form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 2px solid var(--beige-dark);
+  background: var(--cream);
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-group input:focus { border-color: var(--blue); }
+
+.btn-place-order {
+  width: 100%;
+  padding: 16px;
+  border-radius: 100px;
+  border: none;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, #09308b, #428ce2);
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(9,48,139,0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-place-order:hover { transform: scale(1.02); box-shadow: 0 8px 32px rgba(9,48,139,0.35); }
+.btn-place-order:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.stripe-note {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+}
+
+/* ======= CONFIRMATION ======= */
+.confirmation-container {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+  display: none;
+}
+.confirmation-container.active { display: block; }
+.confirmation-card {
+  background: white;
+  border-radius: 24px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+.confirmation-card .check {
+  width: 64px; height: 64px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: #d9e3c1;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem;
+}
+.confirmation-card h2 {
+  color: var(--navy);
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+.confirmation-card .conf-text {
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+.conf-summary {
+  background: #f8f6f0;
+  border-radius: 16px;
+  padding: 20px;
+  text-align: left;
+  margin-bottom: 24px;
+}
+.conf-summary-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+.conf-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  color: var(--text-dark);
+}
+.conf-line .name { color: var(--text-muted); }
+.conf-line .amt { font-weight: 700; }
+.conf-total {
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px solid #e8e2d6;
+  margin-top: 10px;
+  padding-top: 10px;
+  font-weight: 700;
+}
+.conf-total .amt { color: var(--navy); font-size: 1.1rem; }
+.conf-pickup {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e8e2d6;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+.conf-pickup strong { color: var(--text-dark); }
+.btn-new-order {
+  padding: 12px 28px;
+  border-radius: 100px;
+  border: none;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: white;
+  background: var(--navy);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.btn-new-order:hover { transform: scale(1.05); }
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 768px) {
+  .product-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+  .order-hero h1 { font-size: 2.2rem; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: var(--cream);
+    padding: 24px;
+    gap: 20px;
+    border-bottom: 1px solid var(--beige);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+}
+@media (max-width: 480px) {
+  .order-hero { padding: 100px 16px 32px; }
+  .order-hero h1 { font-size: 1.8rem; }
+  .products-container, .checkout-container, .confirmation-container { padding-left: 16px; padding-right: 16px; }
+  .product-img { padding: 20px; min-height: 180px; }
+  .product-img img { width: 140px; height: 140px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">schmear<span>.</span>d</a>
+    <div class="nav-links" id="navLinks">
+      <a href="products.html">Flavors</a>
+      <a href="compare.html">Why Us</a>
+      <a href="index.html#story">Our Story</a>
+      <a href="order.html" class="active">Order</a>
+      <button class="cart-btn" id="navCartBtn" onclick="goToCheckout()" style="display:none;">
+        Cart <span class="badge" id="navCartCount">0</span>
+      </button>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<div class="order-hero" id="orderHero">
+  <div class="glow1"></div>
+  <div class="glow2"></div>
+  <h1>Order <span class="gradient">Fresh</span> Schmear</h1>
+  <p>Protein-packed cream cheese, made fresh. Choose your flavors, pick a day, and we'll have it ready for you.</p>
+  <div class="steps">
+    <div class="step active" id="step1">
+      <span class="step-num">1</span> Choose Flavors
+    </div>
+    <div class="step-line"></div>
+    <div class="step" id="step2">
+      <span class="step-num">2</span> Pickup &amp; Pay
+    </div>
+  </div>
+</div>
+
+<!-- ===== SHOP STEP ===== -->
+<div class="products-container" id="shopSection">
+  <div class="product-grid">
+
+    <!-- Original -->
+    <div class="product-card" style="border-color: #e8d9b8;">
+      <div class="product-img" style="background: #F5F0E5;">
+        <img src="tub-original.png" alt="Schmear'd Original">
+      </div>
+      <div class="product-info">
+        <div class="product-top">
+          <div>
+            <span class="product-badge" style="background:#fff5e1;color:#09308b;">The Classic</span>
+            <div class="product-name">Original</div>
+          </div>
+          <div>
+            <div class="product-price">$8.00</div>
+            <div class="product-unit">8oz container</div>
+          </div>
+        </div>
+        <div class="product-desc">Our signature protein-packed cream cheese. 12g protein per serving with a smooth, rich flavor.</div>
+        <div class="product-actions" id="actions-plain">
+          <button class="btn-add" onclick="addToCart('plain')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chive & Onion -->
+    <div class="product-card" style="border-color: #96c287;">
+      <div class="product-img" style="background: #d9e3c1;">
+        <img src="tub-chive.png" alt="Schmear'd Chive & Onion">
+      </div>
+      <div class="product-info">
+        <div class="product-top">
+          <div>
+            <span class="product-badge" style="background:#d9e3c1;color:#3d6b2e;">The Garden</span>
+            <div class="product-name">Chive &amp; Onion</div>
+          </div>
+          <div>
+            <div class="product-price">$8.00</div>
+            <div class="product-unit">8oz container</div>
+          </div>
+        </div>
+        <div class="product-desc">Fresh chives and sweet onion blended into our protein-packed base. A savory classic, elevated.</div>
+        <div class="product-actions" id="actions-chive">
+          <button class="btn-add" onclick="addToCart('chive')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lemon Pepper -->
+    <div class="product-card" style="border-color: #fbea57;">
+      <div class="product-img" style="background: #fef9b4;">
+        <img src="tub-lemon.png" alt="Schmear'd Lemon Pepper">
+      </div>
+      <div class="product-info">
+        <div class="product-top">
+          <div>
+            <span class="product-badge" style="background:#fef9b4;color:#7a6d00;">The Zest</span>
+            <div class="product-name">Lemon Pepper</div>
+          </div>
+          <div>
+            <div class="product-price">$8.00</div>
+            <div class="product-unit">8oz container</div>
+          </div>
+        </div>
+        <div class="product-desc">Bright lemon zest and cracked black pepper for a bold, refreshing twist on cream cheese.</div>
+        <div class="product-actions" id="actions-lemon">
+          <button class="btn-add" onclick="addToCart('lemon')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Variety Pack -->
+    <div class="product-card" style="border-color: #84b6ee;">
+      <div class="product-img variety-img" style="background: #e8eeff;">
+        <img src="tub-original.png" alt="Original">
+        <img src="tub-chive.png" alt="Chive">
+        <img src="tub-lemon.png" alt="Lemon Pepper">
+      </div>
+      <div class="product-info">
+        <div class="product-top">
+          <div>
+            <span class="product-badge" style="background:#e8eeff;color:#09308b;">All Three Flavors</span>
+            <div class="product-name">Variety Pack</div>
+          </div>
+          <div>
+            <div class="product-price">$21.00</div>
+            <div class="product-unit">3 containers</div>
+          </div>
+        </div>
+        <div class="product-desc">Can't decide? Get one of each — Original, Chive &amp; Onion, and Lemon Pepper. Save $3!</div>
+        <div class="product-actions" id="actions-variety">
+          <button class="btn-add" onclick="addToCart('variety')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="proceed-wrap" id="proceedWrap" style="display:none;">
+    <button class="btn-proceed" onclick="goToCheckout()">Continue to Pickup &amp; Checkout →</button>
+  </div>
+</div>
+
+<!-- ===== CHECKOUT STEP ===== -->
+<div class="checkout-container" id="checkoutSection">
+
+  <!-- Cart Summary -->
+  <div class="checkout-card">
+    <h3>Your Cart</h3>
+    <div id="cartItems"></div>
+    <div class="cart-total">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-amount" id="cartTotal">$0.00</span>
+    </div>
+    <a class="back-link" onclick="goToShop()">← Back to shopping</a>
+  </div>
+
+  <!-- Pickup Slots -->
+  <div class="checkout-card">
+    <h3>Choose Pickup Day &amp; Time</h3>
+    <p class="pickup-note">Pickup address will be emailed after your order is placed.</p>
+    <div id="pickupSlots"></div>
+  </div>
+
+  <!-- Customer Info -->
+  <div class="checkout-card">
+    <h3>Your Information</h3>
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" id="custName" placeholder="Jane Smith">
+    </div>
+    <div class="form-group">
+      <label>Email <span style="color:#c00;font-size:0.8em;">*</span></label>
+      <input type="email" id="custEmail" placeholder="jane@email.com" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
+      <span class="field-error" id="emailError" style="color:#c00;font-size:0.78rem;display:none;margin-top:4px;">Please enter a valid email address</span>
+    </div>
+    <div class="form-group">
+      <label>Phone <span style="color:#c00;font-size:0.8em;">*</span></label>
+      <input type="tel" id="custPhone" placeholder="(555) 123-4567" required>
+      <span class="field-error" id="phoneError" style="color:#c00;font-size:0.78rem;display:none;margin-top:4px;">Please enter a valid 10-digit phone number</span>
+    </div>
+  </div>
+
+  <!-- Place Order -->
+  <button class="btn-place-order" id="placeOrderBtn" onclick="placeOrder()" disabled>
+    Place Order — <span id="orderTotal">$0.00</span>
+  </button>
+  <p class="stripe-note">Payment will be processed securely via Stripe</p>
+</div>
+
+<!-- ===== CONFIRMATION ===== -->
+<div class="confirmation-container" id="confirmationSection">
+  <div class="confirmation-card">
+    <div class="check">✓</div>
+    <h2>Order Confirmed!</h2>
+    <p class="conf-text" id="confText"></p>
+    <div class="conf-summary" id="confSummary"></div>
+    <button class="btn-new-order" onclick="resetOrder()">Place Another Order</button>
+  </div>
+</div>
+
+<!-- ===== STICKY CART BAR ===== -->
+<div class="sticky-cart" id="stickyCart">
+  <div class="sticky-cart-inner">
+    <div class="sticky-cart-info">
+      <span class="count" id="stickyCount">0 items</span>
+      <span class="sep">|</span>
+      <span class="total" id="stickyTotal">$0.00</span>
+    </div>
+    <button class="btn-sticky-checkout" onclick="goToCheckout()">Checkout →</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+// ===== CONFIG =====
+const SUPABASE_URL = 'https://sotesfefkeonykvlchzs.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvdGVzZmVma2VvbnlrdmxjaHpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUwOTE2MzQsImV4cCI6MjA5MDY2NzYzNH0.M-Dw0h_xBymRM8ncL5GC6DM4DlUsnf_64YM5yweTvUo';
+const STRIPE_PK = 'pk_test_51SpuWXHXHIlPjdnVjoUX5S8STbkM9q3kIbmS7mIzBF1tTECM10TN0pk7koTKovGWrUZzqWbZH5Cmp1H3VoiX7Ywa00yJceDA34';
+
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const stripe = Stripe(STRIPE_PK);
+
+const IMG_MAP = { plain: 'tub-original.png', chive: 'tub-chive.png', lemon: 'tub-lemon.png', variety: 'variety' };
+
+let PRODUCTS = [];
+let PICKUP_SLOTS = [];
+let storeOpen = true;
+let cart = {};
+let selectedSlot = null;
+let currentStep = 'shop';
+
+// ===== LOAD DATA FROM SUPABASE =====
+async function loadProducts() {
+  const { data, error } = await sb.from('products').select('*').eq('is_active', true).order('sort_order');
+  if (error) { console.error('Error loading products:', error); return; }
+  PRODUCTS = data.map(p => ({
+    id: p.id, name: p.name, subtitle: p.subtitle, description: p.description,
+    price: parseFloat(p.price), img: IMG_MAP[p.id] || 'tub-original.png',
+    maxQty: p.quantity_available
+  }));
+  renderProductCards();
+  updateUI();
+}
+
+async function loadPickupSlots() {
+  const { data, error } = await sb.from('pickup_slots').select('*').eq('is_active', true).gte('pickup_date', new Date().toISOString().split('T')[0]).order('pickup_date').order('start_time');
+  if (error) { console.error('Error loading slots:', error); return; }
+
+  // Group by date
+  const grouped = {};
+  data.forEach(slot => {
+    const dateKey = slot.pickup_date;
+    if (!grouped[dateKey]) grouped[dateKey] = [];
+    if (slot.current_orders < slot.max_orders) {
+      grouped[dateKey].push(slot);
+    }
+  });
+  PICKUP_SLOTS = Object.entries(grouped).map(([date, slots]) => ({ date, slots }));
+}
+
+async function loadStoreStatus() {
+  const { data, error } = await sb.from('admin_settings').select('store_open, store_message').eq('id', 1).single();
+  if (error) return;
+  storeOpen = data.store_open;
+  if (!storeOpen) {
+    document.getElementById('shopSection').innerHTML =
+      '<div style="text-align:center;padding:60px 20px;">' +
+      '<div style="font-size:3rem;margin-bottom:16px;">🔒</div>' +
+      '<h2 style="color:#09308b;margin-bottom:12px;">Store Currently Closed</h2>' +
+      '<p style="color:#5a5a72;max-width:400px;margin:0 auto;">' + (data.store_message || 'We\'re not taking orders right now. Check back soon!') + '</p>' +
+      '</div>';
+  }
+}
+
+function renderProductCards() {
+  const grid = document.querySelector('.product-grid');
+  if (!grid) return;
+
+  const cardConfigs = {
+    plain: { border: '#e8d9b8', bg: '#F5F0E5', badgeBg: '#fff5e1', badgeColor: '#09308b', unit: '8oz container' },
+    chive: { border: '#96c287', bg: '#d9e3c1', badgeBg: '#d9e3c1', badgeColor: '#3d6b2e', unit: '8oz container' },
+    lemon: { border: '#fbea57', bg: '#fef9b4', badgeBg: '#fef9b4', badgeColor: '#7a6d00', unit: '8oz container' },
+    variety: { border: '#84b6ee', bg: '#e8eeff', badgeBg: '#e8eeff', badgeColor: '#09308b', unit: '3 containers' }
+  };
+
+  let html = '';
+  PRODUCTS.forEach(p => {
+    const c = cardConfigs[p.id] || cardConfigs.plain;
+    const soldOut = p.maxQty <= 0;
+
+    let imgHtml;
+    if (p.id === 'variety') {
+      imgHtml = '<div class="product-img variety-img" style="background:' + c.bg + ';">' +
+        '<img src="tub-original.png" alt="Original">' +
+        '<img src="tub-chive.png" alt="Chive">' +
+        '<img src="tub-lemon.png" alt="Lemon Pepper"></div>';
+    } else {
+      imgHtml = '<div class="product-img" style="background:' + c.bg + ';"><img src="' + p.img + '" alt="' + p.name + '"></div>';
+    }
+
+    html += '<div class="product-card" style="border-color:' + c.border + ';' + (soldOut ? 'opacity:0.6;' : '') + '">' +
+      imgHtml +
+      '<div class="product-info"><div class="product-top"><div>' +
+      '<span class="product-badge" style="background:' + c.badgeBg + ';color:' + c.badgeColor + ';">' + p.subtitle + '</span>' +
+      '<div class="product-name">' + p.name + '</div></div><div>' +
+      '<div class="product-price">$' + p.price.toFixed(2) + '</div>' +
+      '<div class="product-unit">' + c.unit + '</div></div></div>' +
+      '<div class="product-desc">' + p.description + '</div>' +
+      '<div class="product-actions" id="actions-' + p.id + '">' +
+      (soldOut
+        ? '<button class="btn-add" disabled style="background:#ccc;color:#666;cursor:not-allowed;">Sold Out</button>'
+        : '<button class="btn-add" onclick="addToCart(\'' + p.id + '\')">Add to Cart</button>') +
+      '</div></div></div>';
+  });
+
+  grid.innerHTML = html;
+}
+
+// ===== CART LOGIC =====
+function getCartCount() { return Object.values(cart).reduce((a, b) => a + b, 0); }
+
+function getCartTotal() {
+  return PRODUCTS.reduce((sum, p) => sum + (cart[p.id] || 0) * p.price, 0);
+}
+
+function addToCart(id) {
+  const product = PRODUCTS.find(p => p.id === id);
+  if (!product) return;
+  const current = cart[id] || 0;
+  if (current >= product.maxQty) return;
+  cart[id] = current + 1;
+  updateUI();
+}
+
+function removeFromCart(id) {
+  const current = cart[id] || 0;
+  if (current <= 0) return;
+  cart[id] = current - 1;
+  if (cart[id] === 0) delete cart[id];
+  updateUI();
+}
+
+// ===== UI UPDATES =====
+function updateUI() {
+  const count = getCartCount();
+  const total = getCartTotal();
+
+  const navCart = document.getElementById('navCartBtn');
+  const navCount = document.getElementById('navCartCount');
+  if (count > 0) { navCart.style.display = 'inline-flex'; navCount.textContent = count; }
+  else { navCart.style.display = 'none'; }
+
+  document.getElementById('proceedWrap').style.display = count > 0 ? 'block' : 'none';
+  updateStickyCart();
+
+  PRODUCTS.forEach(p => {
+    const qty = cart[p.id] || 0;
+    const soldOut = p.maxQty <= 0;
+    const container = document.getElementById('actions-' + p.id);
+    if (!container) return;
+
+    if (soldOut) {
+      container.innerHTML = '<button class="btn-add" disabled>Sold Out</button>';
+    } else if (qty === 0) {
+      container.innerHTML = '<button class="btn-add" onclick="addToCart(\'' + p.id + '\')">Add to Cart</button>';
+    } else {
+      const atMax = qty >= p.maxQty;
+      container.innerHTML =
+        '<div class="qty-control">' +
+        '<button class="qty-btn" onclick="removeFromCart(\'' + p.id + '\')">−</button>' +
+        '<span class="qty-num">' + qty + '</span>' +
+        '<button class="qty-btn plus" onclick="addToCart(\'' + p.id + '\')"' + (atMax ? ' disabled' : '') + '>+</button>' +
+        '</div>';
+    }
+  });
+
+  if (currentStep === 'pickup') renderCheckout();
+  validateOrder();
+}
+
+function updateStickyCart() {
+  const count = getCartCount();
+  const total = getCartTotal();
+  const sticky = document.getElementById('stickyCart');
+  if (count > 0 && currentStep === 'shop' && window.scrollY > 300) sticky.classList.add('visible');
+  else sticky.classList.remove('visible');
+  document.getElementById('stickyCount').textContent = count + ' item' + (count !== 1 ? 's' : '');
+  document.getElementById('stickyTotal').textContent = '$' + total.toFixed(2);
+}
+
+// ===== STEP NAVIGATION =====
+function goToCheckout() {
+  if (getCartCount() === 0) return;
+  currentStep = 'pickup';
+  document.getElementById('shopSection').style.display = 'none';
+  document.getElementById('checkoutSection').classList.add('active');
+  document.getElementById('confirmationSection').classList.remove('active');
+  document.getElementById('step1').classList.remove('active');
+  document.getElementById('step2').classList.add('active');
+  document.getElementById('stickyCart').classList.remove('visible');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  renderCheckout();
+  renderPickupSlots();
+}
+
+function goToShop() {
+  currentStep = 'shop';
+  document.getElementById('shopSection').style.display = 'block';
+  document.getElementById('checkoutSection').classList.remove('active');
+  document.getElementById('step1').classList.add('active');
+  document.getElementById('step2').classList.remove('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateUI();
+}
+
+// ===== CHECKOUT RENDERING =====
+function renderCheckout() {
+  const container = document.getElementById('cartItems');
+  let html = '';
+  PRODUCTS.forEach(p => {
+    const qty = cart[p.id]; if (!qty) return;
+    const thumbHtml = p.img === 'variety'
+      ? '<div class="cart-item-variety-thumb">3x</div>'
+      : '<img class="cart-item-thumb" src="' + p.img + '" alt="' + p.name + '">';
+    html += '<div class="cart-item"><div class="cart-item-left">' + thumbHtml +
+      '<div><div class="cart-item-name">' + p.name + '</div><div class="cart-item-price">$' + p.price.toFixed(2) + ' each</div></div></div>' +
+      '<div class="cart-item-right"><button class="qty-btn" onclick="removeFromCart(\'' + p.id + '\')">−</button>' +
+      '<span class="qty-num">' + qty + '</span><button class="qty-btn plus" onclick="addToCart(\'' + p.id + '\')" ' +
+      (qty >= p.maxQty ? 'disabled' : '') + '>+</button>' +
+      '<span class="cart-item-subtotal">$' + (qty * p.price).toFixed(2) + '</span></div></div>';
+  });
+  container.innerHTML = html;
+  const total = getCartTotal();
+  document.getElementById('cartTotal').textContent = '$' + total.toFixed(2);
+  document.getElementById('orderTotal').textContent = '$' + total.toFixed(2);
+}
+
+function renderPickupSlots() {
+  const container = document.getElementById('pickupSlots');
+  if (PICKUP_SLOTS.length === 0) {
+    container.innerHTML = '<p style="color:#5a5a72;text-align:center;padding:20px;">No pickup slots available right now. Check back soon!</p>';
+    return;
+  }
+  let html = '';
+  PICKUP_SLOTS.forEach(group => {
+    const d = new Date(group.date + 'T12:00:00');
+    const dayName = d.toLocaleDateString('en-US', { weekday: 'long' });
+    const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    html += '<div class="slot-group"><div class="slot-day">' + dayName + ', ' + dateStr + '</div><div class="slot-times">';
+    group.slots.forEach(slot => {
+      const timeStr = formatTime(slot.start_time);
+      const isSelected = selectedSlot && selectedSlot.id === slot.id;
+      html += '<button class="slot-btn' + (isSelected ? ' selected' : '') + '" onclick="selectSlot(' + slot.id + ',\'' + dayName + '\',\'' + dateStr + '\',\'' + timeStr + '\')">' + timeStr + '</button>';
+    });
+    html += '</div></div>';
+  });
+  container.innerHTML = html;
+}
+
+function formatTime(timeStr) {
+  const [h, m] = timeStr.split(':');
+  const hour = parseInt(h);
+  const ampm = hour >= 12 ? 'PM' : 'AM';
+  const h12 = hour > 12 ? hour - 12 : (hour === 0 ? 12 : hour);
+  return h12 + ':' + m + ' ' + ampm;
+}
+
+function selectSlot(id, day, date, time) {
+  selectedSlot = { id, day, date, time };
+  renderPickupSlots();
+  validateOrder();
+}
+
+function validateOrder() {
+  const name = document.getElementById('custName').value.trim();
+  const email = document.getElementById('custEmail').value.trim();
+  const phone = document.getElementById('custPhone').value.trim();
+
+  // Email validation
+  const emailRegex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+  const emailValid = emailRegex.test(email);
+  const emailError = document.getElementById('emailError');
+  if (emailError) emailError.style.display = (email && !emailValid) ? 'block' : 'none';
+
+  // Phone validation - require exactly 10 digits
+  const phoneDigits = phone.replace(/\D/g, '');
+  const phoneValid = phoneDigits.length === 10;
+  const phoneError = document.getElementById('phoneError');
+  if (phoneError) phoneError.style.display = (phone && !phoneValid) ? 'block' : 'none';
+
+  document.getElementById('placeOrderBtn').disabled = !(selectedSlot && name && emailValid && phoneValid && getCartCount() > 0);
+}
+
+// ===== PLACE ORDER (Supabase + Stripe Checkout) =====
+async function placeOrder() {
+  const btn = document.getElementById('placeOrderBtn');
+  btn.disabled = true;
+  btn.textContent = 'Processing...';
+
+  const name = document.getElementById('custName').value.trim();
+  const email = document.getElementById('custEmail').value.trim();
+  const phone = document.getElementById('custPhone').value.trim();
+  const total = getCartTotal();
+
+  try {
+    // 1. Create order in Supabase (status: pending until payment)
+    const { data: order, error: orderErr } = await sb.from('orders').insert({
+      customer_name: name,
+      customer_email: email,
+      customer_phone: phone,
+      pickup_slot_id: selectedSlot.id,
+      total_amount: total,
+      order_status: 'pending'
+    }).select().single();
+
+    if (orderErr) throw orderErr;
+
+    // 2. Create order items
+    const orderItems = PRODUCTS.filter(p => cart[p.id]).map(p => ({
+      order_id: order.id,
+      product_id: p.id,
+      quantity: cart[p.id],
+      unit_price: p.price
+    }));
+    const { error: itemsErr } = await sb.from('order_items').insert(orderItems);
+    if (itemsErr) throw itemsErr;
+
+    // 3. Decrement product quantities
+    for (const p of PRODUCTS) {
+      const qty = cart[p.id];
+      if (!qty) continue;
+      const { data: prod } = await sb.from('products').select('quantity_available').eq('id', p.id).single();
+      if (prod) {
+        const newQty = Math.max(0, prod.quantity_available - qty);
+        await sb.from('products').update({ quantity_available: newQty }).eq('id', p.id);
+      }
+    }
+
+    // 4. Increment pickup slot order count
+    const { data: slot } = await sb.from('pickup_slots').select('current_orders').eq('id', selectedSlot.id).single();
+    if (slot) {
+      await sb.from('pickup_slots').update({ current_orders: slot.current_orders + 1 }).eq('id', selectedSlot.id);
+    }
+
+    // 5. Redirect to Stripe Checkout
+    const stripeItems = PRODUCTS.filter(p => cart[p.id]).map(p => ({
+      name: 'Schmear\'d ' + p.name,
+      description: p.id === 'variety' ? '3 containers (Original + Chive + Lemon)' : '8oz container',
+      price: p.price,
+      quantity: cart[p.id]
+    }));
+
+    const pickupInfo = selectedSlot.day + ', ' + selectedSlot.date + ' at ' + selectedSlot.time;
+
+    const response = await fetch('/.netlify/functions/create-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        items: stripeItems,
+        customer_email: email,
+        customer_name: name,
+        order_id: order.id,
+        pickup_info: pickupInfo
+      })
+    });
+
+    const result = await response.json();
+
+    if (result.url) {
+      // Save order info to sessionStorage for confirmation page
+      sessionStorage.setItem('pendingOrder', JSON.stringify({
+        orderId: order.id, name, email, total, cart: {...cart},
+        slot: {...selectedSlot}, products: PRODUCTS.map(p => ({id:p.id, name:p.name, price:p.price}))
+      }));
+      // Redirect to Stripe
+      window.location.href = result.url;
+    } else {
+      throw new Error(result.error || 'Failed to create checkout session');
+    }
+
+  } catch (err) {
+    console.error('Order error:', err);
+    alert('There was an error processing your order. Please try again.');
+    btn.disabled = false;
+    btn.innerHTML = 'Place Order — <span id="orderTotal">$' + total.toFixed(2) + '</span>';
+  }
+}
+
+// ===== HANDLE STRIPE RETURN =====
+function handleStripeReturn() {
+  const params = new URLSearchParams(window.location.search);
+
+  if (params.get('success') === 'true') {
+    const orderId = params.get('order_id');
+    const sessionId = params.get('session_id');
+    const pending = JSON.parse(sessionStorage.getItem('pendingOrder') || '{}');
+
+    // Update order with Stripe session ID
+    if (orderId && sessionId) {
+      sb.from('orders').update({
+        stripe_checkout_session_id: sessionId,
+        order_status: 'paid'
+      }).eq('id', parseInt(orderId)).then(() => {});
+    }
+
+    // Show confirmation
+    currentStep = 'confirmation';
+    document.getElementById('shopSection').style.display = 'none';
+    document.getElementById('checkoutSection').classList.remove('active');
+    document.getElementById('confirmationSection').classList.add('active');
+    document.getElementById('orderHero').style.display = 'none';
+
+    const displayName = pending.name || 'there';
+    const displayEmail = pending.email || '';
+    document.getElementById('confText').innerHTML = 'Thank you, ' + displayName + '! Order #' + (orderId || '') + ' is confirmed and paid. We\'ll send pickup details to <strong>' + displayEmail + '</strong> before your pickup day.';
+
+    let summaryHtml = '<div class="conf-summary-title">Order Summary</div>';
+    if (pending.products && pending.cart) {
+      pending.products.forEach(p => {
+        const qty = pending.cart[p.id]; if (!qty) return;
+        summaryHtml += '<div class="conf-line"><span class="name">' + p.name + ' x' + qty + '</span><span class="amt">$' + (qty * p.price).toFixed(2) + '</span></div>';
+      });
+    }
+    summaryHtml += '<div class="conf-total"><span>Total</span><span class="amt">$' + (pending.total || 0).toFixed(2) + '</span></div>';
+    if (pending.slot) {
+      summaryHtml += '<div class="conf-pickup">Pickup: <strong>' + pending.slot.day + ', ' + pending.slot.date + ' at ' + pending.slot.time + '</strong><br>Address will be sent via email</div>';
+    }
+    summaryHtml += '<div style="margin-top:12px;padding-top:12px;border-top:1px solid #e8e2d6;font-size:0.85rem;color:#96c287;font-weight:600;">Payment confirmed via Stripe</div>';
+    document.getElementById('confSummary').innerHTML = summaryHtml;
+
+    sessionStorage.removeItem('pendingOrder');
+    window.history.replaceState({}, '', '/order.html');
+
+  } else if (params.get('cancelled') === 'true') {
+    const orderId = params.get('order_id');
+    const pending = JSON.parse(sessionStorage.getItem('pendingOrder') || '{}');
+
+    if (orderId) {
+      // Cancel the order in Supabase
+      sb.from('orders').update({ order_status: 'cancelled' }).eq('id', parseInt(orderId)).then(() => {});
+
+      // Restore product quantities that were decremented
+      if (pending.products && pending.cart) {
+        pending.products.forEach(async (p) => {
+          const qty = pending.cart[p.id];
+          if (!qty) return;
+          const { data: prod } = await sb.from('products').select('quantity_available').eq('id', p.id).single();
+          if (prod) {
+            await sb.from('products').update({ quantity_available: prod.quantity_available + qty }).eq('id', p.id);
+          }
+        });
+      }
+
+      // Restore pickup slot count
+      if (pending.slot && pending.slot.id) {
+        sb.from('pickup_slots').select('current_orders').eq('id', pending.slot.id).single().then(({ data: slot }) => {
+          if (slot && slot.current_orders > 0) {
+            sb.from('pickup_slots').update({ current_orders: slot.current_orders - 1 }).eq('id', pending.slot.id);
+          }
+        });
+      }
+    }
+
+    sessionStorage.removeItem('pendingOrder');
+    alert('Payment was cancelled. Your order has not been placed.');
+    window.history.replaceState({}, '', '/order.html');
+  }
+}
+
+function resetOrder() {
+  cart = {};
+  selectedSlot = null;
+  currentStep = 'shop';
+  document.getElementById('custName').value = '';
+  document.getElementById('custEmail').value = '';
+  document.getElementById('custPhone').value = '';
+  document.getElementById('confirmationSection').classList.remove('active');
+  document.getElementById('checkoutSection').classList.remove('active');
+  document.getElementById('shopSection').style.display = 'block';
+  document.getElementById('orderHero').style.display = 'block';
+  document.getElementById('step1').classList.add('active');
+  document.getElementById('step2').classList.remove('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Reload fresh data
+  loadProducts();
+  loadPickupSlots();
+}
+
+// ===== EVENT LISTENERS =====
+document.getElementById('custName').addEventListener('input', validateOrder);
+document.getElementById('custEmail').addEventListener('input', validateOrder);
+document.getElementById('custPhone').addEventListener('input', validateOrder);
+
+window.addEventListener('scroll', function() {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 10) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+  updateStickyCart();
+});
+
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+// ===== INIT =====
+(async function init() {
+  // Check for Stripe return FIRST (before loading store data)
+  handleStripeReturn();
+
+  await loadStoreStatus();
+  if (storeOpen) {
+    await Promise.all([loadProducts(), loadPickupSlots()]);
+  }
+})();
+</script>
+
+</body>
+</html>
