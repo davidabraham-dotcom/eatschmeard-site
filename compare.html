@@ -55,7 +55,7 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
 .hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); border-radius: 2px; }
 
 /* HERO */
-.page-hero { padding: 140px 24px 80px; text-align: center; position: relative; overflow: hidden; }
+.page-hero { padding: 180px 24px 80px; text-align: center; position: relative; overflow: hidden; }
 .page-hero::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(9,48,139,0.04) 0%, transparent 70%); border-radius: 50%; }
 .page-hero h1 { font-size: clamp(2.5rem, 5vw, 3.8rem); font-weight: 700; color: var(--navy); letter-spacing: -1.5px; margin-bottom: 16px; position: relative; z-index: 1; }
 .page-hero h1 .highlight { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -230,7 +230,10 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
   font-weight: 600;
   font-size: 0.95rem;
   padding: 10px 0;
-  position: relative;
+  position: fixed;
+  top: 68px;
+  left: 0;
+  right: 0;
   z-index: 999;
 ">
   <div style="
