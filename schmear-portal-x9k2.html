@@ -1044,7 +1044,7 @@ const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzd
 
 // Initialize Supabase with Service Role Key
 const { createClient } = window.supabase;
-const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
+const db = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 
 // ============ STATE ============
 let currentUser = null;
@@ -1079,7 +1079,7 @@ async function handleLogin(event) {
     errorEl.style.display = 'none';
 
     // Fetch admin settings to get password hash
-    const { data, error } = await supabase
+    const { data, error } = await db
       .from('admin_settings')
       .select('id, admin_password_hash')
       .eq('id', 1)
@@ -1139,7 +1139,7 @@ async function loadAllData() {
 
 async function loadProducts() {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await db
       .from('products')
       .select('*')
       .order('sort_order', { ascending: true });
@@ -1155,7 +1155,7 @@ async function loadProducts() {
 
 async function loadPickupSlots() {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await db
       .from('pickup_slots')
       .select('*')
       .order('pickup_date', { ascending: true });
@@ -1171,7 +1171,7 @@ async function loadPickupSlots() {
 
 async function loadPickupConfig() {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await db
       .from('pickup_config')
       .select('*')
       .eq('id', 1)
@@ -1187,7 +1187,7 @@ async function loadPickupConfig() {
 
 async function loadOrders() {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await db
       .from('orders')
       .select(`
         *,
@@ -1213,7 +1213,7 @@ async function loadOrders() {
 
 async function loadAdminSettings() {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await db
       .from('admin_settings')
       .select('*')
       .eq('id', 1)
@@ -1298,7 +1298,7 @@ async function setQuantity(productId) {
 
 async function updateProductQuantity(productId, newQty) {
   try {
-    const { error } = await supabase
+    const { error } = await db
       .from('products')
       .update({ quantity_available: newQty })
       .eq('id', productId);
@@ -1379,7 +1379,7 @@ async function savePickupSlot() {
   }
 
   try {
-    const { error } = await supabase
+    const { error } = await db
       .from('pickup_slots')
       .insert({
         pickup_date: date,
@@ -1403,7 +1403,7 @@ async function savePickupSlot() {
 
 async function toggleSlot(slotId, isActive) {
   try {
-    const { error } = await supabase
+    const { error } = await db
       .from('pickup_slots')
       .update({ is_active: isActive })
       .eq('id', slotId);
@@ -1421,7 +1421,7 @@ async function deleteSlot(slotId) {
   if (!confirm('Are you sure? This will delete the pickup slot.')) return;
 
   try {
-    const { error } = await supabase
+    const { error } = await db
       .from('pickup_slots')
       .delete()
       .eq('id', slotId);
@@ -1475,14 +1475,14 @@ async function saveLocation(event) {
 
   try {
     // Try update first, then insert if doesn't exist
-    const { error: updateError } = await supabase
+    const { error: updateError } = await db
       .from('pickup_config')
       .update(config)
       .eq('id', 1);
 
     if (updateError && updateError.code === 'PGRST116') {
       // Row doesn't exist, insert instead
-      const { error: insertError } = await supabase
+      const { error: insertError } = await db
         .from('pickup_config')
         .insert(config);
       if (insertError) throw insertError;
@@ -1611,7 +1611,7 @@ function filterOrders(status) {
 
 async function updateOrderStatus(orderId, newStatus) {
   try {
-    const { error } = await supabase
+    const { error } = await db
       .from('orders')
       .update({ order_status: newStatus })
       .eq('id', orderId);
@@ -1645,13 +1645,13 @@ async function saveSettings() {
   };
 
   try {
-    const { error: updateError } = await supabase
+    const { error: updateError } = await db
       .from('admin_settings')
       .update(settings)
       .eq('id', 1);
 
     if (updateError && updateError.code === 'PGRST116') {
-      const { error: insertError } = await supabase
+      const { error: insertError } = await db
         .from('admin_settings')
         .insert(settings);
       if (insertError) throw insertError;
@@ -1681,7 +1681,7 @@ async function changePassword() {
   }
 
   try {
-    const { error } = await supabase
+    const { error } = await db
       .from('admin_settings')
       .update({ admin_password_hash: newPassword })
       .eq('id', 1);

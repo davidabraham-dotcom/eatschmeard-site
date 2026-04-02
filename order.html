@@ -865,10 +865,10 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
 <script>
 // ===== CONFIG =====
 const SUPABASE_URL = 'https://sotesfefkeonykvlchzs.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvdGVzZmVma2VvbnlrdmxjaHpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUwOTE2MzQsImV4cCI6MjA5MDY2NzYzNH0.M-Dw0h_xBymRM8ncL5GC6DM4DlUsnf_64YM5yweTvUo';
+const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvdGVzZmVma2VvbnlrdmxjaHpzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NTA5MTYzNCwiZXhwIjoyMDkwNjY3NjM0fQ.W846T4it5fD2DQgnL3EjYxx5B1_nDoI3L0m5vu5o_1o';
 const STRIPE_PK = 'pk_test_51SpuWXHXHIlPjdnVjoUX5S8STbkM9q3kIbmS7mIzBF1tTECM10TN0pk7koTKovGWrUZzqWbZH5Cmp1H3VoiX7Ywa00yJceDA34';
 
-const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 const stripe = Stripe(STRIPE_PK);
 
 const IMG_MAP = { plain: 'tub-original.png', chive: 'tub-chive.png', lemon: 'tub-lemon.png', variety: 'variety' };
