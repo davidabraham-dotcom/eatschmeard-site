@@ -231,34 +231,6 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
 </head>
 <body>
 
-<!-- ===== ANNOUNCEMENT BANNER ===== -->
-<div id="announcementBanner" style="
-  background: linear-gradient(90deg, #09308b, #428ce2, #09308b);
-  color: #fff;
-  overflow: hidden;
-  white-space: nowrap;
-  font-family: 'Quicksand', sans-serif;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 10px 0;
-  position: relative;
-  z-index: 1001;
-">
-  <div style="
-    display: inline-block;
-    animation: scrollBanner 18s linear infinite;
-    padding-left: 100%;
-  ">
-    🧀&nbsp; Find us at the <strong>Grove Street Market</strong> in Jersey City — Every Thursday 3–7 PM! &nbsp;🧀&nbsp;&nbsp;&nbsp; 🧀&nbsp; Find us at the <strong>Grove Street Market</strong> in Jersey City — Every Thursday 3–7 PM! &nbsp;🧀&nbsp;&nbsp;&nbsp; 🧀&nbsp; Find us at the <strong>Grove Street Market</strong> in Jersey City — Every Thursday 3–7 PM! &nbsp;🧀
-  </div>
-</div>
-<style>
-@keyframes scrollBanner {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-</style>
-
 <!-- NAV -->
 <nav id="navbar">
   <div class="nav-inner">
@@ -274,6 +246,34 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
     </div>
   </div>
 </nav>
+
+<!-- ===== ANNOUNCEMENT BANNER ===== -->
+<div id="announcementBanner" style="
+  background: linear-gradient(90deg, #09308b, #428ce2, #09308b);
+  color: #fff;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 10px 0;
+  position: relative;
+  z-index: 999;
+">
+  <div style="
+    display: inline-block;
+    animation: scrollBanner 18s linear infinite;
+    padding-left: 100%;
+  ">
+    🧀&nbsp; Find us at the <strong>Grove Street Market</strong> in Jersey City — Every Thursday 3–7 PM! &nbsp;🧀&nbsp;&nbsp;&nbsp; 🧀&nbsp; Find us at the <strong>Grove Street Market</strong> in Jersey City — Every Thursday 3–7 PM! &nbsp;🧀&nbsp;&nbsp;&nbsp; 🧀&nbsp; Find us at the <strong>Grove Street Market</strong> in Jersey City — Every Thursday 3–7 PM! &nbsp;🧀
+  </div>
+</div>
+<style>
+@keyframes scrollBanner {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+</style>
 
 <!-- PAGE HERO -->
 <section class="page-hero">
