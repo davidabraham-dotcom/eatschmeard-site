@@ -838,7 +838,7 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
   <!-- Pickup Slots -->
   <div class="checkout-card">
     <h3>Choose Pickup Day &amp; Time</h3>
-    <p class="pickup-note">Pickup address will be emailed after your order is placed.</p>
+    <p class="pickup-note">Select your preferred pickup location and time below.</p>
     <div id="pickupSlots"></div>
   </div>
 
@@ -928,16 +928,18 @@ async function loadPickupSlots() {
   const { data, error } = await sb.from('pickup_slots').select('*').eq('is_active', true).gte('pickup_date', new Date().toISOString().split('T')[0]).order('pickup_date').order('start_time');
   if (error) { console.error('Error loading slots:', error); return; }
 
-  // Group by date
+  // Group by location + date
   const grouped = {};
   data.forEach(slot => {
-    const dateKey = slot.pickup_date;
-    if (!grouped[dateKey]) grouped[dateKey] = [];
+    const locName = slot.location_name || 'Pickup';
+    const locAddr = slot.location_address || '';
+    const groupKey = locName + '||' + slot.pickup_date;
+    if (!grouped[groupKey]) grouped[groupKey] = { date: slot.pickup_date, location_name: locName, location_address: locAddr, slots: [] };
     if (slot.current_orders < slot.max_orders) {
-      grouped[dateKey].push(slot);
+      grouped[groupKey].slots.push(slot);
     }
   });
-  PICKUP_SLOTS = Object.entries(grouped).map(([date, slots]) => ({ date, slots }));
+  PICKUP_SLOTS = Object.values(grouped).filter(g => g.slots.length > 0);
 }
 
 async function loadStoreStatus() {
@@ -1128,11 +1130,19 @@ function renderPickupSlots() {
     const d = new Date(group.date + 'T12:00:00');
     const dayName = d.toLocaleDateString('en-US', { weekday: 'long' });
     const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-    html += '<div class="slot-group"><div class="slot-day">' + dayName + ', ' + dateStr + '</div><div class="slot-times">';
+    const locName = group.location_name || 'Pickup';
+    const locAddr = group.location_address || '';
+    const showAddr = locAddr && locAddr !== 'Address provided via email';
+    html += '<div class="slot-group"><div class="slot-day"><span style="color:#09308b;font-weight:700;">' + locName + '</span> — ' + dayName + ', ' + dateStr;
+    if (showAddr) html += '<br><span style="font-size:0.85rem;color:#5a5a72;font-weight:400;">' + locAddr + '</span>';
+    html += '</div><div class="slot-times">';
     group.slots.forEach(slot => {
       const timeStr = formatTime(slot.start_time);
+      const endStr = formatTime(slot.end_time);
       const isSelected = selectedSlot && selectedSlot.id === slot.id;
-      html += '<button class="slot-btn' + (isSelected ? ' selected' : '') + '" onclick="selectSlot(' + slot.id + ',\'' + dayName + '\',\'' + dateStr + '\',\'' + timeStr + '\')">' + timeStr + '</button>';
+      const locData = encodeURIComponent(locName);
+      const addrData = encodeURIComponent(locAddr);
+      html += '<button class="slot-btn' + (isSelected ? ' selected' : '') + '" onclick="selectSlot(' + slot.id + ',\'' + dayName + '\',\'' + dateStr + '\',\'' + timeStr + '\',\'' + locData + '\',\'' + addrData + '\')">' + timeStr + ' – ' + endStr + '</button>';
     });
     html += '</div></div>';
   });
@@ -1147,8 +1157,8 @@ function formatTime(timeStr) {
   return h12 + ':' + m + ' ' + ampm;
 }
 
-function selectSlot(id, day, date, time) {
-  selectedSlot = { id, day, date, time };
+function selectSlot(id, day, date, time, locName, locAddr) {
+  selectedSlot = { id, day, date, time, location: decodeURIComponent(locName || ''), address: decodeURIComponent(locAddr || '') };
   renderPickupSlots();
   validateOrder();
 }
@@ -1305,7 +1315,8 @@ function handleStripeReturn() {
     }
     summaryHtml += '<div class="conf-total"><span>Total</span><span class="amt">$' + (pending.total || 0).toFixed(2) + '</span></div>';
     if (pending.slot) {
-      summaryHtml += '<div class="conf-pickup">Pickup: <strong>' + pending.slot.day + ', ' + pending.slot.date + ' at ' + pending.slot.time + '</strong><br>Address will be sent via email</div>';
+      const addrLine = (pending.slot.address && pending.slot.address !== 'Address provided via email') ? pending.slot.address : 'Address will be sent via email';
+      summaryHtml += '<div class="conf-pickup">Pickup: <strong>' + (pending.slot.location ? pending.slot.location + ' — ' : '') + pending.slot.day + ', ' + pending.slot.date + ' at ' + pending.slot.time + '</strong><br>' + addrLine + '</div>';
     }
     summaryHtml += '<div style="margin-top:12px;padding-top:12px;border-top:1px solid #e8e2d6;font-size:0.85rem;color:#96c287;font-weight:600;">Payment confirmed via Stripe</div>';
     document.getElementById('confSummary').innerHTML = summaryHtml;
