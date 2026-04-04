@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wholesale — Schmear'd | Protein Packed Cream Cheese</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Genty';
+  src: url('fonts/genty.woff2') format('woff2'),
+       url('fonts/genty.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Genty Sans';
+  src: url('fonts/genty-sans.woff2') format('woff2'),
+       url('fonts/genty-sans.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ======= RESET & BASE ======= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: #fff5e1;
+  color: #1a1a2e;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+h1, h2, h3, h4 { font-family: 'Genty Sans', sans-serif; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; }
+
+:root {
+  --navy: #09308b;
+  --blue: #428ce2;
+  --blue-light: #84b6ee;
+  --cream: #fff5e1;
+  --beige: #fef3d0;
+  --beige-dark: #e8d9b8;
+  --white: #FFFFFF;
+  --sage: #96c287;
+  --sage-light: #d9e3c1;
+  --yellow: #fbea57;
+  --yellow-light: #fef9b4;
+  --text-dark: #1a1a2e;
+  --text-muted: #5a5a72;
+}
+
+/* ======= NAVIGATION ======= */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(255,245,225,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(9,48,139,0.08);
+  transition: box-shadow 0.3s ease;
+}
+nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Genty', cursive;
+  font-weight: 400;
+  font-size: 1.7rem;
+  color: var(--navy);
+}
+.nav-logo span { color: var(--yellow); }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--navy); }
+.nav-links a.active { color: var(--navy); font-weight: 700; }
+.nav-cta {
+  background: var(--navy) !important;
+  color: var(--white) !important;
+  padding: 10px 24px !important;
+  border-radius: 100px !important;
+  font-weight: 600 !important;
+  transition: transform 0.2s, background 0.2s !important;
+}
+.nav-cta:hover { background: var(--blue) !important; transform: translateY(-1px); }
+
+/* Mobile menu */
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); border-radius: 2px; transition: 0.3s; }
+
+/* ======= HERO SECTION ======= */
+.wholesale-hero {
+  padding: 160px 24px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.wholesale-hero .glow1 {
+  position: absolute; top: -80px; right: -120px;
+  width: 380px; height: 380px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(251,234,87,0.25), transparent 70%);
+  pointer-events: none;
+}
+.wholesale-hero .glow2 {
+  position: absolute; bottom: -80px; left: -80px;
+  width: 320px; height: 320px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(150,194,135,0.25), transparent 70%);
+  pointer-events: none;
+}
+.wholesale-hero h1 {
+  font-size: 3rem;
+  color: var(--navy);
+  letter-spacing: -1.5px;
+  margin-bottom: 12px;
+  position: relative; z-index: 1;
+}
+.wholesale-hero p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative; z-index: 1;
+}
+
+/* ======= FORM SECTION ======= */
+.wholesale-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+.form-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 4px 32px rgba(9,48,139,0.08);
+  position: relative; z-index: 2;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.form-group .required {
+  color: #c00;
+  font-size: 0.8em;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--beige-dark);
+  border-radius: 8px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  background: var(--beige);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(9,48,139,0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.field-error {
+  color: #c00;
+  font-size: 0.78rem;
+  display: none;
+  margin-top: 4px;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 14px 28px;
+  border-radius: 100px;
+  border: none;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--navy);
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: var(--blue);
+  transform: translateY(-1px);
+}
+
+.btn-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ======= SUCCESS STATE ======= */
+.success-state {
+  display: none;
+  text-align: center;
+  padding: 40px;
+}
+
+.success-state.active {
+  display: block;
+}
+
+.success-check {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: var(--sage);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.success-state h2 {
+  font-size: 1.8rem;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+
+.success-state p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.btn-new-inquiry {
+  padding: 12px 28px;
+  border-radius: 100px;
+  border: none;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--navy);
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  display: inline-block;
+}
+
+.btn-new-inquiry:hover {
+  background: var(--blue);
+  transform: translateY(-1px);
+}
+
+/* ======= FOOTER ======= */
+footer {
+  background: var(--navy);
+  color: var(--white);
+  padding: 48px 24px;
+  margin-top: 80px;
+  text-align: center;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-logo {
+  font-family: 'Genty', cursive;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+
+.footer-logo span { color: var(--yellow); }
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+}
+
+.footer-links a {
+  color: rgba(255,255,255,0.8);
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--white); }
+
+.footer-copy {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+}
+
+.cursive-text { font-family: 'Genty', cursive; }
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 768px) {
+  .wholesale-hero h1 { font-size: 2.2rem; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: var(--cream);
+    padding: 24px;
+    gap: 20px;
+    border-bottom: 1px solid var(--beige);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .form-card { padding: 32px 24px; }
+}
+
+@media (max-width: 480px) {
+  .wholesale-hero { padding: 100px 16px 40px; }
+  .wholesale-hero h1 { font-size: 1.8rem; }
+  .wholesale-hero p { font-size: 0.95rem; }
+  .wholesale-container { padding: 0 16px 60px; }
+  .form-card { padding: 24px 16px; }
+  .footer-links { gap: 12px; font-size: 0.8rem; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">schmear<span>.</span>d</a>
+    <div class="nav-links" id="navLinks">
+      <a href="products.html">Flavors</a>
+      <a href="compare.html">Why Us</a>
+      <a href="index.html#story">Our Story</a>
+      <a href="wholesale.html" class="active">Wholesale</a>
+      <a href="order.html" class="nav-cta">Order Now</a>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== ANNOUNCEMENT BANNER ===== -->
+<div id="announcementBanner" style="
+  background: linear-gradient(90deg, #09308b, #428ce2, #09308b);
+  color: #fff;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 10px 0;
+  position: fixed;
+  top: 68px;
+  left: 0;
+  right: 0;
+  z-index: 999;
+">
+  <div style="
+    display: inline-block;
+    animation: scrollBanner 18s linear infinite;
+    padding-left: 100%;
+  ">
+    Find us at the <strong>Grove Street Market</strong> in Jersey City — Every Thursday 3–7 PM!&nbsp;&nbsp;&nbsp; 🥯&nbsp; Find us at the <strong>Grove Street Market</strong> in Jersey City — Every Thursday 3–7 PM! &nbsp;🥯&nbsp;&nbsp;&nbsp; 🥯&nbsp; Find us at the <strong>Grove Street Market</strong> in Jersey City — Every Thursday 3–7 PM! &nbsp;🥯
+  </div>
+</div>
+<style>
+@keyframes scrollBanner {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+</style>
+
+<!-- ===== HERO ===== -->
+<div class="wholesale-hero">
+  <div class="glow1"></div>
+  <div class="glow2"></div>
+  <h1>Carry the Schmear</h1>
+  <p>Interested in stocking Schmear'd at your store? We'd love to hear from you. Fill out the form below and we'll be in touch.</p>
+</div>
+
+<!-- ===== FORM SECTION ===== -->
+<div class="wholesale-container">
+  <div class="form-card">
+    <!-- Form -->
+    <form id="wholesaleForm" name="wholesale" method="POST" data-netlify="true" style="display: block;">
+      <input type="hidden" name="form-name" value="wholesale">
+      <div class="form-group">
+        <label>Store Name <span class="required">*</span></label>
+        <input type="text" id="storeName" name="storeName" required>
+        <span class="field-error" id="storeNameError"></span>
+      </div>
+
+      <div class="form-group">
+        <label>Contact Name <span class="required">*</span></label>
+        <input type="text" id="contactName" name="contactName" required>
+        <span class="field-error" id="contactNameError"></span>
+      </div>
+
+      <div class="form-group">
+        <label>Email <span class="required">*</span></label>
+        <input type="email" id="email" name="email" required>
+        <span class="field-error" id="emailError"></span>
+      </div>
+
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
+        <span class="field-error" id="phoneError"></span>
+      </div>
+
+      <div class="form-group">
+        <label>Store Address</label>
+        <input type="text" id="storeAddress" name="storeAddress">
+      </div>
+
+      <div class="form-group">
+        <label>Message</label>
+        <textarea id="message" name="message" placeholder="Tell us about your store, customer base, or any questions you have..."></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit">Submit Inquiry</button>
+    </form>
+
+    <!-- Success State -->
+    <div class="success-state" id="successState">
+      <div class="success-check">✓</div>
+      <h2>We'll be in touch!</h2>
+      <p>Thank you for your interest in wholesale opportunities with Schmear'd. We've received your inquiry and will get back to you shortly.</p>
+      <button class="btn-new-inquiry" onclick="resetForm()">Send Another Inquiry</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">schmear<span>.</span>d</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="products.html">Flavors</a>
+      <a href="compare.html">Why Us</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="https://www.instagram.com/eatschmear.d?igsh=ZXRheHR2M3ZjbGY2&utm_source=qr" aria-label="Instagram" target="_blank">Follow on Instagram</a>
+      <a href="https://www.tiktok.com/@eatschmeard?_r=1&_t=ZT-95DCj4VmzWf" aria-label="TikTok" target="_blank">Follow on TikTok</a>
+      <a href="https://x.com" aria-label="X (Twitter)" target="_blank">Follow on X</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 Schmear'd. All rights reserved. <span class="cursive-text">Schmear Responsibly.</span>™</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ===== CONFIG =====
+const SUPABASE_URL = 'https://sotesfefkeonykvlchzs.supabase.co';
+const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvdGVzZmVma2VvbnlrdmxjaHpzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NTA5MTYzNCwiZXhwIjoyMDkwNjY3NjM0fQ.W846T4it5fD2DQgnL3EjYxx5B1_nDoI3L0m5vu5o_1o';
+
+// Initialize Supabase client
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
+
+// ===== FORM VALIDATION =====
+function validateEmail(email) {
+  const regex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+  return regex.test(email);
+}
+
+function validatePhone(phone) {
+  if (!phone) return true; // Phone is optional
+  const digits = phone.replace(/\D/g, '');
+  return digits.length === 10;
+}
+
+function validateForm() {
+  let isValid = true;
+  const storeName = document.getElementById('storeName').value.trim();
+  const contactName = document.getElementById('contactName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+
+  // Clear all error messages
+  document.getElementById('storeNameError').textContent = '';
+  document.getElementById('contactNameError').textContent = '';
+  document.getElementById('emailError').textContent = '';
+  document.getElementById('phoneError').textContent = '';
+
+  // Validate Store Name
+  if (!storeName) {
+    document.getElementById('storeNameError').textContent = 'Store name is required';
+    isValid = false;
+  }
+
+  // Validate Contact Name
+  if (!contactName) {
+    document.getElementById('contactNameError').textContent = 'Contact name is required';
+    isValid = false;
+  }
+
+  // Validate Email
+  if (!email) {
+    document.getElementById('emailError').textContent = 'Email is required';
+    isValid = false;
+  } else if (!validateEmail(email)) {
+    document.getElementById('emailError').textContent = 'Please enter a valid email address';
+    isValid = false;
+  }
+
+  // Validate Phone (optional, but if provided must be valid)
+  if (phone && !validatePhone(phone)) {
+    document.getElementById('phoneError').textContent = 'Please enter a valid 10-digit phone number';
+    isValid = false;
+  }
+
+  return isValid;
+}
+
+// ===== FORMAT PHONE NUMBER =====
+function formatPhoneNumber(value) {
+  const digits = value.replace(/\D/g, '');
+  if (digits.length === 0) return '';
+  if (digits.length <= 3) return digits;
+  if (digits.length <= 6) return digits.slice(0, 3) + '-' + digits.slice(3);
+  return '(' + digits.slice(0, 3) + ') ' + digits.slice(3, 6) + '-' + digits.slice(6, 10);
+}
+
+// ===== FORM SUBMISSION =====
+document.getElementById('wholesaleForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  if (!validateForm()) {
+    return;
+  }
+
+  const btn = document.querySelector('.btn-submit');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  const storeName = document.getElementById('storeName').value.trim();
+  const contactName = document.getElementById('contactName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const storeAddress = document.getElementById('storeAddress').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  try {
+    // Save to Supabase
+    const { data, error } = await sb.from('wholesale_inquiries').insert({
+      store_name: storeName,
+      contact_name: contactName,
+      email: email,
+      phone: phone || null,
+      store_address: storeAddress || null,
+      message: message || null,
+      created_at: new Date().toISOString()
+    });
+
+    if (error) throw error;
+
+    // Also submit to Netlify Forms for email notification
+    const formData = new FormData(document.getElementById('wholesaleForm'));
+    fetch('/', { method: 'POST', body: formData }).catch(() => {});
+
+    // Show success state
+    document.getElementById('wholesaleForm').style.display = 'none';
+    document.getElementById('successState').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  } catch (err) {
+    console.error('Submission error:', err);
+    alert('There was an error submitting your inquiry. Please try again.');
+    btn.disabled = false;
+    btn.textContent = 'Submit Inquiry';
+  }
+});
+
+// ===== PHONE NUMBER FORMATTING =====
+document.getElementById('phone').addEventListener('input', (e) => {
+  e.target.value = formatPhoneNumber(e.target.value);
+});
+
+// ===== RESET FORM =====
+function resetForm() {
+  document.getElementById('wholesaleForm').reset();
+  document.getElementById('wholesaleForm').style.display = 'block';
+  document.getElementById('successState').classList.remove('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===== NAVIGATION SCROLL EFFECT =====
+window.addEventListener('scroll', function() {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 10) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+// ===== MOBILE MENU TOGGLE =====
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+</script>
+
+</body>
+</html>
