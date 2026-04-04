@@ -876,6 +876,7 @@ table tr:hover {
       <button class="tab-btn" onclick="switchTab('schedule')">Pickup Schedule</button>
       <button class="tab-btn" onclick="switchTab('location')">Pickup Location</button>
       <button class="tab-btn" onclick="switchTab('orders')">Orders</button>
+      <button class="tab-btn" onclick="switchTab('wholesale')">Wholesale</button>
       <button class="tab-btn" onclick="switchTab('settings')">Settings</button>
     </div>
 
@@ -1017,6 +1018,20 @@ table tr:hover {
     </div>
 
     <!-- SETTINGS TAB -->
+    <!-- WHOLESALE INQUIRIES TAB -->
+    <div id="wholesale" class="tab-content">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2 style="font-size: 1.3rem; color: var(--navy);">Wholesale Inquiries</h2>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <span id="wholesaleCount" style="font-size: 0.85rem; color: var(--text-muted);"></span>
+          <button class="btn btn-secondary btn-small" onclick="loadWholesaleInquiries()">Refresh</button>
+        </div>
+      </div>
+      <div id="wholesaleList" style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="text-align: center; padding: 40px; color: var(--text-muted);">Loading inquiries...</div>
+      </div>
+    </div>
+
     <div id="settings" class="tab-content">
       <div class="card">
         <div class="form-section">
@@ -1182,7 +1197,8 @@ async function loadAllData() {
     loadPickupSlots(),
     loadPickupConfig(),
     loadOrders(),
-    loadAdminSettings()
+    loadAdminSettings(),
+    loadWholesaleInquiries()
   ]);
   renderLowStockAlerts();
   renderAnalytics();
@@ -1998,6 +2014,80 @@ async function changePassword() {
   } catch (err) {
     console.error('Error changing password:', err);
     showToast('Error changing password', 'error');
+  }
+}
+
+// ============ WHOLESALE INQUIRIES ============
+async function loadWholesaleInquiries() {
+  try {
+    const { data, error } = await db.from('wholesale_inquiries')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+
+    const container = document.getElementById('wholesaleList');
+    const countEl = document.getElementById('wholesaleCount');
+
+    if (!data || data.length === 0) {
+      container.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text-muted);">No inquiries yet.</div>';
+      countEl.textContent = '0 inquiries';
+      return;
+    }
+
+    const newCount = data.filter(i => i.status === 'new').length;
+    countEl.textContent = `${data.length} total · ${newCount} new`;
+
+    container.innerHTML = data.map(inq => {
+      const date = new Date(inq.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
+      const statusColor = inq.status === 'new' ? 'var(--blue)' : inq.status === 'contacted' ? 'var(--sage)' : inq.status === 'closed' ? 'var(--text-muted)' : 'var(--navy)';
+      const statusBg = inq.status === 'new' ? '#e8f0fe' : inq.status === 'contacted' ? '#e8f5e9' : '#f0f0f0';
+
+      return `
+        <div class="card" style="padding: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+            <div>
+              <div style="font-weight: 700; font-size: 1.1rem; color: var(--navy);">${escapeHtml(inq.store_name)}</div>
+              <div style="font-size: 0.85rem; color: var(--text-muted);">${date}</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <span style="padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: ${statusBg}; color: ${statusColor};">${escapeHtml(inq.status)}</span>
+              <select onchange="updateInquiryStatus(${inq.id}, this.value)" style="padding: 4px 8px; border-radius: 8px; border: 1px solid #ddd; font-size: 0.8rem; font-family: 'Quicksand', sans-serif; cursor: pointer;">
+                <option value="" disabled selected>Set status</option>
+                <option value="new">New</option>
+                <option value="contacted">Contacted</option>
+                <option value="closed">Closed</option>
+              </select>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.9rem;">
+            <div><strong>Contact:</strong> ${escapeHtml(inq.contact_name)}</div>
+            <div><strong>Email:</strong> <a href="mailto:${escapeHtml(inq.email)}" style="color: var(--blue);">${escapeHtml(inq.email)}</a></div>
+            ${inq.phone ? `<div><strong>Phone:</strong> <a href="tel:${escapeHtml(inq.phone)}" style="color: var(--blue);">${escapeHtml(inq.phone)}</a></div>` : ''}
+            ${inq.store_address ? `<div><strong>Address:</strong> ${escapeHtml(inq.store_address)}</div>` : ''}
+          </div>
+          ${inq.message ? `<div style="margin-top: 12px; padding: 12px; background: var(--cream); border-radius: 10px; font-size: 0.9rem;"><strong>Message:</strong> ${escapeHtml(inq.message)}</div>` : ''}
+        </div>
+      `;
+    }).join('');
+  } catch (err) {
+    console.error('Error loading wholesale inquiries:', err);
+    document.getElementById('wholesaleList').innerHTML = '<div style="text-align: center; padding: 40px; color: var(--error);">Error loading inquiries.</div>';
+  }
+}
+
+async function updateInquiryStatus(id, newStatus) {
+  try {
+    const { error } = await db.from('wholesale_inquiries')
+      .update({ status: newStatus })
+      .eq('id', id);
+
+    if (error) throw error;
+    showToast(`Inquiry marked as "${newStatus}"`, 'success');
+    loadWholesaleInquiries();
+  } catch (err) {
+    console.error('Error updating inquiry status:', err);
+    showToast('Error updating status', 'error');
   }
 }
 
