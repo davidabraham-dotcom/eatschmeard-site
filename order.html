@@ -1083,8 +1083,38 @@ function updateStickyCart() {
 }
 
 // ===== STEP NAVIGATION =====
-function goToCheckout() {
+async function goToCheckout() {
   if (getCartCount() === 0) return;
+
+  // Defensive: re-fetch latest stock before checkout to prevent overselling
+  try {
+    const { data: fresh } = await sb.from('products').select('id, quantity_available, is_active').in('id', Object.keys(cart));
+    if (fresh) {
+      const stockMap = {}; fresh.forEach(f => { stockMap[f.id] = f.is_active ? f.quantity_available : 0; });
+      const conflicts = [];
+      Object.keys(cart).forEach(id => {
+        const available = stockMap[id] ?? 0;
+        const inCart = cart[id];
+        if (inCart > available) {
+          const p = PRODUCTS.find(x => x.id === id);
+          conflicts.push((p ? p.name : id) + ': you have ' + inCart + ' in cart, only ' + available + ' left');
+          // Clamp cart to what's actually available (0 means sold out)
+          if (available <= 0) { delete cart[id]; } else { cart[id] = available; }
+          // Reflect new stock in local state so UI shows Sold Out
+          if (p) p.maxQty = available;
+        } else {
+          const p = PRODUCTS.find(x => x.id === id);
+          if (p) p.maxQty = available;
+        }
+      });
+      if (conflicts.length > 0) {
+        alert('Heads up — stock changed while you were shopping:\n\n' + conflicts.join('\n') + '\n\nWe\'ve adjusted your cart. Please review before continuing.');
+        renderProductCards(); updateUI();
+        if (getCartCount() === 0) return;
+      }
+    }
+  } catch (e) { console.warn('stock recheck failed', e); }
+
   currentStep = 'pickup';
   document.getElementById('shopSection').style.display = 'none';
   document.getElementById('checkoutSection').classList.add('active');
