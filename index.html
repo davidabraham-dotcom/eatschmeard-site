@@ -1275,6 +1275,24 @@ document.querySelectorAll('.nav-links a').forEach(a => {
 });
 
 // Signup handler — posts to Brevo subscription form
+// Hidden iframe for Brevo form POST (avoids CORS issues with fetch)
+(function() {
+  const iframe = document.createElement('iframe');
+  iframe.name = 'brevoFormTarget';
+  iframe.style.display = 'none';
+  document.body.appendChild(iframe);
+
+  // Create a real HTML form that targets the hidden iframe
+  const brevoForm = document.createElement('form');
+  brevoForm.id = 'brevoHiddenForm';
+  brevoForm.method = 'POST';
+  brevoForm.action = 'https://3af3ce01.sibforms.com/serve/MUIFAOF0GDN5sHEuzNmlxbt62WPgoOrNvfWNClwqu-_fwQFPQ3UyLFLvHoZJmi6biaj4lgwOd19e4w022_0hNgp-OGcC9gTMtiZ9KEWim8KbAKwb_7svH9VxN58TX9is6pmqOl7AmIRJUCxCBCWZhVxlqP0DHYGIjyVPn75rwLRUDcEoEZB76HW4ocLPQys-b0KQD6j5PMdxkX5QAQ==';
+  brevoForm.target = 'brevoFormTarget';
+  brevoForm.style.display = 'none';
+  brevoForm.innerHTML = '<input type="email" name="EMAIL" /><input type="hidden" name="email_address_check" value="" /><input type="hidden" name="locale" value="en" /><input type="hidden" name="html_type" value="simple" />';
+  document.body.appendChild(brevoForm);
+})();
+
 async function handleSignup(e) {
   e.preventDefault();
   const email = document.getElementById('emailInput').value;
@@ -1295,55 +1313,30 @@ async function handleSignup(e) {
   btn.disabled = true;
 
   try {
-    // Build form data for Brevo
-    const formData = new FormData();
-    formData.append('EMAIL', email);
-    formData.append('email_address_check', '');
-    formData.append('locale', 'en');
-    formData.append('html_type', 'simple');
+    // 1. Submit via hidden HTML form → iframe (reliable, no CORS issues)
+    const brevoForm = document.getElementById('brevoHiddenForm');
+    brevoForm.querySelector('input[name="EMAIL"]').value = email;
+    brevoForm.submit();
 
-    const response = await fetch('https://3af3ce01.sibforms.com/serve/MUIFAOF0GDN5sHEuzNmlxbt62WPgoOrNvfWNClwqu-_fwQFPQ3UyLFLvHoZJmi6biaj4lgwOd19e4w022_0hNgp-OGcC9gTMtiZ9KEWim8KbAKwb_7svH9VxN58TX9is6pmqOl7AmIRJUCxCBCWZhVxlqP0DHYGIjyVPn75rwLRUDcEoEZB76HW4ocLPQys-b0KQD6j5PMdxkX5QAQ==', {
-      method: 'POST',
-      body: formData
-    });
-
-    if (response.ok || response.status === 200 || response.status === 302 || response.type === 'opaque') {
-      document.getElementById('successModal').style.display = 'flex';
-      document.getElementById('emailInput').value = '';
-      document.getElementById('phoneInput').value = '';
-    } else {
-      // Even if we get a non-200, Brevo often redirects which can cause CORS issues
-      // Show success anyway since the form was submitted
-      document.getElementById('successModal').style.display = 'flex';
-      document.getElementById('emailInput').value = '';
-      document.getElementById('phoneInput').value = '';
-    }
-  } catch (err) {
-    // Brevo form submissions may trigger CORS errors due to redirects,
-    // but the submission still goes through. Use no-cors mode as fallback.
+    // 2. Also submit to Netlify function as backup (captures phone number too)
     try {
-      const formData = new FormData();
-      formData.append('EMAIL', email);
-      formData.append('email_address_check', '');
-      formData.append('locale', 'en');
-      formData.append('html_type', 'simple');
-
-      await fetch('https://3af3ce01.sibforms.com/serve/MUIFAOF0GDN5sHEuzNmlxbt62WPgoOrNvfWNClwqu-_fwQFPQ3UyLFLvHoZJmi6biaj4lgwOd19e4w022_0hNgp-OGcC9gTMtiZ9KEWim8KbAKwb_7svH9VxN58TX9is6pmqOl7AmIRJUCxCBCWZhVxlqP0DHYGIjyVPn75rwLRUDcEoEZB76HW4ocLPQys-b0KQD6j5PMdxkX5QAQ==', {
+      await fetch('/api/signup', {
         method: 'POST',
-        body: formData,
-        mode: 'no-cors'
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, phone })
       });
+    } catch (backupErr) { /* Netlify function is optional backup */ }
 
-      // no-cors means we can't read the response, but the request was sent
+    // Show success after a brief delay to let the iframe POST complete
+    setTimeout(() => {
       document.getElementById('successModal').style.display = 'flex';
       document.getElementById('emailInput').value = '';
       document.getElementById('phoneInput').value = '';
-    } catch (finalErr) {
-      alert('Something went wrong. Please try again.');
-    }
+    }, 600);
+  } catch (err) {
+    alert('Something went wrong. Please try again.');
   } finally {
-    btn.textContent = originalText;
-    btn.disabled = false;
+    setTimeout(() => { btn.textContent = originalText; btn.disabled = false; }, 700);
   }
 }
 
