@@ -1439,6 +1439,30 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 .launch-popup .popup-msg strong {
   color: #09308b;
 }
+.launch-popup .popup-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.launch-popup .popup-form input {
+  flex: 1;
+  padding: 13px 18px;
+  border: 2px solid #e0d6c4;
+  border-radius: 50px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.launch-popup .popup-form input:focus {
+  border-color: #09308b;
+}
+.launch-popup .popup-form input::placeholder {
+  color: #b0a898;
+}
 .launch-popup .popup-cta {
   display: inline-block;
   background: #09308b;
@@ -1446,16 +1470,25 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   font-family: 'Genty Sans', sans-serif;
   font-weight: 700;
   font-size: 1rem;
-  padding: 14px 40px;
+  padding: 14px 28px;
   border-radius: 50px;
   border: none;
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
   text-decoration: none;
+  white-space: nowrap;
 }
 .launch-popup .popup-cta:hover {
   background: #428ce2;
   transform: scale(1.04);
+}
+.launch-popup .popup-success {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  color: #3d6b2e;
+  font-weight: 600;
+  margin-top: 8px;
+  display: none;
 }
 .launch-popup .popup-close {
   position: absolute;
@@ -1478,13 +1511,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 <div class="launch-overlay" id="launchPopup">
   <div class="launch-popup">
     <button class="popup-close" onclick="closeLaunchPopup()" aria-label="Close">&times;</button>
-    <div class="popup-badge">Soft Launch</div>
+    <div class="popup-badge">Join the Waitlist</div>
     <div class="popup-logo">schmear<span style="color:#428ce2;">.</span>d</div>
-    <div class="popup-date">April 15th, 2026</div>
+    <div class="popup-date">Protein-Packed Cream Cheese</div>
     <p class="popup-msg">
-      We're soft-launching today! Protein-packed cream cheese, now available for <strong>pickup in Jersey City & NYC</strong>. Order online and grab yours fresh.
+      Get updates on <strong>pop-ups, new flavors, and drops</strong> in Jersey City & NYC. Be the first to know when we're near you.
     </p>
-    <a href="order.html" class="popup-cta" onclick="closeLaunchPopup()">Order for Pickup</a>
+    <div class="popup-form">
+      <input type="email" id="popupEmailInput" placeholder="Your email address" />
+      <button class="popup-cta" onclick="handlePopupSignup()">I'm In</button>
+    </div>
+    <div class="popup-success" id="popupSuccess">You're on the list! We'll keep you posted.</div>
   </div>
 </div>
 
@@ -1496,6 +1533,39 @@ function closeLaunchPopup() {
   setTimeout(() => popup.remove(), 300);
   sessionStorage.setItem('launchPopupSeen', 'true');
 }
+
+function handlePopupSignup() {
+  const email = document.getElementById('popupEmailInput').value;
+  if (!email || !email.includes('@')) {
+    document.getElementById('popupEmailInput').style.borderColor = '#e74c3c';
+    setTimeout(() => { document.getElementById('popupEmailInput').style.borderColor = ''; }, 2000);
+    return;
+  }
+  // Use the hidden iframe form (same as main signup)
+  const brevoForm = document.getElementById('brevoHiddenForm');
+  if (brevoForm) {
+    brevoForm.querySelector('input[name="EMAIL"]').value = email;
+    brevoForm.submit();
+  }
+  // Also try Netlify function backup
+  fetch('/api/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email })
+  }).catch(() => {});
+
+  // Show success state in popup
+  document.querySelector('.popup-form').style.display = 'none';
+  document.getElementById('popupSuccess').style.display = 'block';
+  // Auto-close popup after a moment
+  setTimeout(() => closeLaunchPopup(), 2500);
+}
+
+// Enter key support for popup email
+document.getElementById('popupEmailInput')?.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') handlePopupSignup();
+});
+
 // Only show once per session
 if (sessionStorage.getItem('launchPopupSeen')) {
   document.getElementById('launchPopup')?.remove();
