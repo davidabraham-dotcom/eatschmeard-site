@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html><head><title>Setup Base Gym Pickup</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head><body style="font-family:sans-serif;padding:40px;max-width:600px;margin:auto;">
+<h2>Base Gym Pickup Setup</h2>
+<p>This page will add the Base Gym pickup slot and set inventory for Saturday 4/25.</p>
+<button id="btn" onclick="setup()" style="padding:12px 24px;font-size:16px;cursor:pointer;background:#09308b;color:white;border:none;border-radius:8px;">Run Setup</button>
+<pre id="log" style="background:#f5f5f5;padding:16px;margin-top:20px;border-radius:8px;white-space:pre-wrap;"></pre>
+<script>
+const sb = window.supabase.createClient(
+  'https://sotesfefkeonykvlchzs.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvdGVzZmVma2VvbnlrdmxjaHpzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NTA5MTYzNCwiZXhwIjoyMDkwNjY3NjM0fQ.W846T4it5fD2DQgnL3EjYxx5B1_nDoI3L0m5vu5o_1o'
+);
+
+const log = document.getElementById('log');
+function addLog(msg) { log.textContent += msg + '\n'; }
+
+async function setup() {
+  document.getElementById('btn').disabled = true;
+  addLog('Starting setup...');
+
+  try {
+    // 1. Add Base Gym pickup slot for Saturday 4/25
+    addLog('\n--- Adding Base Gym Pickup Slot ---');
+    const { data: existingSlots } = await sb.from('pickup_slots').select('*').eq('pickup_date', '2026-04-25').ilike('location_name', '%Base%');
+
+    if (existingSlots && existingSlots.length > 0) {
+      addLog('Base Gym slot already exists: ' + JSON.stringify(existingSlots[0]));
+    } else {
+      const { data: newSlot, error: slotErr } = await sb.from('pickup_slots').insert({
+        pickup_date: '2026-04-25',
+        start_time: '09:00:00',
+        end_time: '13:00:00',
+        location_name: 'Base Gym',
+        location_address: '60 Christopher Columbus Dr, Jersey City, NJ 07302',
+        max_orders: 50,
+        current_orders: 0,
+        is_active: true
+      }).select().single();
+
+      if (slotErr) { addLog('ERROR creating slot: ' + JSON.stringify(slotErr)); }
+      else { addLog('Created slot: ' + JSON.stringify(newSlot)); }
+    }
+
+    // 2. Set quantity_available to at least 3 for each individual flavor
+    addLog('\n--- Updating Product Inventory ---');
+    const flavors = ['plain', 'chive', 'lemon'];
+    for (const id of flavors) {
+      const { data: prod } = await sb.from('products').select('id, name, quantity_available').eq('id', id).single();
+      if (prod) {
+        const newQty = Math.max(prod.quantity_available, 3);
+        if (newQty !== prod.quantity_available) {
+          const { error: updErr } = await sb.from('products').update({ quantity_available: newQty }).eq('id', id);
+          if (updErr) addLog('ERROR updating ' + id + ': ' + JSON.stringify(updErr));
+          else addLog(prod.name + ': updated qty from ' + prod.quantity_available + ' to ' + newQty);
+        } else {
+          addLog(prod.name + ': already has ' + prod.quantity_available + ' available (good)');
+        }
+      }
+    }
+
+    // 3. Make sure store is open
+    addLog('\n--- Checking Store Status ---');
+    const { data: settings } = await sb.from('admin_settings').select('store_open').eq('id', 1).single();
+    if (settings) {
+      addLog('Store open: ' + settings.store_open);
+      if (!settings.store_open) {
+        await sb.from('admin_settings').update({ store_open: true }).eq('id', 1);
+        addLog('Store has been opened!');
+      }
+    }
+
+    addLog('\n✅ Setup complete!');
+  } catch (e) {
+    addLog('Error: ' + e.message);
+  }
+}
+</script>
+</body></html>
