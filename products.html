@@ -235,6 +235,97 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
   .circle-inner { width: 180px; height: 180px; }
   .circle-inner .brand { font-size: 1.3rem; }
   .ingredient-float { width: 40px; height: 40px; font-size: 1.1rem; }
+  .nf-toggle { font-size: 0.85rem; }
+}
+
+/* Nutrition Facts Panel */
+.nf-toggle {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 20px;
+  background: transparent;
+  border: 2px solid var(--navy);
+  color: var(--navy);
+  border-radius: 30px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.nf-toggle:hover { background: var(--navy); color: #fff; }
+.nf-panel {
+  display: none;
+  margin-top: 16px;
+  background: #fff;
+  border: 2px solid #222;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 420px;
+  text-align: left;
+  font-family: 'Quicksand', sans-serif;
+}
+.nf-panel.open { display: block; }
+.nf-panel h3 {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  border-bottom: 8px solid #222;
+  padding-bottom: 4px;
+  margin-bottom: 4px;
+}
+.nf-panel .nf-serving {
+  font-size: 0.82rem;
+  color: #333;
+  border-bottom: 4px solid #222;
+  padding-bottom: 6px;
+  margin-bottom: 2px;
+}
+.nf-panel .nf-calories {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-bottom: 3px solid #222;
+  padding: 4px 0;
+}
+.nf-panel .nf-calories .cal-num { font-size: 1.6rem; font-weight: 800; }
+.nf-panel .nf-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  padding: 3px 0;
+  border-bottom: 1px solid #ccc;
+}
+.nf-panel .nf-row.thick { border-bottom: 3px solid #222; }
+.nf-panel .nf-row.indent { padding-left: 16px; }
+.nf-panel .nf-row .bold { font-weight: 700; }
+.nf-panel .nf-dv-note {
+  font-size: 0.7rem;
+  color: #555;
+  margin-top: 6px;
+  line-height: 1.4;
+}
+.nf-ingredients {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 2px solid #222;
+}
+.nf-ingredients h4 {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.nf-ingredients p {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: #333;
+}
+.nf-allergen {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 </style>
 </head>
@@ -315,6 +406,32 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
         <div class="nutrition-tile"><div class="value">4g</div><div class="label">Fiber</div></div>
       </div>
       <div class="nutrition-note">Protein &amp; Fiber per 2oz · Calories per serving (2 tbsp)</div>
+      <button class="nf-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'Hide Nutrition Info ▲':'View Nutrition Info ▼'">View Nutrition Info ▼</button>
+      <div class="nf-panel">
+        <h3>Nutrition Facts</h3>
+        <div class="nf-serving">Servings: 8 &nbsp;|&nbsp; <strong>Serv. Size:</strong> 2 Tbsp (30g)</div>
+        <div class="nf-calories"><span>Amount Per Serving<br><span class="cal-num">Calories 70</span></span><span style="text-align:right;font-size:0.7rem;">% Daily Value*</span></div>
+        <div class="nf-row"><span><span class="bold">Total Fat</span> 4.5g</span><span class="bold">6%</span></div>
+        <div class="nf-row indent"><span>Sat. Fat 2.5g</span><span class="bold">13%</span></div>
+        <div class="nf-row indent"><span><em>Trans Fat</em> 0g</span><span></span></div>
+        <div class="nf-row"><span><span class="bold">Cholesterol</span> 15mg</span><span class="bold">5%</span></div>
+        <div class="nf-row"><span><span class="bold">Sodium</span> 115mg</span><span class="bold">5%</span></div>
+        <div class="nf-row"><span><span class="bold">Total Carb.</span> 3g</span><span class="bold">1%</span></div>
+        <div class="nf-row indent"><span>Dietary Fiber 2g</span><span class="bold">7%</span></div>
+        <div class="nf-row indent"><span>Total Sugars 1g</span><span></span></div>
+        <div class="nf-row indent" style="padding-left:28px;"><span>Incl. &lt;1g Added Sugars</span><span class="bold">1%</span></div>
+        <div class="nf-row thick"><span><span class="bold">Protein</span> 5g</span><span class="bold">10%</span></div>
+        <div class="nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
+        <div class="nf-row"><span>Calcium 85mg</span><span>6%</span></div>
+        <div class="nf-row"><span>Iron 0mg</span><span>0%</span></div>
+        <div class="nf-row"><span>Potassium 40mg</span><span>0%</span></div>
+        <div class="nf-dv-note">*Percent Daily Values are based on a 2,000 calorie diet.</div>
+        <div class="nf-ingredients">
+          <h4>INGREDIENTS:</h4>
+          <p>Pasteurized Milk and Cream, Milk Protein Concentrate, Chicory Root Fiber, Sugar, Cheese Culture, Buffered Vinegar, Cultured Skim Milk, Salt, Citrus Fiber, Carob Bean Gum, Enzymes.</p>
+          <p class="nf-allergen">CONTAINS: DAIRY</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -336,6 +453,32 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
         <div class="nutrition-tile"><div class="value">4g</div><div class="label">Fiber</div></div>
       </div>
       <div class="nutrition-note">Protein &amp; Fiber per 2oz · Calories per serving (2 tbsp)</div>
+      <button class="nf-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'Hide Nutrition Info ▲':'View Nutrition Info ▼'">View Nutrition Info ▼</button>
+      <div class="nf-panel">
+        <h3>Nutrition Facts</h3>
+        <div class="nf-serving">Servings: 8 &nbsp;|&nbsp; <strong>Serv. Size:</strong> 2 Tbsp (30g)</div>
+        <div class="nf-calories"><span>Amount Per Serving<br><span class="cal-num">Calories 70</span></span><span style="text-align:right;font-size:0.7rem;">% Daily Value*</span></div>
+        <div class="nf-row"><span><span class="bold">Total Fat</span> 4.5g</span><span class="bold">6%</span></div>
+        <div class="nf-row indent"><span>Sat. Fat 2.5g</span><span class="bold">13%</span></div>
+        <div class="nf-row indent"><span><em>Trans Fat</em> 0g</span><span></span></div>
+        <div class="nf-row"><span><span class="bold">Cholesterol</span> 15mg</span><span class="bold">5%</span></div>
+        <div class="nf-row"><span><span class="bold">Sodium</span> 135mg</span><span class="bold">6%</span></div>
+        <div class="nf-row"><span><span class="bold">Total Carb.</span> 4g</span><span class="bold">1%</span></div>
+        <div class="nf-row indent"><span>Dietary Fiber 2g</span><span class="bold">7%</span></div>
+        <div class="nf-row indent"><span>Total Sugars 1g</span><span></span></div>
+        <div class="nf-row indent" style="padding-left:28px;"><span>Incl. &lt;1g Added Sugars</span><span class="bold">1%</span></div>
+        <div class="nf-row thick"><span><span class="bold">Protein</span> 5g</span><span class="bold">10%</span></div>
+        <div class="nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
+        <div class="nf-row"><span>Calcium 85mg</span><span>6%</span></div>
+        <div class="nf-row"><span>Iron 0mg</span><span>0%</span></div>
+        <div class="nf-row"><span>Potassium 45mg</span><span>1%</span></div>
+        <div class="nf-dv-note">*Percent Daily Values are based on a 2,000 calorie diet.</div>
+        <div class="nf-ingredients">
+          <h4>INGREDIENTS:</h4>
+          <p>Pasteurized Milk and Cream, Milk Protein Concentrate, Chicory Root Fiber, Onion Powder, Salt, Sugar, Dried Chives, Cheese Culture, Buffered Vinegar, Cultured Skim Milk, Citrus Fiber, Carob Bean Gum.</p>
+          <p class="nf-allergen">CONTAINS: DAIRY</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -357,6 +500,32 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
         <div class="nutrition-tile"><div class="value">4g</div><div class="label">Fiber</div></div>
       </div>
       <div class="nutrition-note">Protein &amp; Fiber per 2oz · Calories per serving (2 tbsp)</div>
+      <button class="nf-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'Hide Nutrition Info ▲':'View Nutrition Info ▼'">View Nutrition Info ▼</button>
+      <div class="nf-panel">
+        <h3>Nutrition Facts</h3>
+        <div class="nf-serving">Servings: 8 &nbsp;|&nbsp; <strong>Serv. Size:</strong> 2 Tbsp (30g)</div>
+        <div class="nf-calories"><span>Amount Per Serving<br><span class="cal-num">Calories 70</span></span><span style="text-align:right;font-size:0.7rem;">% Daily Value*</span></div>
+        <div class="nf-row"><span><span class="bold">Total Fat</span> 4.5g</span><span class="bold">6%</span></div>
+        <div class="nf-row indent"><span>Sat. Fat 2.5g</span><span class="bold">13%</span></div>
+        <div class="nf-row indent"><span><em>Trans Fat</em> 0g</span><span></span></div>
+        <div class="nf-row"><span><span class="bold">Cholesterol</span> 15mg</span><span class="bold">5%</span></div>
+        <div class="nf-row"><span><span class="bold">Sodium</span> 115mg</span><span class="bold">5%</span></div>
+        <div class="nf-row"><span><span class="bold">Total Carb.</span> 3g</span><span class="bold">1%</span></div>
+        <div class="nf-row indent"><span>Dietary Fiber 2g</span><span class="bold">7%</span></div>
+        <div class="nf-row indent"><span>Total Sugars 1g</span><span></span></div>
+        <div class="nf-row indent" style="padding-left:28px;"><span>Incl. &lt;1g Added Sugars</span><span class="bold">1%</span></div>
+        <div class="nf-row thick"><span><span class="bold">Protein</span> 5g</span><span class="bold">10%</span></div>
+        <div class="nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
+        <div class="nf-row"><span>Calcium 85mg</span><span>6%</span></div>
+        <div class="nf-row"><span>Iron 0mg</span><span>0%</span></div>
+        <div class="nf-row"><span>Potassium 40mg</span><span>0%</span></div>
+        <div class="nf-dv-note">*Percent Daily Values are based on a 2,000 calorie diet.</div>
+        <div class="nf-ingredients">
+          <h4>INGREDIENTS:</h4>
+          <p>Pasteurized Milk and Cream, Milk Protein Concentrate, Chicory Root Fiber, Lemon Juice, Sugar, Buffered Vinegar, Salt, Black Pepper, Cultured Skim Milk, Citrus Fiber, Lemon Oil, Carob Bean Gum, Cheese Culture.</p>
+          <p class="nf-allergen">CONTAINS: DAIRY</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -364,7 +533,7 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
 <!-- KEY INGREDIENTS -->
 <section class="ingredients-section fade-up">
   <h2>What's Inside (And Why)</h2>
-  <p>Every ingredient earns its spot. No fillers, no artificial preservatives, no mystery powders.</p>
+  <p>Every ingredient earns its spot. No artificial preservatives, no mystery powders.</p>
   <div class="ingredients-grid">
     <div class="ingredient-card">
       <div class="ingredient-icon-lg" style="background:rgba(9,48,139,0.08);">💪</div>
@@ -379,7 +548,7 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
     <div class="ingredient-card">
       <div class="ingredient-icon-lg" style="background:rgba(251,234,87,0.25);">🍊</div>
       <h4>Citrus Fiber</h4>
-      <p>A natural stabilizer that gives schmear.d its smooth, spreadable texture — no gums or artificial thickeners needed.</p>
+      <p>A natural stabilizer that gives schmear.d its smooth, spreadable texture.</p>
     </div>
     <div class="ingredient-card">
       <div class="ingredient-icon-lg" style="background:rgba(9,48,139,0.06);">🛡️</div>
