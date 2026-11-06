@@ -140,7 +140,7 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
 
 /* ======= HERO ======= */
 .order-hero {
-  padding: 160px 24px 48px;
+  padding: 120px 24px 48px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -661,13 +661,13 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
 <!-- ===== NAVIGATION ===== -->
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">schmear<span>.</span>d</a>
+    <a class='nav-logo' href='/'>schmear<span>.</span>d</a>
     <div class="nav-links" id="navLinks">
-      <a href="products.html">Flavors</a>
-      <a href="compare.html">Why Us</a>
-      <a href="index.html#story">Our Story</a>
-      <a href="wholesale.html">Wholesale</a>
-      <a href="order.html" class="active">Order</a>
+      <a href='/products'>Flavors</a>
+      <a href='/compare'>Why Us</a>
+      <a href='/#story'>Our Story</a>
+      <a href='/wholesale'>Wholesale</a>
+      <a class='active' href='/order'>Order</a>
       <button class="cart-btn" id="navCartBtn" onclick="goToCheckout()" style="display:none;">
         Cart <span class="badge" id="navCartCount">0</span>
       </button>
@@ -678,36 +678,7 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
   </div>
 </nav>
 
-<!-- ===== ANNOUNCEMENT BANNER ===== -->
-<div id="announcementBanner" style="
-  background: linear-gradient(90deg, #09308b, #428ce2, #09308b);
-  color: #fff;
-  overflow: hidden;
-  white-space: nowrap;
-  font-family: 'Quicksand', sans-serif;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 10px 0;
-  position: fixed;
-  top: 68px;
-  left: 0;
-  right: 0;
-  z-index: 999;
-">
-  <div style="
-    display: inline-block;
-    animation: scrollBanner 18s linear infinite;
-    padding-left: 100%;
-  ">
-    🎉 <strong>NEW!</strong> Pop-Up at <strong>Base Gym JC</strong> — Saturday 4/25, 9AM–1PM! Free tastings + containers for sale. Order online &amp; pick up there! &nbsp;&nbsp;&nbsp; 🥯&nbsp; 🎉 <strong>NEW!</strong> Pop-Up at <strong>Base Gym JC</strong> — Saturday 4/25, 9AM–1PM! Free tastings + containers for sale. Order online &amp; pick up there! &nbsp;&nbsp;&nbsp; 🥯&nbsp; 🎉 <strong>NEW!</strong> Pop-Up at <strong>Base Gym JC</strong> — Saturday 4/25, 9AM–1PM! Free tastings + containers for sale. Order online &amp; pick up there! &nbsp;🥯
-  </div>
-</div>
-<style>
-@keyframes scrollBanner {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-</style>
+
 
 <!-- ===== HERO ===== -->
 <div class="order-hero" id="orderHero">
@@ -733,7 +704,7 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
     <!-- Original -->
     <div class="product-card" style="border-color: #e8d9b8;">
       <div class="product-img" style="background: #F5F0E5;">
-        <img src="tub-original.png" alt="Schmear.d Original">
+        <img src="lid-original.webp" alt="Schmear.d Original">
       </div>
       <div class="product-info">
         <div class="product-top">
@@ -756,7 +727,7 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
     <!-- Chive & Onion -->
     <div class="product-card" style="border-color: #96c287;">
       <div class="product-img" style="background: #d9e3c1;">
-        <img src="tub-chive.png" alt="Schmear.d Chive & Onion">
+        <img src="lid-chive.webp" alt="Schmear.d Chive & Onion">
       </div>
       <div class="product-info">
         <div class="product-top">
@@ -772,54 +743,6 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
         <div class="product-desc">Fresh chives and sweet onion blended into our protein-packed base. A savory classic, elevated.</div>
         <div class="product-actions" id="actions-chive">
           <button class="btn-add" onclick="addToCart('chive')">Add to Cart</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Lemon Pepper -->
-    <div class="product-card" style="border-color: #fbea57;">
-      <div class="product-img" style="background: #fef9b4;">
-        <img src="tub-lemon.png" alt="Schmear.d Lemon Pepper">
-      </div>
-      <div class="product-info">
-        <div class="product-top">
-          <div>
-            <span class="product-badge" style="background:#fef9b4;color:#7a6d00;">The Zest</span>
-            <div class="product-name">Lemon Pepper</div>
-          </div>
-          <div>
-            <div class="product-price">$9.00</div>
-            <div class="product-unit">8oz container</div>
-          </div>
-        </div>
-        <div class="product-desc">Bright lemon zest and cracked black pepper for a bold, refreshing twist on cream cheese.</div>
-        <div class="product-actions" id="actions-lemon">
-          <button class="btn-add" onclick="addToCart('lemon')">Add to Cart</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Variety Pack -->
-    <div class="product-card" style="border-color: #84b6ee;">
-      <div class="product-img variety-img" style="background: #e8eeff;">
-        <img src="tub-original.png" alt="Original">
-        <img src="tub-chive.png" alt="Chive">
-        <img src="tub-lemon.png" alt="Lemon Pepper">
-      </div>
-      <div class="product-info">
-        <div class="product-top">
-          <div>
-            <span class="product-badge" style="background:#e8eeff;color:#09308b;">All Three Flavors</span>
-            <div class="product-name">Variety Pack</div>
-          </div>
-          <div>
-            <div class="product-price">$24.00</div>
-            <div class="product-unit">3 containers</div>
-          </div>
-        </div>
-        <div class="product-desc">Can't decide? Get one of each — Original, Chive &amp; Onion, and Lemon Pepper. Save $3!</div>
-        <div class="product-actions" id="actions-variety">
-          <button class="btn-add" onclick="addToCart('variety')">Add to Cart</button>
         </div>
       </div>
     </div>
@@ -901,18 +824,15 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://js.stripe.com/v3/"></script>
 <script>
 // ===== CONFIG =====
-const SUPABASE_URL = 'https://sotesfefkeonykvlchzs.supabase.co';
-const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvdGVzZmVma2VvbnlrdmxjaHpzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NTA5MTYzNCwiZXhwIjoyMDkwNjY3NjM0fQ.W846T4it5fD2DQgnL3EjYxx5B1_nDoI3L0m5vu5o_1o';
 const STRIPE_PK = 'pk_live_51SpuWXHXHIlPjdnVdMv448oZcg5deT0lEHRLm03aOntGoiuv53MCrilpUw59GFnBl0Df9WeNPglU2YrzpDVhgq0o00rhL4JyYz';
 
-const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 const stripe = Stripe(STRIPE_PK);
 
-const IMG_MAP = { plain: 'tub-original.png', chive: 'tub-chive.png', lemon: 'tub-lemon.png', variety: 'variety' };
+const IMG_MAP = { plain: 'lid-original.webp', chive: 'lid-chive.webp', strawberry: 'lid-strawberry.webp', honey: 'lid-honey.webp' };
+const RETIRED_IDS = ['lemon', 'variety']; // Lemon Pepper discontinued; variety pack removed
 
 let PRODUCTS = [];
 let PICKUP_SLOTS = [];
@@ -921,13 +841,23 @@ let cart = {};
 let selectedSlot = null;
 let currentStep = 'shop';
 
-// ===== LOAD DATA FROM SUPABASE =====
+function escHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));}
+// ===== LOAD DATA (via server; the browser never touches the database) =====
+let _storeCache = null;
+async function fetchStore(force) {
+  if (_storeCache && !force) return _storeCache;
+  const r = await fetch('/.netlify/functions/store-data', { cache: 'no-store' });
+  if (!r.ok) throw new Error('store-data ' + r.status);
+  _storeCache = await r.json();
+  return _storeCache;
+}
+
 async function loadProducts() {
-  const { data, error } = await sb.from('products').select('*').eq('is_active', true).order('sort_order');
-  if (error) { console.error('Error loading products:', error); return; }
-  PRODUCTS = data.map(p => ({
+  let data;
+  try { data = (await fetchStore(true)).products; } catch (error) { console.error('Error loading products:', error); return; }
+  PRODUCTS = data.filter(p => !RETIRED_IDS.includes(p.id)).map(p => ({
     id: p.id, name: p.name, subtitle: p.subtitle, description: p.description,
-    price: parseFloat(p.price), img: IMG_MAP[p.id] || 'tub-original.png',
+    price: parseFloat(p.price), img: IMG_MAP[p.id] || 'lid-original.webp',
     maxQty: p.quantity_available
   }));
   renderProductCards();
@@ -935,8 +865,8 @@ async function loadProducts() {
 }
 
 async function loadPickupSlots() {
-  const { data, error } = await sb.from('pickup_slots').select('*').eq('is_active', true).gte('pickup_date', new Date().toISOString().split('T')[0]).order('pickup_date').order('start_time');
-  if (error) { console.error('Error loading slots:', error); return; }
+  let data;
+  try { data = (await fetchStore()).slots; } catch (error) { console.error('Error loading slots:', error); return; }
 
   // Group by location + date
   const grouped = {};
@@ -953,15 +883,16 @@ async function loadPickupSlots() {
 }
 
 async function loadStoreStatus() {
-  const { data, error } = await sb.from('admin_settings').select('store_open, store_message').eq('id', 1).single();
-  if (error) return;
+  let data;
+  try { data = (await fetchStore()).settings; } catch (error) { return; }
+  if (!data) return;
   storeOpen = data.store_open;
   if (!storeOpen) {
     document.getElementById('shopSection').innerHTML =
       '<div style="text-align:center;padding:60px 20px;">' +
       '<div style="font-size:3rem;margin-bottom:16px;">🔒</div>' +
       '<h2 style="color:#09308b;margin-bottom:12px;">Store Currently Closed</h2>' +
-      '<p style="color:#5a5a72;max-width:400px;margin:0 auto;">' + (data.store_message || 'We\'re not taking orders right now. Check back soon!') + '</p>' +
+      '<p style="color:#5a5a72;max-width:400px;margin:0 auto;">' + escHtml(data.store_message || 'We\'re not taking orders right now. Check back soon!') + '</p>' +
       '</div>';
   }
 }
@@ -973,8 +904,8 @@ function renderProductCards() {
   const cardConfigs = {
     plain: { border: '#e8d9b8', bg: '#F5F0E5', badgeBg: '#fff5e1', badgeColor: '#09308b', unit: '8oz container' },
     chive: { border: '#96c287', bg: '#d9e3c1', badgeBg: '#d9e3c1', badgeColor: '#3d6b2e', unit: '8oz container' },
-    lemon: { border: '#fbea57', bg: '#fef9b4', badgeBg: '#fef9b4', badgeColor: '#7a6d00', unit: '8oz container' },
-    variety: { border: '#84b6ee', bg: '#e8eeff', badgeBg: '#e8eeff', badgeColor: '#09308b', unit: '3 containers' }
+    strawberry: { border: '#883848', bg: '#f4c2c2', badgeBg: '#f4c2c2', badgeColor: '#883848', unit: '8oz container' },
+    honey: { border: '#901818', bg: '#ffdecd', badgeBg: '#ffdecd', badgeColor: '#901818', unit: '8oz container' }
   };
 
   let html = '';
@@ -985,8 +916,8 @@ function renderProductCards() {
     let imgHtml;
     if (p.id === 'variety') {
       imgHtml = '<div class="product-img variety-img" style="background:' + c.bg + ';">' +
-        '<img src="tub-original.png" alt="Original">' +
-        '<img src="tub-chive.png" alt="Chive">' +
+        '<img src="lid-original.webp" alt="Original">' +
+        '<img src="lid-chive.webp" alt="Chive">' +
         '<img src="tub-lemon.png" alt="Lemon Pepper"></div>';
     } else {
       imgHtml = '<div class="product-img" style="background:' + c.bg + ';"><img src="' + p.img + '" alt="' + p.name + '"></div>';
@@ -1088,7 +1019,7 @@ async function goToCheckout() {
 
   // Defensive: re-fetch latest stock before checkout to prevent overselling
   try {
-    const { data: fresh } = await sb.from('products').select('id, quantity_available, is_active').in('id', Object.keys(cart));
+    const fresh = (await fetchStore(true)).products.filter(f => Object.prototype.hasOwnProperty.call(cart, f.id));
     if (fresh) {
       const stockMap = {}; fresh.forEach(f => { stockMap[f.id] = f.is_active ? f.quantity_available : 0; });
       const conflicts = [];
@@ -1235,64 +1166,17 @@ async function placeOrder() {
   const total = getCartTotal();
 
   try {
-    // 1. Create order in Supabase (status: pending until payment)
-    const { data: order, error: orderErr } = await sb.from('orders').insert({
-      customer_name: name,
-      customer_email: email,
-      customer_phone: phone,
-      pickup_slot_id: selectedSlot.id,
-      total_amount: total,
-      order_status: 'pending'
-    }).select().single();
-
-    if (orderErr) throw orderErr;
-
-    // 2. Create order items
-    const orderItems = PRODUCTS.filter(p => cart[p.id]).map(p => ({
-      order_id: order.id,
-      product_id: p.id,
-      quantity: cart[p.id],
-      unit_price: p.price
-    }));
-    const { error: itemsErr } = await sb.from('order_items').insert(orderItems);
-    if (itemsErr) throw itemsErr;
-
-    // 3. Decrement product quantities
-    for (const p of PRODUCTS) {
-      const qty = cart[p.id];
-      if (!qty) continue;
-      const { data: prod } = await sb.from('products').select('quantity_available').eq('id', p.id).single();
-      if (prod) {
-        const newQty = Math.max(0, prod.quantity_available - qty);
-        await sb.from('products').update({ quantity_available: newQty }).eq('id', p.id);
-      }
-    }
-
-    // 4. Increment pickup slot order count
-    const { data: slot } = await sb.from('pickup_slots').select('current_orders').eq('id', selectedSlot.id).single();
-    if (slot) {
-      await sb.from('pickup_slots').update({ current_orders: slot.current_orders + 1 }).eq('id', selectedSlot.id);
-    }
-
-    // 5. Redirect to Stripe Checkout
-    const stripeItems = PRODUCTS.filter(p => cart[p.id]).map(p => ({
-      name: 'Schmear\'d ' + p.name,
-      description: p.id === 'variety' ? '3 containers (Original + Chive + Lemon)' : '8oz container',
-      price: p.price,
-      quantity: cart[p.id]
-    }));
-
     const pickupInfo = selectedSlot.day + ', ' + selectedSlot.date + ' at ' + selectedSlot.time;
 
-    const response = await fetch('/.netlify/functions/create-checkout', {
+    // The server looks up prices, checks stock and capacity, and creates the order + Stripe session.
+    const response = await fetch('/.netlify/functions/place-order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        items: stripeItems,
-        customer_email: email,
-        customer_name: name,
-        order_id: order.id,
-        pickup_info: pickupInfo
+        name, email, phone,
+        slot_id: selectedSlot.id,
+        pickup_label: pickupInfo,
+        items: PRODUCTS.filter(p => cart[p.id]).map(p => ({ id: p.id, quantity: cart[p.id] }))
       })
     });
 
@@ -1301,18 +1185,19 @@ async function placeOrder() {
     if (result.url) {
       // Save order info to sessionStorage for confirmation page
       sessionStorage.setItem('pendingOrder', JSON.stringify({
-        orderId: order.id, name, email, total, cart: {...cart},
+        orderId: result.order_id, name, email, total: (typeof result.total === 'number' ? result.total : total), cart: {...cart},
         slot: {...selectedSlot}, products: PRODUCTS.map(p => ({id:p.id, name:p.name, price:p.price}))
       }));
       // Redirect to Stripe
       window.location.href = result.url;
     } else {
+      if (result.refresh) { try { await loadProducts(); await loadPickupSlots(); } catch (e) {} }
       throw new Error(result.error || 'Failed to create checkout session');
     }
 
   } catch (err) {
     console.error('Order error:', err);
-    alert('There was an error processing your order. Please try again.');
+    alert((err && err.message && err.message !== 'Failed to create checkout session') ? err.message : 'There was an error processing your order. Please try again.');
     btn.disabled = false;
     btn.innerHTML = 'Place Order — <span id="orderTotal">$' + total.toFixed(2) + '</span>';
   }
@@ -1327,12 +1212,12 @@ function handleStripeReturn() {
     const sessionId = params.get('session_id');
     const pending = JSON.parse(sessionStorage.getItem('pendingOrder') || '{}');
 
-    // Update order with Stripe session ID
+    // Ask the server to verify the payment with Stripe and mark the order paid
     if (orderId && sessionId) {
-      sb.from('orders').update({
-        stripe_checkout_session_id: sessionId,
-        order_status: 'paid'
-      }).eq('id', parseInt(orderId)).then(() => {});
+      fetch('/.netlify/functions/confirm-order', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ order_id: orderId, session_id: sessionId, t: params.get('t') })
+      }).catch(() => {});
     }
 
     // Show confirmation
@@ -1342,8 +1227,8 @@ function handleStripeReturn() {
     document.getElementById('confirmationSection').classList.add('active');
     document.getElementById('orderHero').style.display = 'none';
 
-    const displayName = pending.name || 'there';
-    const displayEmail = pending.email || '';
+    const displayName = escHtml(pending.name || 'there');
+    const displayEmail = escHtml(pending.email || '');
     document.getElementById('confText').innerHTML = 'Thank you, ' + displayName + '! Order #' + (orderId || '') + ' is confirmed and paid. We\'ll send pickup details to <strong>' + displayEmail + '</strong> before your pickup day.';
 
     let summaryHtml = '<div class="conf-summary-title">Order Summary</div>';
@@ -1369,29 +1254,11 @@ function handleStripeReturn() {
     const pending = JSON.parse(sessionStorage.getItem('pendingOrder') || '{}');
 
     if (orderId) {
-      // Cancel the order in Supabase
-      sb.from('orders').update({ order_status: 'cancelled' }).eq('id', parseInt(orderId)).then(() => {});
-
-      // Restore product quantities that were decremented
-      if (pending.products && pending.cart) {
-        pending.products.forEach(async (p) => {
-          const qty = pending.cart[p.id];
-          if (!qty) return;
-          const { data: prod } = await sb.from('products').select('quantity_available').eq('id', p.id).single();
-          if (prod) {
-            await sb.from('products').update({ quantity_available: prod.quantity_available + qty }).eq('id', p.id);
-          }
-        });
-      }
-
-      // Restore pickup slot count
-      if (pending.slot && pending.slot.id) {
-        sb.from('pickup_slots').select('current_orders').eq('id', pending.slot.id).single().then(({ data: slot }) => {
-          if (slot && slot.current_orders > 0) {
-            sb.from('pickup_slots').update({ current_orders: slot.current_orders - 1 }).eq('id', pending.slot.id);
-          }
-        });
-      }
+      // The server cancels the order and puts stock and the pickup slot back
+      fetch('/.netlify/functions/cancel-order', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ order_id: orderId, t: params.get('t') })
+      }).catch(() => {});
     }
 
     sessionStorage.removeItem('pendingOrder');
@@ -1452,12 +1319,12 @@ function toggleMenu() {
   <div class="footer-inner">
     <div class="footer-logo">schmear<span>.</span>d</div>
     <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="products.html">Flavors</a>
-      <a href="compare.html">Why Us</a>
+      <a href='/'>Home</a>
+      <a href='/products'>Flavors</a>
+      <a href='/compare'>Why Us</a>
       <a href="#">Privacy</a>
       <a href="#">Terms</a>
-      <a href="https://www.instagram.com/eatschmear.d?igsh=ZXRheHR2M3ZjbGY2&utm_source=qr" aria-label="Instagram" target="_blank">Follow on Instagram</a>
+      <a href="https://www.instagram.com/eatschmeard?igsh=ZXRheHR2M3ZjbGY2&utm_source=qr" aria-label="Instagram" target="_blank">Follow on Instagram</a>
       <a href="https://www.tiktok.com/@eatschmeard?_r=1&_t=ZT-95DCj4VmzWf" aria-label="TikTok" target="_blank">Follow on TikTok</a>
     </div>
     <div class="footer-copy">&copy; 2026 Schmear.d. All rights reserved. <span class="cursive-text">Schmear Responsibly.</span>™</div>

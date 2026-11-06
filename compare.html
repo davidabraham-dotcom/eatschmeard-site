@@ -64,7 +64,7 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
 .hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); border-radius: 2px; }
 
 /* HERO */
-.page-hero { padding: 180px 24px 80px; text-align: center; position: relative; overflow: hidden; }
+.page-hero { padding: 140px 24px 80px; text-align: center; position: relative; overflow: hidden; }
 .page-hero::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(9,48,139,0.04) 0%, transparent 70%); border-radius: 50%; }
 .page-hero h1 { font-size: clamp(2.5rem, 5vw, 3.8rem); font-weight: 700; color: var(--navy); letter-spacing: -1.5px; margin-bottom: 16px; position: relative; z-index: 1; }
 .page-hero h1 .highlight { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -230,36 +230,7 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
   </div>
 </nav>
 
-<!-- ===== ANNOUNCEMENT BANNER ===== -->
-<div id="announcementBanner" style="
-  background: linear-gradient(90deg, #09308b, #428ce2, #09308b);
-  color: #fff;
-  overflow: hidden;
-  white-space: nowrap;
-  font-family: 'Quicksand', sans-serif;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 10px 0;
-  position: fixed;
-  top: 68px;
-  left: 0;
-  right: 0;
-  z-index: 999;
-">
-  <div style="
-    display: inline-block;
-    animation: scrollBanner 18s linear infinite;
-    padding-left: 100%;
-  ">
-    Find us at the <strong>Grove Street Market</strong> in Jersey City — Every Thursday 3–7 PM!&nbsp;&nbsp;&nbsp; 🥯&nbsp; Find us at the <strong>Grove Street Market</strong> in Jersey City — Every Thursday 3–7 PM! &nbsp;🥯&nbsp;&nbsp;&nbsp; 🥯&nbsp; Find us at the <strong>Grove Street Market</strong> in Jersey City — Every Thursday 3–7 PM! &nbsp;🥯
-  </div>
-</div>
-<style>
-@keyframes scrollBanner {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-</style>
+
 
 <!-- HERO -->
 <section class="page-hero">
@@ -290,7 +261,7 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
       <tbody>
         <tr>
           <td>Calories <span style="font-size:0.75em;opacity:0.6">(per serving)</span></td>
-          <td class="schmear-col win">70</td>
+          <td class="schmear-col win">60</td>
           <td class="neutral">80</td>
           <td class="neutral">100</td>
           <td class="neutral">80</td>
@@ -311,14 +282,14 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
         </tr>
         <tr>
           <td>Total Fat <span style="font-size:0.75em;opacity:0.6">(per 2oz)</span></td>
-          <td class="schmear-col win">8g</td>
+          <td class="schmear-col win">9g</td>
           <td class="neutral">14g</td>
           <td class="neutral">20g</td>
           <td class="neutral">16g</td>
         </tr>
         <tr>
           <td>Carbohydrates <span style="font-size:0.75em;opacity:0.6">(per 2oz)</span></td>
-          <td class="schmear-col">8g</td>
+          <td class="schmear-col">6g</td>
           <td class="neutral">4g</td>
           <td class="neutral">4g</td>
           <td class="neutral">4g</td>
@@ -346,6 +317,7 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
         </tr>
       </tbody>
     </table>
+    <p style="text-align:center;font-size:0.85rem;color:var(--text-muted);margin-top:14px;">Schmear.d figures shown for Original (2oz = 2 servings). Other flavors vary slightly; see the Flavors page.</p>
   </div>
 </section>
 
@@ -404,7 +376,7 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
       <h3>Total Fat per 2oz (4 tbsp)</h3>
       <div class="bar-row">
         <div class="bar-label ours">Schmear.d</div>
-        <div class="bar-track"><div class="bar-fill schmear" data-width="40">8g</div></div>
+        <div class="bar-track"><div class="bar-fill schmear" data-width="45">9g</div></div>
       </div>
       <div class="bar-row">
         <div class="bar-label">Philadelphia</div>
@@ -466,7 +438,7 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
       <div class="advantage-icon">📉</div>
       <div class="advantage-stat">60<span>%</span></div>
       <h4>Less Fat</h4>
-      <p>8g of fat per 2oz vs. Tillamook's 20g. Same creamy taste, dramatically less fat — because you deserve both.</p>
+      <p>9g of fat per 2oz vs. Tillamook's 20g. Same creamy taste, dramatically less fat — because you deserve both.</p>
     </div>
     <div class="advantage-card">
       <div class="advantage-icon">🔥</div>

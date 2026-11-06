@@ -63,7 +63,7 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
 .hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); border-radius: 2px; }
 
 /* HERO */
-.page-hero { padding: 180px 24px 80px; text-align: center; position: relative; overflow: hidden; }
+.page-hero { padding: 140px 24px 80px; text-align: center; position: relative; overflow: hidden; }
 .page-hero::before { content: ''; position: absolute; top: -100px; right: -150px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(251,234,87,0.12) 0%, transparent 70%); border-radius: 50%; }
 .page-hero::after { content: ''; position: absolute; bottom: -100px; left: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(150,194,135,0.12) 0%, transparent 70%); border-radius: 50%; }
 .page-hero h1 { font-size: clamp(2.5rem, 5vw, 3.8rem); font-weight: 700; color: var(--navy); letter-spacing: -1.5px; margin-bottom: 16px; position: relative; z-index: 1; }
@@ -96,7 +96,8 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
 .product-circle:hover { transform: scale(1.03); }
 .product-circle.original { background: linear-gradient(135deg, #F5F0E5 0%, #E0D5C0 100%); }
 .product-circle.chive { background: linear-gradient(135deg, #D4E2C4 0%, #a8b893 100%); }
-.product-circle.lemon { background: linear-gradient(135deg, #FFF0B3 0%, #f0d880 100%); }
+.product-circle.strawberry { background: linear-gradient(135deg, #f8d4d4 0%, #e59aa4 100%); }
+.product-circle.honey { background: linear-gradient(135deg, #ffe6d8 0%, #f3a98a 100%); }
 
 .product-image {
   width: 240px; height: 240px;
@@ -136,7 +137,8 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
 }
 .tag-original { background: rgba(9,48,139,0.08); color: var(--navy); }
 .tag-chive { background: rgba(150,194,135,0.35); color: var(--sage-dark); }
-.tag-lemon { background: rgba(251,234,87,0.3); color: #8a7520; }
+.tag-strawberry { background: rgba(136,56,72,0.12); color: #883848; }
+.tag-honey { background: rgba(144,24,24,0.12); color: #901818; }
 
 .product-info .description { font-size: 1.05rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 28px; }
 .product-info .callout {
@@ -348,41 +350,12 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
   </div>
 </nav>
 
-<!-- ===== ANNOUNCEMENT BANNER ===== -->
-<div id="announcementBanner" style="
-  background: linear-gradient(90deg, #09308b, #428ce2, #09308b);
-  color: #fff;
-  overflow: hidden;
-  white-space: nowrap;
-  font-family: 'Quicksand', sans-serif;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 10px 0;
-  position: fixed;
-  top: 68px;
-  left: 0;
-  right: 0;
-  z-index: 999;
-">
-  <div style="
-    display: inline-block;
-    animation: scrollBanner 18s linear infinite;
-    padding-left: 100%;
-  ">
-    Find us at the <strong>Grove Street Market</strong> in Jersey City — Every Thursday 3–7 PM!&nbsp;&nbsp;&nbsp; 🥯&nbsp; Find us at the <strong>Grove Street Market</strong> in Jersey City — Every Thursday 3–7 PM! &nbsp;🥯&nbsp;&nbsp;&nbsp; 🥯&nbsp; Find us at the <strong>Grove Street Market</strong> in Jersey City — Every Thursday 3–7 PM! &nbsp;🥯
-  </div>
-</div>
-<style>
-@keyframes scrollBanner {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-</style>
+
 
 <!-- PAGE HERO -->
 <section class="page-hero">
   <h1>Meet the <span class="highlight">Lineup.</span></h1>
-  <p>Three flavors. Same powerful nutrition. Every tub delivers 10g of protein and 4g of fiber per 2oz — just 70 calories per serving. No compromises, no weird ingredients.</p>
+  <p>Four flavors. Serious nutrition. Up to 10g of protein and 4g of fiber per 2oz, and just 60–70 calories per serving. No compromises, no weird ingredients.</p>
 </section>
 
 <!-- PRODUCTS -->
@@ -392,7 +365,7 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
   <div class="product-showcase fade-up">
     <div class="product-visual">
       <div class="product-circle original" style="padding:0;overflow:hidden;">
-        <img src="tub-original.png" alt="Schmear.d Original cream cheese spread" class="product-image" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
+        <img src="lid-original.webp" alt="Schmear.d Original cream cheese spread" class="product-image" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
       </div>
     </div>
     <div class="product-info">
@@ -401,7 +374,7 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
       <p class="description">The one that started it all. Our Original is the classic cream cheese spread you know and love — silky, rich, and perfectly spreadable — rebuilt from scratch with a serious nutritional upgrade. Made with real dairy from cottage cheese, Greek yogurt, and milk protein concentrate, every 2oz serving packs 10g of protein and 4g of fiber from chicory root.</p>
       <div class="callout">"All the comfort of your morning bagel ritual — now with 5x the protein."</div>
       <div class="nutrition-grid">
-        <div class="nutrition-tile"><div class="value">70</div><div class="label">Calories</div></div>
+        <div class="nutrition-tile"><div class="value">60</div><div class="label">Calories</div></div>
         <div class="nutrition-tile"><div class="value">10g</div><div class="label">Protein</div></div>
         <div class="nutrition-tile"><div class="value">4g</div><div class="label">Fiber</div></div>
       </div>
@@ -410,25 +383,25 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
       <div class="nf-panel">
         <h3>Nutrition Facts</h3>
         <div class="nf-serving">Servings: 8 &nbsp;|&nbsp; <strong>Serv. Size:</strong> 2 Tbsp (30g)</div>
-        <div class="nf-calories"><span>Amount Per Serving<br><span class="cal-num">Calories 70</span></span><span style="text-align:right;font-size:0.7rem;">% Daily Value*</span></div>
+        <div class="nf-calories"><span>Amount Per Serving<br><span class="cal-num">Calories 60</span></span><span style="text-align:right;font-size:0.7rem;">% Daily Value*</span></div>
         <div class="nf-row"><span><span class="bold">Total Fat</span> 4.5g</span><span class="bold">6%</span></div>
         <div class="nf-row indent"><span>Sat. Fat 2.5g</span><span class="bold">13%</span></div>
         <div class="nf-row indent"><span><em>Trans Fat</em> 0g</span><span></span></div>
         <div class="nf-row"><span><span class="bold">Cholesterol</span> 15mg</span><span class="bold">5%</span></div>
-        <div class="nf-row"><span><span class="bold">Sodium</span> 115mg</span><span class="bold">5%</span></div>
+        <div class="nf-row"><span><span class="bold">Sodium</span> 120mg</span><span class="bold">5%</span></div>
         <div class="nf-row"><span><span class="bold">Total Carb.</span> 3g</span><span class="bold">1%</span></div>
         <div class="nf-row indent"><span>Dietary Fiber 2g</span><span class="bold">7%</span></div>
-        <div class="nf-row indent"><span>Total Sugars 1g</span><span></span></div>
-        <div class="nf-row indent" style="padding-left:28px;"><span>Incl. &lt;1g Added Sugars</span><span class="bold">1%</span></div>
+        <div class="nf-row indent"><span>Total Sugars &lt;1g</span><span></span></div>
+        <div class="nf-row indent" style="padding-left:28px;"><span>Incl. 0g Added Sugars</span><span class="bold">0%</span></div>
         <div class="nf-row thick"><span><span class="bold">Protein</span> 5g</span><span class="bold">10%</span></div>
         <div class="nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
         <div class="nf-row"><span>Calcium 85mg</span><span>6%</span></div>
         <div class="nf-row"><span>Iron 0mg</span><span>0%</span></div>
-        <div class="nf-row"><span>Potassium 40mg</span><span>0%</span></div>
+        <div class="nf-row"><span>Potassium 40mg</span><span>1%</span></div>
         <div class="nf-dv-note">*Percent Daily Values are based on a 2,000 calorie diet.</div>
         <div class="nf-ingredients">
           <h4>INGREDIENTS:</h4>
-          <p>Pasteurized Milk and Cream, Milk Protein Concentrate, Chicory Root Fiber, Sugar, Cheese Culture, Buffered Vinegar, Cultured Skim Milk, Salt, Citrus Fiber, Carob Bean Gum, Enzymes.</p>
+          <p>Pasteurized Milk and Cream, Cultured Nonfat Milk, Milk Protein Concentrate, Nonfat Milk, Chicory Root Fiber, Salt, Buffered Vinegar, Cultured Skim Milk, Cheese Culture, Carob Bean Gum, Citrus Fiber, Live Active Yogurt Cultures, Vitamin A Palmitate.</p>
           <p class="nf-allergen">CONTAINS: DAIRY</p>
         </div>
       </div>
@@ -439,12 +412,12 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
   <div class="product-showcase reverse fade-up">
     <div class="product-visual">
       <div class="product-circle chive" style="padding:0;overflow:hidden;">
-        <img src="tub-chive.png" alt="Schmear.d Chive & Onion cream cheese spread" class="product-image" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
+        <img src="lid-chive.webp" alt="Schmear.d Chive cream cheese spread" class="product-image" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
       </div>
     </div>
     <div class="product-info">
       <span class="flavor-tag tag-chive">Savory Flavor</span>
-      <h2>Chive &amp; Onion</h2>
+      <h2>Chive</h2>
       <p class="description">The everything-bagel's best friend just leveled up. Real onion powder blooms into the base during our 12-hour cold rest, while freeze-dried chives are gently folded in at the end to keep their color and crunch. It's savory, herby, and packed with the same protein and fiber as our Original — 10g and 4g per 2oz serving.</p>
       <div class="callout">"Garden-fresh flavor meets gym-ready nutrition. Your everything bagel just got even better."</div>
       <div class="nutrition-grid">
@@ -462,11 +435,11 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
         <div class="nf-row indent"><span>Sat. Fat 2.5g</span><span class="bold">13%</span></div>
         <div class="nf-row indent"><span><em>Trans Fat</em> 0g</span><span></span></div>
         <div class="nf-row"><span><span class="bold">Cholesterol</span> 15mg</span><span class="bold">5%</span></div>
-        <div class="nf-row"><span><span class="bold">Sodium</span> 135mg</span><span class="bold">6%</span></div>
+        <div class="nf-row"><span><span class="bold">Sodium</span> 140mg</span><span class="bold">6%</span></div>
         <div class="nf-row"><span><span class="bold">Total Carb.</span> 4g</span><span class="bold">1%</span></div>
         <div class="nf-row indent"><span>Dietary Fiber 2g</span><span class="bold">7%</span></div>
-        <div class="nf-row indent"><span>Total Sugars 1g</span><span></span></div>
-        <div class="nf-row indent" style="padding-left:28px;"><span>Incl. &lt;1g Added Sugars</span><span class="bold">1%</span></div>
+        <div class="nf-row indent"><span>Total Sugars &lt;1g</span><span></span></div>
+        <div class="nf-row indent" style="padding-left:28px;"><span>Incl. 0g Added Sugars</span><span class="bold">0%</span></div>
         <div class="nf-row thick"><span><span class="bold">Protein</span> 5g</span><span class="bold">10%</span></div>
         <div class="nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
         <div class="nf-row"><span>Calcium 85mg</span><span>6%</span></div>
@@ -475,28 +448,26 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
         <div class="nf-dv-note">*Percent Daily Values are based on a 2,000 calorie diet.</div>
         <div class="nf-ingredients">
           <h4>INGREDIENTS:</h4>
-          <p>Pasteurized Milk and Cream, Milk Protein Concentrate, Chicory Root Fiber, Onion Powder, Salt, Sugar, Dried Chives, Cheese Culture, Buffered Vinegar, Cultured Skim Milk, Citrus Fiber, Carob Bean Gum.</p>
+          <p>Pasteurized Milk and Cream, Cultured Nonfat Milk, Milk Protein Concentrate, Nonfat Milk, Chicory Root Fiber, Onion Powder, Salt, Buffered Vinegar, Chives, Cultured Skim Milk, Cheese Culture, Carob Bean Gum, Citrus Fiber, Live Active Yogurt Cultures, Vitamin A Palmitate.</p>
           <p class="nf-allergen">CONTAINS: DAIRY</p>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- LEMON PEPPER -->
+  <!-- STRAWBERRY -->
   <div class="product-showcase fade-up">
     <div class="product-visual">
-      <div class="product-circle lemon" style="padding:0;overflow:hidden;">
-        <img src="tub-lemon.png" alt="Schmear.d Lemon Pepper cream cheese spread" class="product-image" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
+      <div class="product-circle strawberry" style="padding:0;overflow:hidden;">
+        <img src="lid-strawberry.webp" alt="Schmear.d Strawberry cream cheese spread" class="product-image" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
       </div>
     </div>
     <div class="product-info">
-      <span class="flavor-tag tag-lemon">Bold Flavor</span>
-      <h2>Lemon Pepper</h2>
-      <p class="description">The bold one. Real lemon oil and fresh juice bring a bright, zesty punch, while coarse-cracked black pepper adds warmth and a satisfying bite. A touch of turmeric gives it that golden glow. This isn't your grandma's cream cheese spread — it's the flavor-forward spread that makes every bite an adventure with 10g protein and 4g fiber per 2oz.</p>
-      <div class="callout">"Bright, bold, and a little unexpected — for people who think cream cheese should have a personality."</div>
+      <span class="flavor-tag tag-strawberry">Sweet Flavor</span>
+      <h2>Strawberry</h2>
+      <p class="description">Sweet, fruity, and made for a toasted bagel. Real strawberries swirled into our protein-packed base, with 32g of protein and 15g of fiber in every tub.</p>
       <div class="nutrition-grid">
-        <div class="nutrition-tile"><div class="value">70</div><div class="label">Calories</div></div>
-        <div class="nutrition-tile"><div class="value">10g</div><div class="label">Protein</div></div>
+        <div class="nutrition-tile"><div class="value">60</div><div class="label">Calories</div></div>
+        <div class="nutrition-tile"><div class="value">8g</div><div class="label">Protein</div></div>
         <div class="nutrition-tile"><div class="value">4g</div><div class="label">Fiber</div></div>
       </div>
       <div class="nutrition-note">Protein &amp; Fiber per 2oz · Calories per serving (2 tbsp)</div>
@@ -504,30 +475,52 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
       <div class="nf-panel">
         <h3>Nutrition Facts</h3>
         <div class="nf-serving">Servings: 8 &nbsp;|&nbsp; <strong>Serv. Size:</strong> 2 Tbsp (30g)</div>
-        <div class="nf-calories"><span>Amount Per Serving<br><span class="cal-num">Calories 70</span></span><span style="text-align:right;font-size:0.7rem;">% Daily Value*</span></div>
-        <div class="nf-row"><span><span class="bold">Total Fat</span> 4.5g</span><span class="bold">6%</span></div>
+        <div class="nf-calories"><span>Amount Per Serving<br><span class="cal-num">Calories 60</span></span><span style="text-align:right;font-size:0.7rem;">% Daily Value*</span></div>
+        <div class="nf-row"><span><span class="bold">Total Fat</span> 4g</span><span class="bold">5%</span></div>
         <div class="nf-row indent"><span>Sat. Fat 2.5g</span><span class="bold">13%</span></div>
         <div class="nf-row indent"><span><em>Trans Fat</em> 0g</span><span></span></div>
-        <div class="nf-row"><span><span class="bold">Cholesterol</span> 15mg</span><span class="bold">5%</span></div>
-        <div class="nf-row"><span><span class="bold">Sodium</span> 115mg</span><span class="bold">5%</span></div>
-        <div class="nf-row"><span><span class="bold">Total Carb.</span> 3g</span><span class="bold">1%</span></div>
+        <div class="nf-row"><span><span class="bold">Cholesterol</span> 10mg</span><span class="bold">3%</span></div>
+        <div class="nf-row"><span><span class="bold">Sodium</span> 100mg</span><span class="bold">4%</span></div>
+        <div class="nf-row"><span><span class="bold">Total Carb.</span> 4g</span><span class="bold">1%</span></div>
         <div class="nf-row indent"><span>Dietary Fiber 2g</span><span class="bold">7%</span></div>
         <div class="nf-row indent"><span>Total Sugars 1g</span><span></span></div>
-        <div class="nf-row indent" style="padding-left:28px;"><span>Incl. &lt;1g Added Sugars</span><span class="bold">1%</span></div>
-        <div class="nf-row thick"><span><span class="bold">Protein</span> 5g</span><span class="bold">10%</span></div>
-        <div class="nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
-        <div class="nf-row"><span>Calcium 85mg</span><span>6%</span></div>
-        <div class="nf-row"><span>Iron 0mg</span><span>0%</span></div>
-        <div class="nf-row"><span>Potassium 40mg</span><span>0%</span></div>
-        <div class="nf-dv-note">*Percent Daily Values are based on a 2,000 calorie diet.</div>
+        <div class="nf-row indent" style="padding-left:28px;"><span>Incl. 0g Added Sugars</span><span class="bold">0%</span></div>
+        <div class="nf-row thick"><span><span class="bold">Protein</span> 4g</span><span class="bold">8%</span></div>
+                <div class="nf-dv-note">*Percent Daily Values are based on a 2,000 calorie diet.</div>
         <div class="nf-ingredients">
           <h4>INGREDIENTS:</h4>
-          <p>Pasteurized Milk and Cream, Milk Protein Concentrate, Chicory Root Fiber, Lemon Juice, Sugar, Buffered Vinegar, Salt, Black Pepper, Cultured Skim Milk, Citrus Fiber, Lemon Oil, Carob Bean Gum, Cheese Culture.</p>
+          <p>Pasteurized Milk and Cream, Cultured Nonfat Milk, Milk Protein Concentrate, Nonfat Milk, Chicory Root Fiber, Strawberries, Salt, Buffered Vinegar, Cultured Skim Milk, Cheese Culture, Carob Bean Gum, Citrus Fiber, Live Active Yogurt Cultures, Vitamin A Palmitate.</p>
           <p class="nf-allergen">CONTAINS: DAIRY</p>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- HOT HONEY -->
+  <div class="product-showcase reverse fade-up">
+    <div class="product-visual">
+      <div class="product-circle honey" style="padding:0;overflow:hidden;">
+        <img src="lid-honey.webp" alt="Schmear.d Hot Honey cream cheese spread" class="product-image" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
+      </div>
+    </div>
+    <div class="product-info">
+      <span class="flavor-tag tag-honey">Sweet Heat</span>
+      <h2>Hot Honey</h2>
+      <p class="description">Sweet honey with a slow chili kick. The same protein-packed base, with 36g of protein and 16g of fiber in every tub.</p>
+      <div class="nutrition-grid">
+        <div class="nutrition-tile"><div class="value">36g</div><div class="label">Protein / tub</div></div>
+        <div class="nutrition-tile"><div class="value">16g</div><div class="label">Fiber / tub</div></div>
+        <div class="nutrition-tile"><div class="value">8.5oz</div><div class="label">Net wt.</div></div>
+      </div>
+      <div class="nutrition-note">Per 8.5 oz (240g) tub</div>
+      <button class="nf-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'Hide Nutrition Info ▲':'View Nutrition Info ▼'">View Nutrition Info ▼</button>
+      <div class="nf-panel">
+        <h3>Nutrition Facts</h3>
+        <div class="nf-serving">The full Nutrition Facts panel and ingredient list will be posted once the Hot Honey label is final.</div>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <!-- KEY INGREDIENTS -->
@@ -538,7 +531,7 @@ footer { background: var(--navy); color: var(--white); padding: 40px 24px; }
     <div class="ingredient-card">
       <div class="ingredient-icon-lg" style="background:rgba(9,48,139,0.08);">💪</div>
       <h4>MPC 85 Protein</h4>
-      <p>Milk protein concentrate delivers 10g of complete protein per 2oz without the chalky taste.</p>
+      <p>Milk protein concentrate delivers up to 10g of complete protein per 2oz without the chalky taste.</p>
     </div>
     <div class="ingredient-card">
       <div class="ingredient-icon-lg" style="background:rgba(150,194,135,0.3);">🌾</div>

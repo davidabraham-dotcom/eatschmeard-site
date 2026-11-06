@@ -1063,7 +1063,7 @@ table tr:hover {
           <h3>Admin Password</h3>
           <div class="form-group" style="margin-bottom: 16px;">
             <label for="newPassword">New Password</label>
-            <input type="password" id="newPassword" placeholder="Leave blank to keep current" />
+            <input type="password" id="newPassword" placeholder="Managed in Netlify (ADMIN_PASSWORD)" disabled />
           </div>
           <button class="btn btn-primary" onclick="changePassword()" style="max-width: 300px;">Update Password</button>
         </div>
@@ -1108,15 +1108,39 @@ table tr:hover {
 <!-- TOAST CONTAINER -->
 <div class="toast-container" id="toastContainer"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// ============ CONFIG ============
-const SUPABASE_URL = 'https://sotesfefkeonykvlchzs.supabase.co';
-const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvdGVzZmVma2VvbnlrdmxjaHpzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NTA5MTYzNCwiZXhwIjoyMDkwNjY3NjM0fQ.W846T4it5fD2DQgnL3EjYxx5B1_nDoI3L0m5vu5o_1o';
-
-// Initialize Supabase with Service Role Key
-const { createClient } = window.supabase;
-const db = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
+// ============ DATABASE ACCESS ============
+// All data goes through a password-protected server function. No database key is in this page.
+const ADMIN_FN = '/.netlify/functions/admin-db';
+function adminFrom(table) {
+  const chain = [{ m: 'from', a: [table] }];
+  const q = new Proxy({}, {
+    get(_, prop) {
+      if (prop === 'then') {
+        return (resolve, reject) => adminRun(chain).then(resolve, reject);
+      }
+      return (...args) => { chain.push({ m: prop, a: args }); return q; };
+    }
+  });
+  return q;
+}
+async function adminRun(chain, pw) {
+  const password = pw !== undefined ? pw : sessionStorage.getItem('adminToken');
+  try {
+    const r = await fetch(ADMIN_FN, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-password': password || '' },
+      body: JSON.stringify({ chain })
+    });
+    const body = await r.json().catch(() => ({}));
+    if (r.status === 401 && pw === undefined) { logout(); }
+    if (!r.ok) return { data: null, count: null, error: { message: body.error || ('HTTP ' + r.status), code: 'HTTP' + r.status, status: r.status } };
+    return { data: body.data, count: body.count, error: body.error };
+  } catch (e) {
+    return { data: null, count: null, error: { message: e.message, code: 'NETWORK' } };
+  }
+}
+const db = { from: adminFrom };
 
 // ============ STATE ============
 let currentUser = null;
@@ -1151,28 +1175,23 @@ async function handleLogin(event) {
   try {
     errorEl.style.display = 'none';
 
-    // Fetch admin settings to get password hash
-    const { data, error } = await db
-      .from('admin_settings')
-      .select('id, admin_password_hash')
-      .eq('id', 1)
-      .single();
+    const res = await adminRun([{ m: 'from', a: ['admin_settings'] }, { m: 'select', a: ['id'] }, { m: 'eq', a: ['id', 1] }, { m: 'maybeSingle', a: [] }], password);
 
-    if (error) throw error;
-
-    const storedHash = data?.admin_password_hash || 'schmeard2026';
-
-    // Simple comparison (in production, use bcrypt)
-    if (password === storedHash) {
+    if (!res.error) {
       currentUser = password;
       sessionStorage.setItem('adminToken', password);
       document.getElementById('loginForm').reset();
       showDashboard();
       loadAllData();
       startAutoRefresh();
-    } else {
+    } else if (res.error.code === 'HTTP401') {
       errorEl.textContent = 'Invalid password';
       errorEl.style.display = 'block';
+    } else if (res.error.code === 'HTTP503') {
+      errorEl.textContent = 'Admin password has not been set up on the server yet.';
+      errorEl.style.display = 'block';
+    } else {
+      throw new Error(res.error.message);
     }
   } catch (err) {
     console.error('Login error:', err);
@@ -1296,7 +1315,7 @@ async function loadAdminSettings() {
       .single();
 
     if (error && error.code !== 'PGRST116') throw error;
-    adminSettings = data || { id: 1, store_open: true, store_message: '', admin_password_hash: 'schmeard2026' };
+    adminSettings = data || { id: 1, store_open: true, store_message: '' };
     renderSettings();
   } catch (err) {
     console.error('Error loading admin settings:', err);
@@ -1969,8 +1988,7 @@ async function saveSettings() {
   const settings = {
     id: 1,
     store_open: document.getElementById('storeOpen').checked,
-    store_message: document.getElementById('storeMessage').value,
-    admin_password_hash: adminSettings?.admin_password_hash || 'schmeard2026'
+    store_message: document.getElementById('storeMessage').value
   };
 
   try {
@@ -1996,34 +2014,8 @@ async function saveSettings() {
   }
 }
 
-async function changePassword() {
-  const newPassword = document.getElementById('newPassword').value;
-
-  if (!newPassword) {
-    showToast('Please enter a new password', 'error');
-    return;
-  }
-
-  if (newPassword.length < 6) {
-    showToast('Password must be at least 6 characters', 'error');
-    return;
-  }
-
-  try {
-    const { error } = await db
-      .from('admin_settings')
-      .update({ admin_password_hash: newPassword })
-      .eq('id', 1);
-
-    if (error) throw error;
-
-    adminSettings.admin_password_hash = newPassword;
-    document.getElementById('newPassword').value = '';
-    showToast('Password changed successfully', 'success');
-  } catch (err) {
-    console.error('Error changing password:', err);
-    showToast('Error changing password', 'error');
-  }
+function changePassword() {
+  showToast('The admin password is set in Netlify (ADMIN_PASSWORD).', 'error');
 }
 
 // ============ WHOLESALE INQUIRIES ============

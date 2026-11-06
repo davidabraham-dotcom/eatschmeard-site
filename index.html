@@ -123,7 +123,7 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 160px 24px 80px;
+  padding: 120px 24px 80px;
   position: relative;
   overflow: hidden;
 }
@@ -312,6 +312,28 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
   50% { transform: translateY(-10px); }
 }
 
+
+/* ======= FLAVOR PICKER (hero repaint) ======= */
+:root { --fl-bg: #fff5e1; --fl-ring: #083088; --fl-pt: #fff5e1; }
+.hero { background: var(--fl-bg); transition: background-color .6s; }
+.hero-checker { height: 36px; background: conic-gradient(var(--fl-ring) 25%, transparent 0 50%, var(--fl-ring) 0 75%, transparent 0) 0 0/36px 36px; transition: background .6s; }
+.hero-visual-picker { display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.lid-stage { position: relative; width: min(440px, 88vw); }
+.lid-stage img.lid { width: 100%; height: auto; border-radius: 50%; filter: drop-shadow(0 18px 24px rgba(9,48,139,.2)); }
+.lid-stage img.lid.spin { animation: lidspin .7s cubic-bezier(.3,1.4,.5,1); }
+@keyframes lidspin { from { transform: rotate(-70deg) scale(.88); } to { transform: none; } }
+.flavor-name { display: inline-block; background: var(--fl-ring); color: var(--fl-pt); font-family: 'Genty Sans', sans-serif; font-size: 1.15rem; letter-spacing: .06em; padding: 6px 22px; border-radius: 14px; transition: background .6s, color .6s; }
+.flavor-blurb { margin: -10px 0 0; max-width: 34ch; text-align: center; color: var(--navy); min-height: 3.2em; }
+.flavor-chips { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.flavor-chips button { all: unset; cursor: pointer; width: 60px; height: 60px; border-radius: 50%; outline: 3px solid transparent; outline-offset: 3px; transition: transform .2s; }
+.flavor-chips button img { width: 100%; height: 100%; border-radius: 50%; display: block; }
+.flavor-chips button:hover { transform: scale(1.07); }
+.flavor-chips button[aria-pressed=true] { outline-color: var(--fl-ring); }
+.flavor-chips button:focus-visible { outline: 3px dashed var(--navy); }
+@media (prefers-reduced-motion: reduce) { .lid-stage img.lid.spin { animation: none; } }
+.lid-stage .floating-badge.protein { top: 44px; right: -36px; }
+@media (max-width: 900px) { .lid-stage .floating-badge { display: none; } }
+
 /* ======= MARQUEE ======= */
 .marquee-section {
   background: var(--navy);
@@ -380,8 +402,8 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 28px;
 }
 .product-card {
   background: var(--white);
@@ -402,7 +424,8 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
 }
 .product-card.original-card::before { background: var(--navy); }
 .product-card.chive-card::before { background: var(--sage); }
-.product-card.lemon-card::before { background: var(--yellow); }
+.product-card.strawberry-card::before { background: #883848; }
+.product-card.honey-card::before { background: #901818; }
 
 .card-tub {
   width: 160px; height: 160px;
@@ -415,7 +438,8 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
 }
 .card-tub.original-bg { background: linear-gradient(135deg, #fff5e1, #e8d9b8); }
 .card-tub.chive-bg { background: linear-gradient(135deg, #d9e3c1, #96c287); }
-.card-tub.lemon-bg { background: linear-gradient(135deg, #fef9b4, #fbea57); }
+.card-tub.strawberry-bg { background: linear-gradient(135deg, #f4c2c2, #e59aa4); }
+.card-tub.honey-bg { background: linear-gradient(135deg, #ffdecd, #f3a98a); }
 
 .card-tub-inner {
   width: 130px; height: 130px;
@@ -892,13 +916,13 @@ footer {
 <!-- ===== NAVIGATION ===== -->
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">schmear<span>.</span>d</a>
+    <a class='nav-logo' href='/'>schmear<span>.</span>d</a>
     <div class="nav-links" id="navLinks">
-      <a href="products.html">Flavors</a>
-      <a href="compare.html">Why Us</a>
+      <a href='/products'>Flavors</a>
+      <a href='/compare'>Why Us</a>
       <a href="#story">Our Story</a>
-      <a href="wholesale.html">Wholesale</a>
-      <a href="order.html" class="nav-cta">Order Now</a>
+      <a href='/wholesale'>Wholesale</a>
+      <a class='nav-cta' href='/order'>Order Now</a>
     </div>
     <div class="hamburger" id="hamburger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
@@ -906,94 +930,60 @@ footer {
   </div>
 </nav>
 
-<!-- ===== ANNOUNCEMENT BANNER ===== -->
-<div id="announcementBanner" style="
-  background: linear-gradient(90deg, #09308b, #428ce2, #09308b);
-  color: #fff;
-  overflow: hidden;
-  white-space: nowrap;
-  font-family: 'Quicksand', sans-serif;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 10px 0;
-  position: fixed;
-  top: 68px;
-  left: 0;
-  right: 0;
-  z-index: 999;
-">
-  <div style="
-    display: inline-block;
-    animation: scrollBanner 18s linear infinite;
-    padding-left: 100%;
-  ">
-    🎉 <strong>NEW!</strong> Pop-Up at <strong>Base Gym JC</strong> — Saturday 4/25, 9AM–1PM! Free tastings + containers for sale. Order online &amp; pick up there! &nbsp;&nbsp;&nbsp; 🥯&nbsp; 🎉 <strong>NEW!</strong> Pop-Up at <strong>Base Gym JC</strong> — Saturday 4/25, 9AM–1PM! Free tastings + containers for sale. Order online &amp; pick up there! &nbsp;&nbsp;&nbsp; 🥯&nbsp; 🎉 <strong>NEW!</strong> Pop-Up at <strong>Base Gym JC</strong> — Saturday 4/25, 9AM–1PM! Free tastings + containers for sale. Order online &amp; pick up there! &nbsp;🥯
-  </div>
-</div>
-<style>
-@keyframes scrollBanner {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-</style>
+
 
 <!-- ===== HERO ===== -->
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-content fade-up">
-      <div class="hero-badge"><span class="dot"></span> Soft Launch — April 15th</div>
+      
       <h1>Cream Cheese Spread,<br><span class="highlight">Reimagined.</span></h1>
-      <p>10g protein &amp; 4g fiber per 2oz. Just 70 calories per serving. Real dairy, clean ingredients, and a taste you'll actually crave. <span class="cursive" style="font-size:1.1em">Schmear responsibly.</span></p>
+      <p>Up to 10g protein &amp; 4g fiber per 2oz. Just 60–70 calories per serving. Real dairy, clean ingredients, and a taste you'll actually crave. <span class="cursive" style="font-size:1.1em">Schmear responsibly.</span></p>
       <div class="hero-actions">
         <a href="#signup" class="btn btn-primary">Join the Waitlist →</a>
         <a href="#products" class="btn btn-secondary">See Flavors</a>
       </div>
     </div>
     <div class="hero-visual fade-up" style="transition-delay: 0.2s">
-      <div class="product-hero-container">
-        <div class="tub-img-wrap tub-original">
-          <img src="tub-original.png" alt="Schmear.d Original cream cheese spread">
-          <span class="tub-label">Original</span>
+      <div class="hero-visual-picker">
+        <div class="lid-stage">
+          <img class="lid" id="heroLid" src="lid-original.webp" alt="Schmear.d Original lid" width="640" height="640">
+          <div class="floating-badge protein" id="fbP">💪 36g Protein / tub</div>
+          <div class="floating-badge fiber" id="fbF">🌿 16g Fiber / tub</div>
+          <div class="floating-badge cal" id="fbC">🔥 60 Cal / serving</div>
         </div>
-        <div class="tub-img-wrap tub-chive">
-          <img src="tub-chive.png" alt="Schmear.d Chive cream cheese spread">
-          <span class="tub-label">Chive</span>
-        </div>
-        <div class="tub-img-wrap tub-lemon">
-          <img src="tub-lemon.png" alt="Schmear.d Lemon Pepper cream cheese spread">
-          <span class="tub-label">Lemon Pepper</span>
-        </div>
-        <div class="floating-badge protein">💪 10g Protein*</div>
-        <div class="floating-badge fiber">🌿 4g Fiber*</div>
-        <div class="floating-badge cal">🔥 70 Cal*</div>
+        <span class="flavor-name" id="flavorName">Original</span>
+        <p class="flavor-blurb" id="flavorBlurb"></p>
+        <div class="flavor-chips" id="flavorChips" role="group" aria-label="Choose a flavor"></div>
       </div>
     </div>
   </div>
 </section>
+<div class="hero-checker" aria-hidden="true"></div>
 
 <!-- ===== SCROLLING MARQUEE ===== -->
 <div class="marquee-section">
   <div class="marquee-track">
     <div class="marquee-item"><span class="sep"></span><span class="cursive">Schmear Responsibly</span></div>
-    <div class="marquee-item"><span class="sep"></span>10g Protein per 2oz</div>
+    <div class="marquee-item"><span class="sep"></span>Up to 10g Protein per 2oz</div>
     <div class="marquee-item"><span class="sep"></span>4g Fiber per 2oz</div>
     <div class="marquee-item"><span class="sep"></span>Clean Label</div>
-    <div class="marquee-item"><span class="sep"></span>70 Calories</div>
-    <div class="marquee-item"><span class="sep"></span>3 Flavors</div>
+    <div class="marquee-item"><span class="sep"></span>60–70 Calories</div>
+    <div class="marquee-item"><span class="sep"></span>4 Flavors</div>
     <div class="marquee-item"><span class="sep"></span>No Artificial Preservatives</div>
     <div class="marquee-item"><span class="sep"></span><span class="cursive">Schmear Responsibly</span></div>
-    <div class="marquee-item"><span class="sep"></span>10g Protein per 2oz</div>
+    <div class="marquee-item"><span class="sep"></span>Up to 10g Protein per 2oz</div>
     <div class="marquee-item"><span class="sep"></span>4g Fiber per 2oz</div>
     <div class="marquee-item"><span class="sep"></span>Clean Label</div>
-    <div class="marquee-item"><span class="sep"></span>70 Calories</div>
-    <div class="marquee-item"><span class="sep"></span>3 Flavors</div>
+    <div class="marquee-item"><span class="sep"></span>60–70 Calories</div>
+    <div class="marquee-item"><span class="sep"></span>4 Flavors</div>
     <div class="marquee-item"><span class="sep"></span>No Artificial Preservatives</div>
     <div class="marquee-item"><span class="sep"></span><span class="cursive">Schmear Responsibly</span></div>
-    <div class="marquee-item"><span class="sep"></span>10g Protein per 2oz</div>
+    <div class="marquee-item"><span class="sep"></span>Up to 10g Protein per 2oz</div>
     <div class="marquee-item"><span class="sep"></span>4g Fiber per 2oz</div>
     <div class="marquee-item"><span class="sep"></span>Clean Label</div>
-    <div class="marquee-item"><span class="sep"></span>70 Calories</div>
-    <div class="marquee-item"><span class="sep"></span>3 Flavors</div>
+    <div class="marquee-item"><span class="sep"></span>60–70 Calories</div>
+    <div class="marquee-item"><span class="sep"></span>4 Flavors</div>
     <div class="marquee-item"><span class="sep"></span>No Artificial Preservatives</div>
   </div>
 </div>
@@ -1002,44 +992,56 @@ footer {
 <section class="section" id="products">
   <div class="section-header fade-up">
     <div class="label">The Lineup</div>
-    <h2>Three Flavors. Zero Guilt.</h2>
-    <p>Every tub packs the same powerful nutrition — 10g protein &amp; 4g fiber per 2oz — in a flavor you'll actually crave.</p>
+    <h2>Four Flavors. Zero Guilt.</h2>
+    <p>Every tub packs serious nutrition — up to 10g protein &amp; 4g fiber per 2oz — in a flavor you'll actually crave.</p>
   </div>
   <div class="products-grid">
+    
     <div class="product-card original-card fade-up">
       <div class="card-tub original-bg">
-        <img src="tub-original.png" alt="Schmear.d Original" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
+        <img src="lid-original.webp" alt="Schmear.d Original" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
       </div>
       <h3>Original</h3>
       <p class="flavor-desc">The classic, perfected. Smooth, creamy, and loaded with protein you won't even taste — just pure schmear bliss.</p>
       <div class="tag-row">
-        <span class="tag tag-protein">10g Protein (2oz)</span>
-        <span class="tag tag-fiber">4g Fiber (2oz)</span>
-        <span class="tag tag-cal">70 Cal</span>
+        <span class="tag tag-protein">36g Protein / tub</span>
+        <span class="tag tag-fiber">16g Fiber / tub</span>
+        <span class="tag tag-cal">60 Cal / serving</span>
       </div>
     </div>
-    <div class="product-card chive-card fade-up" style="transition-delay:0.1s">
+    <div class="product-card chive-card fade-up">
       <div class="card-tub chive-bg">
-        <img src="tub-chive.png" alt="Schmear.d Chive" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
+        <img src="lid-chive.webp" alt="Schmear.d Chive" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
       </div>
       <h3>Chive</h3>
       <p class="flavor-desc">Garden-fresh chives in every bite. The everything-bagel's best friend just got a serious protein upgrade.</p>
       <div class="tag-row">
-        <span class="tag tag-protein">10g Protein (2oz)</span>
-        <span class="tag tag-fiber">4g Fiber (2oz)</span>
-        <span class="tag tag-cal">70 Cal</span>
+        <span class="tag tag-protein">36g Protein / tub</span>
+        <span class="tag tag-fiber">16g Fiber / tub</span>
+        <span class="tag tag-cal">70 Cal / serving</span>
       </div>
     </div>
-    <div class="product-card lemon-card fade-up" style="transition-delay:0.2s">
-      <div class="card-tub lemon-bg">
-        <img src="tub-lemon.png" alt="Schmear.d Lemon Pepper" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
+    <div class="product-card strawberry-card fade-up">
+      <div class="card-tub strawberry-bg">
+        <img src="lid-strawberry.webp" alt="Schmear.d Strawberry" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
       </div>
-      <h3>Lemon Pepper</h3>
-      <p class="flavor-desc">Bold, zesty, and a little unexpected. A bright twist that makes every bagel feel like an adventure.</p>
+      <h3>Strawberry</h3>
+      <p class="flavor-desc">Sweet, fruity, and made for a toasted bagel.</p>
       <div class="tag-row">
-        <span class="tag tag-protein">10g Protein (2oz)</span>
-        <span class="tag tag-fiber">4g Fiber (2oz)</span>
-        <span class="tag tag-cal">70 Cal</span>
+        <span class="tag tag-protein">32g Protein / tub</span>
+        <span class="tag tag-fiber">15g Fiber / tub</span>
+        <span class="tag tag-cal">60 Cal / serving</span>
+      </div>
+    </div>
+    <div class="product-card honey-card fade-up">
+      <div class="card-tub honey-bg">
+        <img src="lid-honey.webp" alt="Schmear.d Hot Honey" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
+      </div>
+      <h3>Hot Honey</h3>
+      <p class="flavor-desc">Sweet honey with a slow chili kick.</p>
+      <div class="tag-row">
+        <span class="tag tag-protein">36g Protein / tub</span>
+        <span class="tag tag-fiber">16g Fiber / tub</span>
       </div>
     </div>
   </div>
@@ -1051,10 +1053,10 @@ footer {
     <div class="nutrition-content fade-up">
       <div class="label">The Good Stuff</div>
       <h2>Not Your Average Cream Cheese Spread</h2>
-      <p>We packed in the good stuff — real protein from milk protein concentrate, prebiotic fiber from chicory root — and left out the junk. 10g protein, 4g fiber per 2oz — and just 70 calories per serving. No artificial preservatives. Just clean, honest ingredients you can actually pronounce.</p>
+      <p>We packed in the good stuff — real protein from milk protein concentrate, prebiotic fiber from chicory root — and left out the junk. up to 10g protein, 4g fiber per 2oz — and just 60–70 calories per serving. No artificial preservatives. Just clean, honest ingredients you can actually pronounce.</p>
       <div class="nutrition-highlights">
         <div class="nutrition-card">
-          <div class="number">10g</div>
+          <div class="number">8–10g</div>
           <div class="unit">Protein</div>
           <div class="desc">2.5x more than regular cream cheese spread</div>
           <div class="serving-note">*Per 2oz (4 tbsp)</div>
@@ -1066,7 +1068,7 @@ footer {
           <div class="serving-note">*Per 2oz (4 tbsp)</div>
         </div>
         <div class="nutrition-card">
-          <div class="number">70</div>
+          <div class="number">60–70</div>
           <div class="unit">Calories</div>
           <div class="desc">vs 80–100 for regular cream cheese spread</div>
           <div class="serving-note">*Per serving (2 tbsp)</div>
@@ -1080,7 +1082,7 @@ footer {
     </div>
     <div class="nutrition-visual fade-up" style="transition-delay:0.2s">
       <div class="comparison-chart">
-        <div class="comparison-title">Schmear.d vs. Regular Cream Cheese Spread</div>
+        <div class="comparison-title">Schmear.d (Original &amp; Chive) vs. Regular Cream Cheese Spread</div>
         <div style="margin-bottom:32px;">
           <div class="comparison-title" style="font-size:0.9rem;margin-bottom:16px;">Protein <span style="font-size:0.7rem;opacity:0.5">(per 2oz)</span></div>
           <div class="comparison-row">
@@ -1178,7 +1180,7 @@ footer {
       <h2>A Better Cream Cheese Spread</h2>
       <p>Once upon a time, we found ourselves craving a bagel with cream cheese spread. Within us rose a quiet battle — should we surrender to empty calories, or seek a healthier alternative?</p>
       <p>And just like that, Schmear.d was born. We took everything we love about the morning ritual — the comfort, the tang, the perfect schmear — and rebuilt it from the ground up. Real dairy blended with milk protein concentrate, prebiotic chicory root fiber, and clean ingredients you can actually pronounce. No compromises.</p>
-      <p>The result? A cream cheese spread with 10g of protein and 4g of fiber per 2oz that actually tastes like the real thing — because it is. Let it sit at room temp for 5–10 minutes for the best schmear.</p>
+      <p>The result? A cream cheese spread with up to 10g of protein and 4g of fiber per 2oz that actually tastes like the real thing — because it is. Let it sit at room temp for 5–10 minutes for the best schmear.</p>
       <div class="highlight-text cursive" style="font-size:1.4rem">"schmear responsibly."</div>
     </div>
   </div>
@@ -1201,7 +1203,7 @@ footer {
     </div>
     <div class="signup-divider"><span>or follow along</span></div>
     <div class="social-signup">
-      <a href="https://www.instagram.com/eatschmear.d?igsh=ZXRheHR2M3ZjbGY2&utm_source=qr" class="social-btn" target="_blank">
+      <a href="https://www.instagram.com/eatschmeard?igsh=ZXRheHR2M3ZjbGY2&utm_source=qr" class="social-btn" target="_blank">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         Follow on Instagram
       </a>
@@ -1223,7 +1225,7 @@ footer {
         <div class="tagline">Schmear Responsibly.™</div>
       </div>
       <div class="footer-socials">
-        <a href="https://www.instagram.com/eatschmear.d?igsh=ZXRheHR2M3ZjbGY2&utm_source=qr" aria-label="Instagram" target="_blank">
+        <a href="https://www.instagram.com/eatschmeard?igsh=ZXRheHR2M3ZjbGY2&utm_source=qr" aria-label="Instagram" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
         </a>
         <a href="https://www.tiktok.com/@eatschmeard?_r=1&_t=ZT-95DCj4VmzWf" aria-label="TikTok" target="_blank">
@@ -1235,7 +1237,7 @@ footer {
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Schmear.d. All rights reserved. | eatschmear.d.com | @eatschmear.d</p>
+      <p>&copy; 2026 Schmear.d. All rights reserved. | eatschmeard.com | @eatschmeard</p>
       <div class="footer-links">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms</a>
@@ -1370,7 +1372,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 <!-- ===== LAUNCH ANNOUNCEMENT POPUP ===== -->
 <style>
-.launch-overlay {
+.launch-overlay { display: none !important;
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(9, 48, 139, 0.55);
@@ -1572,5 +1574,37 @@ if (sessionStorage.getItem('launchPopupSeen')) {
 }
 </script>
 
+
+<script>
+(function(){
+  var F = {
+    original:{n:"Original",bg:"#fff5e1",ring:"#083088",pt:"#fff5e1",img:"lid-original.webp",p:"36g Protein / tub",f:"16g Fiber / tub",c:"60 Cal / serving",d:"Smooth, creamy, and loaded with protein you won\u2019t even taste."},
+    chive:{n:"Chive",bg:"#d9e3c1",ring:"#6fa062",pt:"#fffaea",img:"lid-chive.webp",p:"36g Protein / tub",f:"16g Fiber / tub",c:"70 Cal / serving",d:"The everything bagel\u2019s best friend just got a serious protein upgrade."},
+    strawberry:{n:"Strawberry",bg:"#f4c2c2",ring:"#883848",pt:"#fff1ea",img:"lid-strawberry.webp",p:"32g Protein / tub",f:"15g Fiber / tub",c:"60 Cal / serving",d:"Sweet, fruity, and made for a toasted bagel."},
+    honey:{n:"Hot Honey",bg:"#ffdecd",ring:"#901818",pt:"#fff1ea",img:"lid-honey.webp",p:"36g Protein / tub",f:"16g Fiber / tub",c:"",d:"Sweet honey with a slow chili kick."}
+  };
+  var order=["original","chive","strawberry","honey"], root=document.documentElement.style;
+  var lid=document.getElementById("heroLid"), chips=document.getElementById("flavorChips");
+  if(!lid||!chips) return;
+  function pick(k,anim){
+    var o=F[k];
+    root.setProperty("--fl-bg",o.bg); root.setProperty("--fl-ring",o.ring); root.setProperty("--fl-pt",o.pt);
+    lid.src=o.img; lid.alt="Schmear.d "+o.n+" lid";
+    if(anim){ lid.classList.remove("spin"); void lid.offsetWidth; lid.classList.add("spin"); }
+    document.getElementById("flavorName").textContent=o.n;
+    document.getElementById("flavorBlurb").textContent=o.d;
+    document.getElementById("fbP").textContent="\uD83D\uDCAA "+o.p;
+    document.getElementById("fbF").textContent="\uD83C\uDF3F "+o.f;
+    var c=document.getElementById("fbC"); c.textContent="\uD83D\uDD25 "+o.c; c.style.display=o.c?"":"none";
+    [].forEach.call(chips.children,function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-k")===k); });
+  }
+  order.forEach(function(k){
+    var b=document.createElement("button"); b.setAttribute("data-k",k); b.setAttribute("aria-label",F[k].n); b.title=F[k].n;
+    b.innerHTML='<img alt="" src="'+F[k].img+'" width="60" height="60">';
+    b.onclick=function(){ pick(k,true); }; chips.appendChild(b);
+  });
+  pick("original",false);
+})();
+</script>
 </body>
 </html>

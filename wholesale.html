@@ -115,7 +115,7 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(9,48,139,0.08); }
 
 /* ======= HERO SECTION ======= */
 .wholesale-hero {
-  padding: 160px 24px 60px;
+  padding: 120px 24px 60px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -387,36 +387,7 @@ footer {
   </div>
 </nav>
 
-<!-- ===== ANNOUNCEMENT BANNER ===== -->
-<div id="announcementBanner" style="
-  background: linear-gradient(90deg, #09308b, #428ce2, #09308b);
-  color: #fff;
-  overflow: hidden;
-  white-space: nowrap;
-  font-family: 'Quicksand', sans-serif;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 10px 0;
-  position: fixed;
-  top: 68px;
-  left: 0;
-  right: 0;
-  z-index: 999;
-">
-  <div style="
-    display: inline-block;
-    animation: scrollBanner 18s linear infinite;
-    padding-left: 100%;
-  ">
-    Find us at the <strong>Grove Street Market</strong> in Jersey City — Every Thursday 3–7 PM!&nbsp;&nbsp;&nbsp; 🥯&nbsp; Find us at the <strong>Grove Street Market</strong> in Jersey City — Every Thursday 3–7 PM! &nbsp;🥯&nbsp;&nbsp;&nbsp; 🥯&nbsp; Find us at the <strong>Grove Street Market</strong> in Jersey City — Every Thursday 3–7 PM! &nbsp;🥯
-  </div>
-</div>
-<style>
-@keyframes scrollBanner {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-</style>
+
 
 <!-- ===== HERO ===== -->
 <div class="wholesale-hero">
@@ -497,14 +468,10 @@ footer {
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // ===== CONFIG =====
-const SUPABASE_URL = 'https://sotesfefkeonykvlchzs.supabase.co';
-const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvdGVzZmVma2VvbnlrdmxjaHpzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NTA5MTYzNCwiZXhwIjoyMDkwNjY3NjM0fQ.W846T4it5fD2DQgnL3EjYxx5B1_nDoI3L0m5vu5o_1o';
 
 // Initialize Supabase client
-const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 
 // ===== FORM VALIDATION =====
 function validateEmail(email) {
@@ -590,18 +557,12 @@ document.getElementById('wholesaleForm').addEventListener('submit', async (e) =>
   const message = document.getElementById('message').value.trim();
 
   try {
-    // Save to Supabase
-    const { data, error } = await sb.from('wholesale_inquiries').insert({
-      store_name: storeName,
-      contact_name: contactName,
-      email: email,
-      phone: phone || null,
-      store_address: storeAddress || null,
-      message: message || null,
-      created_at: new Date().toISOString()
+    // Save via the server (the browser never touches the database)
+    const res = await fetch('/.netlify/functions/wholesale-inquiry', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ store_name: storeName, contact_name: contactName, email, phone, store_address: storeAddress, message })
     });
-
-    if (error) throw error;
+    if (!res.ok) throw new Error('inquiry ' + res.status);
 
     // Also submit to Netlify Forms for email notification
     const formData = new FormData(document.getElementById('wholesaleForm'));
